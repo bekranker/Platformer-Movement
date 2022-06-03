@@ -13,7 +13,7 @@ public class InputSelection : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("XboxButtonA"))
+        if (Input.GetAxis("XboxLT") > 0)
         {
             Debug.Log("A");
         }
