@@ -308,7 +308,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 0
-    joyNum: 3
+    joyNum: 1
   - serializedVersion: 3
     m_Name: Ps2Horizontal
     descriptiveName: 
@@ -324,7 +324,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 0
-    joyNum: 4
+    joyNum: 2
   - serializedVersion: 3
     m_Name: PsVertical
     descriptiveName: 
@@ -340,7 +340,7 @@ InputManager:
     invert: 1
     type: 2
     axis: 1
-    joyNum: 3
+    joyNum: 1
   - serializedVersion: 3
     m_Name: Ps2Vertical
     descriptiveName: 
@@ -356,9 +356,9 @@ InputManager:
     invert: 1
     type: 2
     axis: 1
-    joyNum: 4
+    joyNum: 2
   - serializedVersion: 3
-    m_Name: PsSquare
+    m_Name: PsButtonSquare
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -374,7 +374,7 @@ InputManager:
     axis: 0
     joyNum: 3
   - serializedVersion: 3
-    m_Name: Ps2Square
+    m_Name: Ps2ButtonSquare
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -500,7 +500,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 3
-    joyNum: 3
+    joyNum: 1
   - serializedVersion: 3
     m_Name: Ps2LT
     descriptiveName: 
@@ -516,7 +516,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 3
-    joyNum: 4
+    joyNum: 2
   - serializedVersion: 3
     m_Name: PsRT
     descriptiveName: 
@@ -532,7 +532,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 4
-    joyNum: 3
+    joyNum: 1
   - serializedVersion: 3
     m_Name: Ps2RT
     descriptiveName: 
@@ -548,7 +548,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 4
-    joyNum: 4
+    joyNum: 2
   - serializedVersion: 3
     m_Name: PsOptions
     descriptiveName: 

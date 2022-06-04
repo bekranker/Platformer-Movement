@@ -45,10 +45,7 @@ public class InputSelection : MonoBehaviour
             PlayButton.SetActive(false);
         }
 
-        if (Input.GetAxis("PsButtonX") > 0)
-        {
-            Debug.Log(Input.GetAxis("PsButtonX"));
-        }
+            Debug.Log(Input.GetAxis("PsHorizontal"));
 
         #region Join
         //Join
