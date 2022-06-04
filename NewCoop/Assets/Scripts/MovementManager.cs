@@ -37,9 +37,9 @@ public class MovementManager : Librariy
             IsJumped = true;
         }
 
-        if (movementBehaviour.Jump == 0)
+        if (movementBehaviour.Jump == 0 && rb.velocity.y > 0f)
         {
-            JumpBufferCounter = 0f;
+            CoyotoTimeCounter = 0f;
         }
 
         #region Coyota
@@ -99,6 +99,7 @@ public class MovementManager : Librariy
     private void AddJumpForce()
     {
         rb.velocity += Vector2.up * jumpAmount;
+        JumpBufferCounter = 0f;
     }
 
     private void OnJump()
