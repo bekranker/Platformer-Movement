@@ -30,14 +30,30 @@ public class MovementBehaviour : MonoBehaviour
             Settings = Input.GetAxis(control + "Options");
             
             if (control == Controls.Xbox || control == Controls.Xbox2)
-            {
-                Jump = Input.GetAxis(control + "ButtonA");
+            {              
+                if(Input.GetButtonDown(control + "ButtonA"))
+                {
+                    Jump = 1;
+                }
+                else
+                {
+                    Jump = 0;
+                }
+                //Jump = Input.GetAxis(control + "ButtonA");
                 Attack = Input.GetAxis(control + "ButtonX");
                 Cancel = Input.GetAxis(control + "ButtonB");
             }
             else if (control == Controls.Ps || control == Controls.Ps2)
             {
-                Jump = Input.GetAxis(control + "ButtonX");
+                if(Input.GetButtonDown(control + "ButtonX"))
+                {
+                    Jump = 1;
+                }
+                else
+                {
+                    Jump = 0;
+                }
+                //Jump = Input.GetAxis(control + "ButtonX");
                 Attack = Input.GetAxis(control + "ButtonSquare");
                 Cancel = Input.GetAxis(control + "ButtonO");
             }
