@@ -32,36 +32,18 @@ public class MovementManager : Librariy
 
     private void Update()
     {
-        if (JumpBufferCounter > 0 && CoyotoTimeCounter > 0)
-        {
-            IsJumped = true;
-        }
+        #region JumpBuffering and CoyotoTime
+        IsJumped = (JumpBufferCounter > 0 && CoyotoTimeCounter > 0) ? true : false;
 
-        if (movementBehaviour.Jump == 0 && rb.velocity.y > 0f)
-        {
-            CoyotoTimeCounter = 0f;
-        }
+        CoyotoTimeCounter = (movementBehaviour.Jump == 0 && rb.velocity.y > 0f) ? 0f : CoyotoTimeCounter;
+        #endregion
 
         #region Coyota
-        if (IsGrouned)
-        {
-            CoyotoTimeCounter = CoyotoTime;
-        }
-        else
-        {
-            CoyotoTimeCounter -= Time.deltaTime;
-        }
+        CoyotoTimeCounter = (IsGrouned) ? CoyotoTime : CoyotoTimeCounter - Time.deltaTime;
         #endregion
 
         #region Buffering
-        if (movementBehaviour.Jump == 1)
-        {
-            JumpBufferCounter = JumpBuffer;
-        }
-        else
-        {
-            JumpBufferCounter -= Time.deltaTime;
-        }
+        JumpBufferCounter = (movementBehaviour.Jump == 1) ? JumpBuffer : JumpBufferCounter - Time.deltaTime;
         #endregion
     }
 
@@ -89,7 +71,6 @@ public class MovementManager : Librariy
         if (IsJumped)
         {
             AddJumpForce();
-            IsJumped = false;
         }
         OnJump();
         #endregion
@@ -100,6 +81,7 @@ public class MovementManager : Librariy
     {
         rb.velocity += Vector2.up * jumpAmount;
         JumpBufferCounter = 0f;
+        IsJumped = false;
     }
 
     private void OnJump()

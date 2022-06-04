@@ -173,7 +173,7 @@ MonoBehaviour:
   velPower: 0.87
   fallingGravityScale: 2.5
   gravityScale: 1.2
-  jumpAmount: 15
+  jumpAmount: 20
   CoyotoTime: 0.2
   CoyotoTimeCounter: 0.2
   JumpBuffer: 0.5
