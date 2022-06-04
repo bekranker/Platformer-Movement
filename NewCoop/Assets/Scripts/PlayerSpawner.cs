@@ -25,27 +25,27 @@ public class PlayerSpawner : MonoBehaviour
         {         
             case "Keyboard1":
                 NewPlayer = Instantiate<GameObject>(PlayerPrefab, Vector3.zero, Quaternion.identity);
-                NewPlayer.GetComponent<Movement>().GetControl(Controls.Keyboard1);
+                NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Keyboard1);
                 break;
             case "Keyboard2":
                 NewPlayer = Instantiate<GameObject>(PlayerPrefab, Vector3.zero, Quaternion.identity);
-                NewPlayer.GetComponent<Movement>().GetControl(Controls.Keyboard2);
+                NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Keyboard2);
                 break;
             case "Xbox":
                 NewPlayer = Instantiate<GameObject>(PlayerPrefab, Vector3.zero, Quaternion.identity);
-                NewPlayer.GetComponent<Movement>().GetControl(Controls.Xbox);
+                NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Xbox);
                 break;
             case "Xbox2":
                 NewPlayer = Instantiate<GameObject>(PlayerPrefab, Vector3.zero, Quaternion.identity);
-                NewPlayer.GetComponent<Movement>().GetControl(Controls.Xbox2);
+                NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Xbox2);
                 break;
             case "Ps":
                 NewPlayer = Instantiate<GameObject>(PlayerPrefab, Vector3.zero, Quaternion.identity);
-                NewPlayer.GetComponent<Movement>().GetControl(Controls.Ps);
+                NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Ps);
                 break;
             case "Ps2":
                 NewPlayer = Instantiate<GameObject>(PlayerPrefab, Vector3.zero, Quaternion.identity);
-                NewPlayer.GetComponent<Movement>().GetControl(Controls.Ps2);
+                NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Ps2);
                 break;
             default:
                 break;

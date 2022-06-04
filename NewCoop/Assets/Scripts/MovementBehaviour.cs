@@ -11,17 +11,11 @@ public enum Controls
     Ps,
     Ps2
 }
-public class Movement : MonoBehaviour
+public class MovementBehaviour : MonoBehaviour
 {
     [SerializeField] Controls control;
     public float x, y, RR, RL, Jump, Attack, Settings, Cancel;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
         //float x,y,RR,RL,Jump,Attack,Settings,Cancel;
