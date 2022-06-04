@@ -32,18 +32,17 @@ public class MovementManager : Librariy
 
     private void Update()
     {
-        #region JumpBuffering and CoyotoTime
+        #region JumpBuffering and CoyotoTime      
         IsJumped = (JumpBufferCounter > 0 && CoyotoTimeCounter > 0) ? true : false;
-
         CoyotoTimeCounter = (movementBehaviour.Jump == 0 && rb.velocity.y > 0f) ? 0f : CoyotoTimeCounter;
         #endregion
 
-        #region Coyota
+        #region Coyoto
         CoyotoTimeCounter = (IsGrouned) ? CoyotoTime : CoyotoTimeCounter - Time.deltaTime;
         #endregion
 
         #region Buffering
-        JumpBufferCounter = (movementBehaviour.Jump == 1) ? JumpBuffer : JumpBufferCounter - Time.deltaTime;
+        JumpBufferCounter = (rb.velocity.y < 1f && movementBehaviour.Jump == 1) ? JumpBuffer : JumpBufferCounter - Time.deltaTime;
         #endregion
     }
 
@@ -67,7 +66,7 @@ public class MovementManager : Librariy
         #endregion
 
         #region Jump
-        IsGrouned = Physics2D.OverlapBox(checkPos.position, checkPosSize, 0, layerMask);
+        IsGrouned = Physics2D.OverlapBox(checkPos.position, checkPosSize, 1, layerMask);
         if (IsJumped)
         {
             AddJumpForce();
