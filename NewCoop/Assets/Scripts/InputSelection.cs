@@ -33,8 +33,15 @@ public class InputSelection : MonoBehaviour
     {
         StartCoroutine(GetController());
 
-        ControllerDebug1.text = Controllers[0];
-        ControllerDebug2.text = Controllers[1];
+        if(Controllers[0] != "")
+        {
+            ControllerDebug1.text = Controllers[0] + Input.GetJoystickNames()[0];
+        }
+        if(Controllers[1] != "")
+        {
+            ControllerDebug2.text = Controllers[1] + Input.GetJoystickNames()[1];
+        }
+       
 
         if (Players[0] != "" && Players[1] != "")
         {
@@ -205,11 +212,11 @@ public class InputSelection : MonoBehaviour
 
                 if (waitForButton.PressedButton == XboxButton)
                 {
-                    Controllers[i] = "Xbox";//(" + Input.GetJoystickNames()[i] + ")";
+                    Controllers[i] = "Xbox";
                 }
                 else
                 {
-                    Controllers[i] = "Ps";// (" + Input.GetJoystickNames()[i] + ")";
+                    Controllers[i] = "Ps";
                 }
                 Debug.Log(Input.GetJoystickNames()[i] +" "+ Controllers[i]);
                 SelectionPanel.SetActive(false);
