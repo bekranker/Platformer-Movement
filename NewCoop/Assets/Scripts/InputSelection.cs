@@ -20,6 +20,8 @@ public class InputSelection : MonoBehaviour
 
     public Button XboxButton;
     public Button PsButton;
+
+    [SerializeField] GameObject PlayButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,20 @@ public class InputSelection : MonoBehaviour
 
         ControllerDebug1.text = Controllers[0];
         ControllerDebug2.text = Controllers[1];
+
+        if (Players[0] != "" && Players[1] != "")
+        {
+            PlayButton.SetActive(true);
+        }
+        else
+        {
+            PlayButton.SetActive(false);
+        }
+
+        if (Input.GetAxis("PsButtonX") > 0)
+        {
+            Debug.Log(Input.GetAxis("PsButtonX"));
+        }
 
         #region Join
         //Join
@@ -192,11 +208,11 @@ public class InputSelection : MonoBehaviour
 
                 if (waitForButton.PressedButton == XboxButton)
                 {
-                    Controllers[i] = "Xbox";
+                    Controllers[i] = "Xbox";//(" + Input.GetJoystickNames()[i] + ")";
                 }
                 else
                 {
-                    Controllers[i] = "Ps";
+                    Controllers[i] = "Ps";// (" + Input.GetJoystickNames()[i] + ")";
                 }
                 Debug.Log(Input.GetJoystickNames()[i] +" "+ Controllers[i]);
                 SelectionPanel.SetActive(false);
@@ -207,21 +223,5 @@ public class InputSelection : MonoBehaviour
                 Controllers[i] = "";
             }
         }
-
-        //for (int i = 0; i < Input.GetJoystickNames().Length; i++)
-        //{
-        //    if (Input.GetJoystickNames()[i].ToLower().Contains("xbox"))
-        //    {
-        //        Controllers[i] = "Xbox";
-        //    }
-        //    else if (Input.GetJoystickNames()[i].ToLower().Contains("dual"))
-        //    {
-        //        Controllers[i] = "Ps";
-        //    }
-        //    else
-        //    {
-        //        Controllers[i] = "";
-        //    }
-        //}
     }
 }
