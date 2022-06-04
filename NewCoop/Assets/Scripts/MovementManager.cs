@@ -5,37 +5,50 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
     [Header("-----Move Options-----")]
-    [SerializeField] float MainSpeed, acceleration, decceleration, velPower;
+    [SerializeField] float MainSpeed;
+    [SerializeField] float acceleration;
+    [SerializeField] float decceleration;
+    [SerializeField] float velPower;
 
-    [Header("-----Jump Options")]
-    [SerializeField] float jumpAmount, lastroundedTime, lastJumpTime, CoyotoTime;
+    [Header("-----Jump Options-----")]
+    [SerializeField] float fallingGravityScale;
+    [SerializeField] float gravityScale;
+    [SerializeField] float jumpAmount;
+    [SerializeField] float CoyotoTime = 0.2f;
+    [SerializeField] float CoyotoTimeCounter;
+    [SerializeField] float jumpCutMultiplayer;
     [SerializeField] Vector2 checkPosSize;
     [SerializeField] Transform checkPos;
     [SerializeField] LayerMask layerMask;
+    private bool IsGrouned;
+
 
     [Header("----Componenets-----")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private MovementBehaviour movementBehaviour;
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        movementBehaviour = GetComponent<MovementBehaviour>();
-    }
-
     private void Update()
     {
-        #region Timer
-        if (lastroundedTime > 0 && lastJumpTime > 0)
+        if (IsGrouned)
         {
-            lastJumpTime -= Time.deltaTime;
-            lastroundedTime -= Time.deltaTime;
+            CoyotoTimeCounter = CoyotoTime;
         }
-        #endregion
+        else
+        {
+            CoyotoTimeCounter -= Time.deltaTime;
+        }
+        if (movementBehaviour.Jump == 1)
+        {
+            if (CoyotoTimeCounter > 0)
+            {
+                Jump();
+            }
+        }
     }
 
     void FixedUpdate()
     {
+        
         #region Run
         // which direction
         float moveInput = movementBehaviour.x;
@@ -54,21 +67,29 @@ public class MovementManager : MonoBehaviour
         #endregion
 
         #region Jump
-        bool IsGrouned = Physics2D.OverlapBox(checkPos.position, checkPosSize, 0, layerMask);
-
-        if (IsGrouned)
-        {
-            if (movementBehaviour.Jump == 1)
-            {
-                Jump();
-            }
-        }
+        IsGrouned = Physics2D.OverlapBox(checkPos.position, checkPosSize, 0, layerMask);
+        
         #endregion
+
+        OnJump();
     }
 
 
     private void Jump()
     {
         rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
+        
+    }
+
+    private void OnJump()
+    {
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = gravityScale * fallingGravityScale;
+        }
+        if(rb.velocity.y == 0)
+        {
+            rb.gravityScale = gravityScale;
+        }
     }
 }

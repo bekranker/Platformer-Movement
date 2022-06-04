@@ -114,7 +114,7 @@ public class MovementBehaviour : MonoBehaviour
                 Attack = 0;
             }
 
-            if (Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(control + "Jump"))))
+            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(control + "Jump"))))
             {
                 Jump = 1;
             }

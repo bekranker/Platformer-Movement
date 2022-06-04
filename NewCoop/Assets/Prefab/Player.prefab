@@ -167,15 +167,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958de6995c7367b468f808d90fbc1312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainSpeed: 9
-  acceleration: 13
-  decceleration: 16
-  velPower: 0.96
-  jumpAmount: 2
-  lastroundedTime: 1
-  lastJumpTime: 1
-  CoyotoTime: 1
-  checkPosSize: {x: 1, y: 1}
+  MainSpeed: 14
+  acceleration: 8
+  decceleration: 24
+  velPower: 0.87
+  fallingGravityScale: 1.5
+  gravityScale: 1.2
+  jumpAmount: 10
+  CoyotoTime: 0.1
+  jumpCutMultiplayer: 1.22
+  checkPosSize: {x: 0.4, y: 0.1}
   checkPos: {fileID: 7461186936902632192}
   layerMask:
     serializedVersion: 2
