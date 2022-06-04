@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementManager : MonoBehaviour
+public class MovementManager : Librariy
 {
     [Header("-----Move Options-----")]
     [SerializeField] float MainSpeed;
@@ -16,11 +16,14 @@ public class MovementManager : MonoBehaviour
     [SerializeField] float jumpAmount;
     [SerializeField] float CoyotoTime = 0.2f;
     [SerializeField] float CoyotoTimeCounter;
+    [SerializeField] float JumpBuffer = 0.2f;
+    [SerializeField] float JumpBufferCounter;
     [SerializeField] float jumpCutMultiplayer;
     [SerializeField] Vector2 checkPosSize;
     [SerializeField] Transform checkPos;
     [SerializeField] LayerMask layerMask;
     private bool IsGrouned;
+    private bool IsJumped;
 
 
     [Header("----Componenets-----")]
@@ -29,6 +32,18 @@ public class MovementManager : MonoBehaviour
 
     private void Update()
     {
+        if (JumpBufferCounter > 0 && CoyotoTimeCounter > 0)
+        {
+            IsJumped = true;
+        }
+
+        if (movementBehaviour.Jump == 0)
+        {
+            //CoyotoTimeCounter = 0f;
+            JumpBufferCounter = 0f;
+        }
+
+        #region Coyota
         if (IsGrouned)
         {
             CoyotoTimeCounter = CoyotoTime;
@@ -37,53 +52,59 @@ public class MovementManager : MonoBehaviour
         {
             CoyotoTimeCounter -= Time.deltaTime;
         }
+        #endregion
+
+        #region Buffering
         if (movementBehaviour.Jump == 1)
         {
-            if (CoyotoTimeCounter > 0)
-            {
-                Jump();
-            }
+            JumpBufferCounter = JumpBuffer;
         }
+        else
+        {
+            JumpBufferCounter -= Time.deltaTime;
+        }
+        #endregion
     }
 
     void FixedUpdate()
     {
-        
         #region Run
-        // which direction
+        //Direction
         float moveInput = movementBehaviour.x;
-        //calculatþng direction we want to move in and our desired velocity
+        //Calculatþng direction we want to move in and our desired velocity
         float targetSpeed = moveInput * MainSpeed;
-        //calculeting difference between current velocity and desired velocity
+        //Calculeting difference between current velocity and desired velocity
         float speedDif = targetSpeed - rb.velocity.x;
-        //this part choosing is need acceleration or deccelaration
+        //This part choosing is need acceleration or deccelaration
         float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : decceleration;
-        //calculeting movement value
+        //Calculeting movement value
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPower) * Mathf.Sign(speedDif);
-        //moving
+        //Moving
         rb.velocity = new Vector2(moveInput * MainSpeed, rb.velocity.y);
-        //moving with forces
+        //Moving with forces
         rb.AddForce(moveInput * Vector2.right);
         #endregion
 
         #region Jump
         IsGrouned = Physics2D.OverlapBox(checkPos.position, checkPosSize, 0, layerMask);
-        
-        #endregion
-
+        if (IsJumped)
+        {
+            AddJumpForce();
+            IsJumped = false;
+        }
         OnJump();
+        #endregion
     }
 
 
-    private void Jump()
+    private void AddJumpForce()
     {
-        rb.AddForce(Vector2.up * jumpAmount, ForceMode2D.Impulse);
-        
+        rb.velocity += Vector2.up * jumpAmount;
     }
 
     private void OnJump()
     {
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y > 5)
         {
             rb.gravityScale = gravityScale * fallingGravityScale;
         }

@@ -171,12 +171,15 @@ MonoBehaviour:
   acceleration: 8
   decceleration: 24
   velPower: 0.87
-  fallingGravityScale: 1.5
+  fallingGravityScale: 2.2
   gravityScale: 1.2
-  jumpAmount: 10
-  CoyotoTime: 0.1
+  jumpAmount: 5
+  CoyotoTime: 0.2
+  CoyotoTimeCounter: 0.2
+  JumpBuffer: 0.2
+  JumpBufferCounter: 0.2
   jumpCutMultiplayer: 1.22
-  checkPosSize: {x: 0.4, y: 0.1}
+  checkPosSize: {x: 0.4, y: 0.25}
   checkPos: {fileID: 7461186936902632192}
   layerMask:
     serializedVersion: 2
