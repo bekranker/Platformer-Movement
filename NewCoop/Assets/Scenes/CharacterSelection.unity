@@ -4278,6 +4278,8 @@ MonoBehaviour:
   - 
   SelectionPanel: {fileID: 66978485}
   SelectionText: {fileID: 377256776}
+  XboxButton: {fileID: 966821389}
+  PsButton: {fileID: 1205501242}
 --- !u!4 &563741255
 Transform:
   m_ObjectHideFlags: 0

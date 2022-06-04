@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class InputSelection : MonoBehaviour
@@ -17,18 +18,18 @@ public class InputSelection : MonoBehaviour
     [SerializeField] GameObject SelectionPanel;
     [SerializeField] TextMeshProUGUI SelectionText;
 
-    bool Wait;
-    int CurrentController;
+    public Button XboxButton;
+    public Button PsButton;
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log(PlayerPrefs.GetString("Keyboard1" + "Jump"));
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        GetController();
+        StartCoroutine(GetController());
 
         ControllerDebug1.text = Controllers[0];
         ControllerDebug2.text = Controllers[1];
@@ -177,24 +178,32 @@ public class InputSelection : MonoBehaviour
         }
     }
 
-    void GetController()
+    IEnumerator GetController()
     {
-
+       
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
         {
-            if(Input.GetJoystickNames()[i] != "" && Controllers[i] != Input.GetJoystickNames()[i])
-            {
-                Bas:
+            if(Input.GetJoystickNames()[i] != "" && Controllers[i] == "")
+            { 
                 SelectionPanel.SetActive(true);
                 SelectionText.text = Input.GetJoystickNames()[i];
-                Wait = true;
-                if (Wait)
+                var waitForButton = new WaitForUIButtons(XboxButton,PsButton);
+                yield return waitForButton.Reset();
+
+                if (waitForButton.PressedButton == XboxButton)
                 {
-                    goto Bas;
+                    Controllers[i] = "Xbox";
                 }
+                else
+                {
+                    Controllers[i] = "Ps";
+                }
+                Debug.Log(Input.GetJoystickNames()[i] +" "+ Controllers[i]);
+                SelectionPanel.SetActive(false);
             }
             else if (Input.GetJoystickNames()[i] == "")
             {
+                SelectionPanel.SetActive(false);
                 Controllers[i] = "";
             }
         }
@@ -214,16 +223,5 @@ public class InputSelection : MonoBehaviour
         //        Controllers[i] = "";
         //    }
         //}
-    }
-
-    public void SelectXbox()
-    {
-        Wait = false;
-        Controllers[CurrentController] = "Xbox";
-    }
-    public void SelectPs()
-    {
-        Wait = false;
-        Controllers[CurrentController] = "Ps";
     }
 }
