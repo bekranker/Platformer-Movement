@@ -88,7 +88,7 @@ public class InputSelection : MonoBehaviour
 
         #region Exit
         //Exit
-        if (PlayerPrefs.GetString("Keyboard1" + "Jump") != "")
+        if (PlayerPrefs.GetString("Keyboard1" + "Cancel") != "")
         {
             if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard1" + "Cancel"))))
             {
@@ -105,7 +105,7 @@ public class InputSelection : MonoBehaviour
             }
         }
 
-        if (PlayerPrefs.GetString("Keyboard2" + "Jump") != "")
+        if (PlayerPrefs.GetString("Keyboard2" + "Cancel") != "")
         {
             if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard2" + "Cancel"))))
             {
