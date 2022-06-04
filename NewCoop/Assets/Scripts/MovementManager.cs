@@ -39,7 +39,6 @@ public class MovementManager : Librariy
 
         if (movementBehaviour.Jump == 0)
         {
-            //CoyotoTimeCounter = 0f;
             JumpBufferCounter = 0f;
         }
 
