@@ -5,49 +5,34 @@ using XInputDotNetPure;
 
 public class VibrarionDeneme : MonoBehaviour
 {
-    bool playerIndexSet = false;
     PlayerIndex playerIndex;
-    GamePadState state;
-    GamePadState prevState;
-
-    Controls controls;
+    bool isActive;
     // Start is called before the first frame update
     void Start()
     {
-        if(GetComponent<MovementBehaviour>().Player == "P1")
+        isActive = false;
+        if (GetComponent<MovementBehaviour>().PlayerName == "P1")
         {
             playerIndex = (PlayerIndex)PlayerPrefs.GetInt("P1Index");
+
+            if(PlayerPrefs.GetInt("P1Index") != -1)
+            {
+                isActive = true;
+            }
         }
         else
         {
             playerIndex = (PlayerIndex)PlayerPrefs.GetInt("P2Index");
-        }        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!playerIndexSet || !prevState.IsConnected)
-        {
-            for (int i = 0; i < 4; ++i)
+            if (PlayerPrefs.GetInt("P2Index") != -1)
             {
-                PlayerIndex testPlayerIndex = (PlayerIndex)i;
-                GamePadState testState = GamePad.GetState(testPlayerIndex);
-                if (testState.IsConnected)
-                {
-                    Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
-                    playerIndex = testPlayerIndex;
-                    playerIndexSet = true;
-                }
+                isActive = true;
             }
-        }
-
-        prevState = state;
-        state = GamePad.GetState(playerIndex);
+        }        
     }
     private void FixedUpdate()
     {
-        if (Input.GetButton("XboxButtonY"))
+        if (Input.GetButton("XboxButtonY") && isActive)
         {
             GamePad.SetVibration(playerIndex, .5f, .5f);
             Debug.Log("Vib");

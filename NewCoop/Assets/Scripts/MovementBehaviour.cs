@@ -13,7 +13,7 @@ public enum Controls
 }
 public class MovementBehaviour : MonoBehaviour
 {
-    public string Player;
+    public string PlayerName;
     [SerializeField] Controls control;
     public float x, y, RR, RL, Jump, Attack, Settings, Cancel;
 

@@ -22,30 +22,26 @@ public class PlayerSpawner : MonoBehaviour
     void SpawnPlayer(string Player)
     {
         GameObject NewPlayer;
+        NewPlayer = Instantiate<GameObject>(PlayerPrefab, spawner.position, Quaternion.identity);
+        NewPlayer.GetComponent<MovementBehaviour>().PlayerName = Player; 
         switch (PlayerPrefs.GetString(Player))
         {         
-            case "Keyboard1":
-                NewPlayer = Instantiate<GameObject>(PlayerPrefab, spawner.position, Quaternion.identity);
+            case "Keyboard1":                
                 NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Keyboard1);
                 break;
             case "Keyboard2":
-                NewPlayer = Instantiate<GameObject>(PlayerPrefab, spawner.position, Quaternion.identity);
                 NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Keyboard2);
                 break;
             case "Xbox":
-                NewPlayer = Instantiate<GameObject>(PlayerPrefab, spawner.position, Quaternion.identity);
                 NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Xbox);
                 break;
             case "Xbox2":
-                NewPlayer = Instantiate<GameObject>(PlayerPrefab, spawner.position, Quaternion.identity);
                 NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Xbox2);
                 break;
             case "Ps":
-                NewPlayer = Instantiate<GameObject>(PlayerPrefab, spawner.position, Quaternion.identity);
                 NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Ps);
                 break;
             case "Ps2":
-                NewPlayer = Instantiate<GameObject>(PlayerPrefab, spawner.position, Quaternion.identity);
                 NewPlayer.GetComponent<MovementBehaviour>().GetControl(Controls.Ps2);
                 break;
             default:
