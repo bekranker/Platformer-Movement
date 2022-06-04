@@ -76,14 +76,18 @@ public class MovementManager : Librariy
         #endregion
     }
 
+    #region Jump Functions
 
+    #region Adding Jump
     private void AddJumpForce()
     {
         rb.velocity += Vector2.up * jumpAmount;
         JumpBufferCounter = 0f;
         IsJumped = false;
     }
+    #endregion
 
+    #region On Jumping
     private void OnJump()
     {
         if (rb.velocity.y > 5)
@@ -95,4 +99,7 @@ public class MovementManager : Librariy
             rb.gravityScale = gravityScale;
         }
     }
+    #endregion
+
+    #endregion
 }
