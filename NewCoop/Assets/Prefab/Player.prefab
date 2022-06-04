@@ -167,15 +167,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958de6995c7367b468f808d90fbc1312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainSpeed: 14
-  acceleration: 8
-  decceleration: 24
+  MainSpeed: 16
+  acceleration: 5
+  decceleration: 27
   velPower: 0.87
   fallingGravityScale: 2.5
   gravityScale: 1.2
   jumpAmount: 20
-  CoyotoTime: 0.2
-  CoyotoTimeCounter: 0.2
+  CoyotoTime: 0.1
+  CoyotoTimeCounter: 0.1
   JumpBuffer: 0.5
   JumpBufferCounter: 0.5
   jumpCutMultiplayer: 1.22
