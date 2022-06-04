@@ -27,12 +27,12 @@ public class MovementBehaviour : MonoBehaviour
             y = Input.GetAxis(control + "Vertical");
             RR = Input.GetAxis(control + "RT");
             RL = Input.GetAxis(control + "LT");
-            Settings = Input.GetAxis(control + "Options"); // RT
+            Settings = Input.GetAxis(control + "Options");
             
             if (control == Controls.Xbox || control == Controls.Xbox2)
             {
                 Jump = Input.GetAxis(control + "ButtonA");
-                Attack = Input.GetAxis(control + "ButtonX"); //Y
+                Attack = Input.GetAxis(control + "ButtonX");
                 Cancel = Input.GetAxis(control + "ButtonB");
             }
             else if (control == Controls.Ps || control == Controls.Ps2)
