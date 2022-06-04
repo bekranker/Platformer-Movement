@@ -13,6 +13,7 @@ public enum Controls
 }
 public class MovementBehaviour : MonoBehaviour
 {
+    public string Player;
     [SerializeField] Controls control;
     public float x, y, RR, RL, Jump, Attack, Settings, Cancel;
 
@@ -146,5 +147,9 @@ public class MovementBehaviour : MonoBehaviour
     public void GetControl(Controls Newcontrols)
     {
         control = Newcontrols;
+    }
+    public Controls GiveControl()
+    {
+        return control;
     }
 }

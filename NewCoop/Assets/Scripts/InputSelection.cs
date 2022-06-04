@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using XInputDotNetPure;
 
 public class InputSelection : MonoBehaviour
 {
@@ -22,6 +23,12 @@ public class InputSelection : MonoBehaviour
     public Button PsButton;
 
     [SerializeField] GameObject PlayButton;
+
+
+    bool playerIndexSet = false;
+    PlayerIndex playerIndex;
+    GamePadState state;
+    GamePadState prevState;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,9 +44,18 @@ public class InputSelection : MonoBehaviour
         {
             ControllerDebug1.text = Controllers[0] + Input.GetJoystickNames()[0];
         }
+        else
+        {
+            ControllerDebug1.text = "No Controller";
+        }
+
         if(Controllers[1] != "")
         {
             ControllerDebug2.text = Controllers[1] + Input.GetJoystickNames()[1];
+        }
+        else
+        {
+            ControllerDebug2.text = "No Controller";
         }
        
 
@@ -52,40 +68,38 @@ public class InputSelection : MonoBehaviour
             PlayButton.SetActive(false);
         }
 
-            Debug.Log(Input.GetAxis("PsHorizontal"));
-
         #region Join
         //Join
         if(PlayerPrefs.GetString("Keyboard1" + "Jump") != "")
         {
             if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard1" + "Jump"))))
             {
-                GetPlayer("Keyboard1");
+                GetPlayer("Keyboard1",-1);
             }
         }
         if (PlayerPrefs.GetString("Keyboard2" + "Jump") != "")
         {
             if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard2" + "Jump"))))
             {
-                GetPlayer("Keyboard2");
+                GetPlayer("Keyboard2",-1);
             }
         }
 
         if (Input.GetAxis("XboxButtonA") > 0 && Controllers[0] == "Xbox")
         {
-            GetPlayer("Xbox");
+            GetPlayer("Xbox", PlayerPrefs.GetInt("PlayerIndex" + 0));
         }
         if (Input.GetAxis("Xbox2ButtonA") > 0 && Controllers[1] == "Xbox") 
         {
-            GetPlayer("Xbox2");
+            GetPlayer("Xbox2", PlayerPrefs.GetInt("PlayerIndex" + 1));
         }
         if (Input.GetAxis("PsButtonX") > 0 && Controllers[0] == "Ps")
         {
-            GetPlayer("Ps");
+            GetPlayer("Ps", PlayerPrefs.GetInt("PlayerIndex" + 0));
         }
         if (Input.GetAxis("Ps2ButtonX") > 0 && Controllers[1] == "Ps")
         {
-            GetPlayer("Ps2");
+            GetPlayer("Ps2", PlayerPrefs.GetInt("PlayerIndex" + 1));
         }
 
         #endregion
@@ -182,25 +196,26 @@ public class InputSelection : MonoBehaviour
         #endregion
     }
 
-    void GetPlayer(string ControllerName)
+    void GetPlayer(string ControllerName,int PlayerIndex)
     {
         if(Players[0] == "" && Players[1] != ControllerName)
         {
             Players[0] = ControllerName;
             P1Text.text = ControllerName;
             PlayerPrefs.SetString("P1", ControllerName);
+            PlayerPrefs.SetInt("P1Index", PlayerIndex);
         }
         else if(Players[1] == "" && Players[0] != ControllerName)
         {
             Players[1] = ControllerName;
             P2Text.text = ControllerName;
             PlayerPrefs.SetString("P2", ControllerName);
+            PlayerPrefs.SetInt("P2Index", PlayerIndex);
         }
     }
 
     IEnumerator GetController()
     {
-       
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
         {
             if(Input.GetJoystickNames()[i] != "" && Controllers[i] == "")
@@ -210,6 +225,7 @@ public class InputSelection : MonoBehaviour
                 var waitForButton = new WaitForUIButtons(XboxButton,PsButton);
                 yield return waitForButton.Reset();
 
+                //kontrolcuyu sectirtmek yerine A veya X e bastýrtýp algýlayabiliriz.
                 if (waitForButton.PressedButton == XboxButton)
                 {
                     Controllers[i] = "Xbox";
@@ -218,6 +234,7 @@ public class InputSelection : MonoBehaviour
                 {
                     Controllers[i] = "Ps";
                 }
+
                 Debug.Log(Input.GetJoystickNames()[i] +" "+ Controllers[i]);
                 SelectionPanel.SetActive(false);
             }
@@ -225,7 +242,28 @@ public class InputSelection : MonoBehaviour
             {
                 SelectionPanel.SetActive(false);
                 Controllers[i] = "";
+                PlayerPrefs.SetInt("PlayerIndex" + i, -1);
             }
-        }
+
+            if (!playerIndexSet || !prevState.IsConnected)
+            {
+                for (int j = 0; j < 4; ++j)
+                {
+                    PlayerIndex testPlayerIndex = (PlayerIndex)j;
+                    GamePadState testState = GamePad.GetState(testPlayerIndex);
+                    if (testState.IsConnected)
+                    {
+                        Debug.Log(string.Format("GamePad found {0}", testPlayerIndex));
+                        playerIndex = testPlayerIndex;
+                        playerIndexSet = true;
+
+                        PlayerPrefs.SetInt("PlayerIndex" + i, j);
+                    }
+                }
+            }
+
+            prevState = state;
+            state = GamePad.GetState(playerIndex);
+        }      
     }
 }
