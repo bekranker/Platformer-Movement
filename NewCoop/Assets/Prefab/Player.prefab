@@ -175,17 +175,16 @@ MonoBehaviour:
   velPower: 0.96
   fallingGravityScale: 2.5
   gravityScale: 1.2
-  jumpAmount: 15
-  coyotoJumpAmount: 5
-  doubleJumpAmount: 10
+  jumpAmount: 10
+  coyotoJumpAmount: 7
+  doubleJumpAmount: 8
   CoyotoTime: 0.1
   checkPosSize: {x: 0.36, y: 0.36}
   checkPos: {fileID: 7461186936902632192}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
-  CoyotoTimeCounter: 0.1
-  jumpCounter: 1
+  totalJump: 2
   rb: {fileID: 1174689607428651664}
   movementBehaviour: {fileID: 1174689607428651666}
 --- !u!114 &-240490266427339487

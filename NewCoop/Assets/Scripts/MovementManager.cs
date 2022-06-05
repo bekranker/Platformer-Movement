@@ -20,10 +20,14 @@ public class MovementManager : Librariy
     [SerializeField] Vector2 checkPosSize;
     [SerializeField] Transform checkPos;
     [SerializeField] LayerMask layerMask;
-    public float CoyotoTimeCounter;
-    private bool IsGrouned;
-    private bool IsJumped;
-    public int jumpCounter;
+    [SerializeField] int totalJump;
+
+    bool isGrounded = true;
+    bool multipleJump;
+    bool coyoteJump;
+    int jumpCunter;
+    Collider2D[] IsGrounded;
+
 
     [Header("----Componenets-----")]
     [SerializeField] private Rigidbody2D rb;
@@ -31,31 +35,38 @@ public class MovementManager : Librariy
 
     private void Update()
     {
-        jumpCounter = (IsGrouned) ? 2 : jumpCounter;
-        if (jumpCounter == 0 && IsGrouned)
+
+        bool wasGrounded = isGrounded;
+        if (IsGrounded.Length > 0)
         {
-            CoyotoTimeCounter = 0;
-        }
-        else if (!IsGrouned && movementBehaviour.Jump == 1 && jumpCounter > 0)
-        {
-            CoyotoTimeCounter = CoyotoTime;
+            isGrounded = true;
+            if (!wasGrounded)
+            {
+                jumpCunter = totalJump;
+                multipleJump = false;
+                Debug.Log("Landed");
+            }
         }
         else
         {
-            CoyotoTimeCounter -= Time.deltaTime;
+            if (wasGrounded)
+            {
+                StartCoroutine(CoyotoJumpCoroutine());
+            }
         }
-        
-
+        isGrounded = (IsGrounded.Length > 0) ? true : false;
         if (movementBehaviour.Jump == 1)
         {
-            if (jumpCounter == 2 && IsGrouned && rb.velocity.y == 0) { AddJumpForce();}
-            jumpCounter--;
-            if (CoyotoTimeCounter !> 0 && !IsGrouned)
-            {
-                if (jumpCounter == 1 && (rb.velocity.y != 0)) { AddDoubleJumpForce(); }
-            }
-            if (CoyotoTimeCounter > 0 && !IsGrouned && jumpCounter != 1) AddCoyotoJumpForce();
+            Jump();
         }
+    }
+
+
+    IEnumerator CoyotoJumpCoroutine()
+    {
+        coyoteJump = true;
+        yield return new WaitForSeconds(CoyotoTime);
+        coyoteJump = false;
     }
 
 
@@ -79,12 +90,36 @@ public class MovementManager : Librariy
         #endregion
 
         #region Jump
-        IsGrouned = Physics2D.OverlapBox(checkPos.position, checkPosSize, 1, layerMask);
+        IsGrounded = Physics2D.OverlapBoxAll(checkPos.position, checkPosSize, 0, layerMask);
         OnJump();
         #endregion
     }
 
     #region Jump Functions
+
+    private void Jump()
+    {
+        if (isGrounded)
+        {
+            jumpCunter--;
+            AddJumpForce();
+            multipleJump = true;
+        }
+        else
+        {
+            if (coyoteJump)
+            {
+                multipleJump = true;
+                Debug.Log("Coyote jump is did");
+                AddCoyotoJumpForce();
+            }
+            if (multipleJump && jumpCunter > 0)
+            {
+                jumpCunter--;
+                AddDoubleJumpForce();
+            }
+        }
+    }
 
     #region Adding Jump
     private void AddJumpForce()
