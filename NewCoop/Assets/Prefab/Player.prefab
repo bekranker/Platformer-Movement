@@ -176,11 +176,11 @@ MonoBehaviour:
   velPower: 0.95
   fallingGravityScale: 2.65
   gravityScale: 1.35
-  jumpAmount: 7
-  coyotoJumpAmount: 7.5
-  doubleJumpAmount: 7
+  jumpAmount: 9
+  coyotoJumpAmount: 9.5
+  doubleJumpAmount: 9
   CoyotoTime: 0.2
-  jumpCutMultiplier: 1.8
+  jumpCutMultiplier: 2.5
   jumpTime: 0.2
   checkPosSize: {x: 0.36, y: 0.36}
   checkPos: {fileID: 7461186936902632192}
@@ -1243,7 +1243,7 @@ ParticleSystem:
     m_BurstCount: 0
     m_Bursts: []
   SizeModule:
-    enabled: 0
+    enabled: 1
     curve:
       serializedVersion: 2
       minMaxState: 1
@@ -1255,21 +1255,30 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 0
-          outSlope: 1
-          tangentMode: 0
+          inSlope: 5.0359225
+          outSlope: 5.0359225
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0.33333334
+          inWeight: 0
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
-          value: 1
-          inSlope: 1
-          outSlope: 0
+          time: 0.17413352
+          value: 0.87692297
+          inSlope: -0.1548936
+          outSlope: -0.1548936
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.257676
+        - serializedVersion: 3
+          time: 0.9492798
+          value: 0
+          inSlope: -1.1313
+          outSlope: -1.1313
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
