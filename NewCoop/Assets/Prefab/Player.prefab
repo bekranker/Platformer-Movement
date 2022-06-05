@@ -175,11 +175,10 @@ MonoBehaviour:
   velPower: 0.96
   fallingGravityScale: 2.5
   gravityScale: 1.2
-  jumpAmount: 10
-  coyotoJumpAmount: 12
-  jumpCutMultiplayer: 15.45
+  jumpAmount: 15
+  coyotoJumpAmount: 5
   doubleJumpAmount: 10
-  CoyotoTime: 0.2
+  CoyotoTime: 0.1
   checkPosSize: {x: 0.36, y: 0.36}
   checkPos: {fileID: 7461186936902632192}
   layerMask:

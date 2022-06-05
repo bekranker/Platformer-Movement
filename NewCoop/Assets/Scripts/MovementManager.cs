@@ -32,23 +32,29 @@ public class MovementManager : Librariy
     private void Update()
     {
         jumpCounter = (IsGrouned) ? 2 : jumpCounter;
-        if (jumpCounter == -1 && IsGrouned)
+        if (jumpCounter == 0 && IsGrouned)
+        {
+            CoyotoTimeCounter = 0;
+        }
+        else if (!IsGrouned && movementBehaviour.Jump == 1 && jumpCounter > 0)
         {
             CoyotoTimeCounter = CoyotoTime;
         }
         else
         {
-            CoyotoTimeCounter = 0.1f;
             CoyotoTimeCounter -= Time.deltaTime;
         }
+        
 
         if (movementBehaviour.Jump == 1)
         {
-            
             if (jumpCounter == 2 && IsGrouned && rb.velocity.y == 0) { AddJumpForce();}
             jumpCounter--;
-            if (jumpCounter == 1 && !IsGrouned) {AddDoubleJumpForce(); }
-            //if (CoyotoTimeCounter > 0 && !IsGrouned) AddCoyotoJumpForce();
+            if (CoyotoTimeCounter !> 0 && !IsGrouned)
+            {
+                if (jumpCounter == 1 && (rb.velocity.y != 0)) { AddDoubleJumpForce(); }
+            }
+            if (CoyotoTimeCounter > 0 && !IsGrouned && jumpCounter != 1) AddCoyotoJumpForce();
         }
     }
 
