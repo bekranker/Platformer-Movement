@@ -22,6 +22,8 @@ public class KeybindingScript : MonoBehaviour
     [SerializeField] Buttons button;
     [SerializeField] bool active;
     [SerializeField] string Default;
+
+    bool wait;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,11 +54,19 @@ public class KeybindingScript : MonoBehaviour
 
     public void OnClick()
     {
-        active = true;
+        StartCoroutine(Wait());       
     }
 
     public void ResetDefault()
     {
+        GetComponentInChildren<TextMeshProUGUI>().text = Default;
+        PlayerPrefs.SetString(Player + button.ToString(), Default);
+        active = false;
+    }
 
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(.2f);
+        active = true;
     }
 }
