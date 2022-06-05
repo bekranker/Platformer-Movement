@@ -170,18 +170,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958de6995c7367b468f808d90fbc1312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainSpeed: 14
+  MainSpeed: 13
   acceleration: 15
-  decceleration: 27
-  velPower: 0.96
-  fallingGravityScale: 2.7
-  gravityScale: 1.25
+  decceleration: 25
+  velPower: 0.95
+  fallingGravityScale: 2.65
+  gravityScale: 1.35
   jumpAmount: 7
-  coyotoJumpAmount: 10
-  doubleJumpAmount: 5
-  CoyotoTime: 0.17
-  jumpCutMultiplier: 1.95
-  jumpTime: 0.22
+  coyotoJumpAmount: 7.5
+  doubleJumpAmount: 7
+  CoyotoTime: 0.2
+  jumpCutMultiplier: 1.8
+  jumpTime: 0.2
   checkPosSize: {x: 0.36, y: 0.36}
   checkPos: {fileID: 7461186936902632192}
   layerMask:

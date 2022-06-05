@@ -179,6 +179,7 @@ public class MovementManager : Librariy
 
         if (coyotoJumpCounter == 0)
         {
+            rb.velocity = Vector2.zero;
             rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
             coyotoJumpCounter++;
         }
