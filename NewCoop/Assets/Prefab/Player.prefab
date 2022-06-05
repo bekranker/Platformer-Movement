@@ -179,7 +179,7 @@ MonoBehaviour:
   coyotoJumpAmount: 7
   doubleJumpAmount: 8
   CoyotoTime: 0.1
-  jumpCutMultiplier: 0.3
+  jumpCutMultiplier: 2.5
   jumpTime: 0.3
   checkPosSize: {x: 0.36, y: 0.36}
   checkPos: {fileID: 7461186936902632192}

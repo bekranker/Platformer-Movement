@@ -5,20 +5,20 @@ using UnityEngine;
 public class MovementManager : Librariy
 {
     [Header("-----Move Options-----")]
-    [SerializeField] float MainSpeed;
-    [SerializeField] float acceleration;
-    [SerializeField] float decceleration;
-    [SerializeField] float velPower;
+    [Range(1f,100f)][SerializeField] float MainSpeed;
+    [Range(1f, 50f)] [SerializeField] float acceleration;
+    [Range(1f, 50f)] [SerializeField] float decceleration;
+    [Range(0f, 1f)] [SerializeField] float velPower;
 
     [Header("-----Jump Options-----")]
-    [SerializeField] float fallingGravityScale;
-    [SerializeField] float gravityScale;
-    [SerializeField] float jumpAmount;
-    [SerializeField] float coyotoJumpAmount;
-    [SerializeField] float doubleJumpAmount;
-    [SerializeField] float CoyotoTime = 0.1f;
-    [SerializeField] float jumpCutMultiplier;
-    [SerializeField] float jumpTime;
+    [Range(1f, 10f)] [SerializeField] float fallingGravityScale;
+    [Range(1f, 10f)] [SerializeField] float gravityScale;
+    [Range(1f, 100f)] [SerializeField] float jumpAmount;
+    [Range(1f, 100f)] [SerializeField] float coyotoJumpAmount;
+    [Range(1f, 100f)] [SerializeField] float doubleJumpAmount;
+    [Range(0f, 1f)] [SerializeField] float CoyotoTime = 0.1f;
+    [Range(1f, 100f)] [SerializeField] float jumpCutMultiplier;
+    [Range(0f, 1f)] [SerializeField] float jumpTime;
     [SerializeField] Vector2 checkPosSize;
     [SerializeField] Transform checkPos;
     [SerializeField] LayerMask layerMask;
@@ -69,13 +69,26 @@ public class MovementManager : Librariy
             }
         }
         isGrounded = (IsGrounded.Length > 0) ? true : false;
-        if (movementBehaviour.JumpDown == 1 && isJumped)
+        if (movementBehaviour.JumpDown == 1)
         {
             Jump();
+            isJumped = true;
         }
-        if (isJumped)
+        if (isJumped && movementBehaviour.Jump == 1)
         {
-            OnJump();
+            if (jumpTimeCounter > 0)
+            {
+                JumpCut();
+                jumpTimeCounter -= Time.deltaTime;
+            }
+            else
+            {
+                isJumped = false;
+            }
+        }
+        if (movementBehaviour.Jump == 0)
+        {
+            isJumped = false;
         }
         
     }
@@ -108,7 +121,7 @@ public class MovementManager : Librariy
 
         #region Jump
         IsGrounded = Physics2D.OverlapBoxAll(checkPos.position, checkPosSize, 0, layerMask);
-        
+        OnJump();
         #endregion
     }
 
@@ -145,18 +158,8 @@ public class MovementManager : Librariy
     #region Adding Jump
     private void AddJumpForce()
     {
-        if (jumpTimeCounter > 0)
-        {
-            rb.velocity = Vector2.zero;
-            rb.velocity += Vector2.up * 100 * jumpAmount * Time.fixedDeltaTime;
-
-            jumpTimeCounter -= Time.deltaTime;
-        }
-        else
-        {
-            isJumped = false;
-        }
-        
+        rb.velocity = Vector2.zero;
+        rb.velocity += Vector2.up * 100 * jumpAmount * Time.fixedDeltaTime;
     }
     #endregion
 
@@ -171,13 +174,8 @@ public class MovementManager : Librariy
     #region Adding CoyotoJump
     private void AddCoyotoJumpForce()
     {
-        if (jumpTimeCounter > 0)
-        {
-            rb.velocity = Vector2.zero;
-            rb.velocity += Vector2.up * 100 * movementBehaviour.x *coyotoJumpAmount * Time.fixedDeltaTime;
-
-            jumpTimeCounter -= Time.deltaTime;
-        }
+        rb.velocity = Vector2.zero;
+        rb.velocity += Vector2.up * 100 * movementBehaviour.x * coyotoJumpAmount * Time.fixedDeltaTime;
     }
     #endregion
 
@@ -192,19 +190,22 @@ public class MovementManager : Librariy
         {
             rb.gravityScale = gravityScale;
         }
-        if (jumpTimeCounter > 0)
+        if (rb.velocity.y < 0)
         {
-            if (movementBehaviour.Jump == 1 && isJumped && jumpTimeCounter > 0)
-            {
-                rb.velocity += Vector2.up * (1 - jumpTimeCounter) * Time.deltaTime;
-            }
-            if (movementBehaviour.Jump == 0 && isGrounded)
-            {
-                jumpTimeCounter = jumpCunter;
-            }
+            rb.gravityScale = gravityScale * fallingGravityScale;
         }
     }
     #endregion
 
+
+    private void JumpCut()
+    {
+        Debug.Log(rb.velocity);
+        rb.velocity += Vector2.up * jumpCutMultiplier * jumpAmount *Time.deltaTime;
+        if (isGrounded)
+        {
+            jumpTimeCounter = jumpCunter;
+        }
+    }
     #endregion
 }
