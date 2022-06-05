@@ -179,6 +179,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 4
   active: 0
+  Default: Keypad3
 --- !u!114 &10869872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,10 +286,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 1725080953}
+  SelectOnDown: {fileID: 1746675025}
+  SelectOnRight: {fileID: 1080196319}
+  SelectOnLeft: {fileID: 1080196319}
+  SelectionButton: 0
 --- !u!1 &41251917
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,6 +460,7 @@ RectTransform:
   - {fileID: 1205501241}
   - {fileID: 966821388}
   - {fileID: 1087197852}
+  - {fileID: 1368188572}
   m_Father: {fileID: 2129035132}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -560,6 +563,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 7
   active: 0
+  Default: Keypad6
 --- !u!114 &80164834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -666,10 +670,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 1400429061}
+  SelectOnDown: {fileID: 540573528}
+  SelectOnRight: {fileID: 592944051}
+  SelectOnLeft: {fileID: 592944051}
+  SelectionButton: 0
 --- !u!1 &100382842
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,6 +999,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 8
   active: 0
+  Default: Q
 --- !u!114 &178601037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1104,6 +1110,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 1683515499}
   SelectOnRight: {fileID: 1301684337}
   SelectOnLeft: {fileID: 540573528}
+  SelectionButton: 0
 --- !u!1 &187989457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1160,6 +1167,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 1
   active: 0
+  Default: DownArrow
 --- !u!114 &187989460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1266,10 +1274,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 1622740472}
+  SelectOnDown: {fileID: 1645786787}
+  SelectOnRight: {fileID: 1056014259}
+  SelectOnLeft: {fileID: 1056014259}
+  SelectionButton: 0
 --- !u!1 &189208620
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,6 +3063,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 949050179}
   SelectOnRight: {fileID: 0}
   SelectOnLeft: {fileID: 0}
+  SelectionButton: 0
 --- !u!1 &401669715
 GameObject:
   m_ObjectHideFlags: 0
@@ -4093,6 +4103,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 9
   active: 0
+  Default: Keypad0
 --- !u!114 &526977667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4199,10 +4210,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 540573528}
+  SelectOnDown: {fileID: 1622740472}
+  SelectOnRight: {fileID: 1683515499}
+  SelectOnLeft: {fileID: 1909574578}
+  SelectionButton: 0
 --- !u!1 &540573528
 GameObject:
   m_ObjectHideFlags: 0
@@ -4259,6 +4271,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 8
   active: 0
+  Default: Keypad4
 --- !u!114 &540573531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4365,10 +4378,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 80164831}
+  SelectOnDown: {fileID: 526977664}
+  SelectOnRight: {fileID: 178601034}
+  SelectOnLeft: {fileID: 1301684337}
+  SelectionButton: 0
 --- !u!1 &551133047
 GameObject:
   m_ObjectHideFlags: 0
@@ -4547,6 +4561,7 @@ MonoBehaviour:
   XboxButton: {fileID: 966821389}
   PsButton: {fileID: 1205501242}
   PlayButton: {fileID: 949050179}
+  InputSelectionPanel: {fileID: 1178810203}
   menu: {fileID: 1644821764}
 --- !u!4 &563741255
 Transform:
@@ -4754,6 +4769,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 7
   active: 0
+  Default: E
 --- !u!114 &592944054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4864,6 +4880,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 178601034}
   SelectOnRight: {fileID: 80164831}
   SelectOnLeft: {fileID: 80164831}
+  SelectionButton: 0
 --- !u!1 &599744468
 GameObject:
   m_ObjectHideFlags: 0
@@ -5233,6 +5250,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 3
   active: 0
+  Default: A
 --- !u!114 &653283389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5343,6 +5361,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 1080196319}
   SelectOnRight: {fileID: 1725080953}
   SelectOnLeft: {fileID: 1725080953}
+  SelectionButton: 0
 --- !u!1 &703392780
 GameObject:
   m_ObjectHideFlags: 0
@@ -5418,6 +5437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 708605375}
+  - component: {fileID: 708605376}
   m_Layer: 5
   m_Name: KeyBindingPanel
   m_TagString: Untagged
@@ -5452,6 +5472,39 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -10.272}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &708605376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 708605374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23b577e09ff829f4c9a98c0bce367442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keybindingScripts:
+  - {fileID: 780972481}
+  - {fileID: 1056014261}
+  - {fileID: 1545839029}
+  - {fileID: 653283388}
+  - {fileID: 1080196321}
+  - {fileID: 1866055492}
+  - {fileID: 1784196478}
+  - {fileID: 592944053}
+  - {fileID: 178601036}
+  - {fileID: 1683515501}
+  - {fileID: 1622740474}
+  - {fileID: 187989459}
+  - {fileID: 1645786789}
+  - {fileID: 1725080955}
+  - {fileID: 10869871}
+  - {fileID: 1746675027}
+  - {fileID: 1400429063}
+  - {fileID: 80164833}
+  - {fileID: 540573530}
+  - {fileID: 526977666}
 --- !u!1 &719652698
 GameObject:
   m_ObjectHideFlags: 0
@@ -5910,6 +5963,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 0
   active: 0
+  Default: W
 --- !u!114 &780972482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6020,6 +6074,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 1056014259}
   SelectOnRight: {fileID: 1622740472}
   SelectOnLeft: {fileID: 1622740472}
+  SelectionButton: 0
 --- !u!1 &827394114
 GameObject:
   m_ObjectHideFlags: 0
@@ -7110,6 +7165,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 386853851}
   SelectOnRight: {fileID: 0}
   SelectOnLeft: {fileID: 0}
+  SelectionButton: 0
 --- !u!1 &960457907
 GameObject:
   m_ObjectHideFlags: 0
@@ -7166,6 +7222,7 @@ GameObject:
   - component: {fileID: 966821391}
   - component: {fileID: 966821390}
   - component: {fileID: 966821389}
+  - component: {fileID: 966821392}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Untagged
@@ -7206,7 +7263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_WrapAround: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -7287,6 +7344,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966821387}
   m_CullTransparentMesh: 1
+--- !u!114 &966821392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966821387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectOnUp: {fileID: 0}
+  SelectOnDown: {fileID: 0}
+  SelectOnRight: {fileID: 0}
+  SelectOnLeft: {fileID: 0}
+  SelectionButton: 1
 --- !u!1 &993644551
 GameObject:
   m_ObjectHideFlags: 0
@@ -7656,6 +7730,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 1
   active: 0
+  Default: S
 --- !u!114 &1056014262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7763,9 +7838,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectOnUp: {fileID: 780972479}
-  SelectOnDown: {fileID: 653283386}
+  SelectOnDown: {fileID: 1545839027}
   SelectOnRight: {fileID: 187989457}
   SelectOnLeft: {fileID: 187989457}
+  SelectionButton: 0
 --- !u!1 &1080196319
 GameObject:
   m_ObjectHideFlags: 0
@@ -7822,6 +7898,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 4
   active: 0
+  Default: Space
 --- !u!114 &1080196322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7932,6 +8009,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 1866055490}
   SelectOnRight: {fileID: 10869869}
   SelectOnLeft: {fileID: 10869869}
+  SelectionButton: 0
 --- !u!1 &1085706635
 GameObject:
   m_ObjectHideFlags: 0
@@ -8118,7 +8196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -8685,6 +8763,7 @@ GameObject:
   - component: {fileID: 1205501244}
   - component: {fileID: 1205501243}
   - component: {fileID: 1205501242}
+  - component: {fileID: 1205501245}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -8725,7 +8804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_WrapAround: 1
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -8806,6 +8885,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205501240}
   m_CullTransparentMesh: 1
+--- !u!114 &1205501245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205501240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SelectOnUp: {fileID: 0}
+  SelectOnDown: {fileID: 0}
+  SelectOnRight: {fileID: 0}
+  SelectOnLeft: {fileID: 0}
+  SelectionButton: 1
 --- !u!1 &1215511030
 GameObject:
   m_ObjectHideFlags: 0
@@ -9079,6 +9175,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 1909574578}
   SelectOnRight: {fileID: 540573528}
   SelectOnLeft: {fileID: 178601034}
+  SelectionButton: 0
 --- !u!114 &1301684340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9196,6 +9293,140 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1301684337}
+  m_CullTransparentMesh: 1
+--- !u!1 &1368188571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1368188572}
+  - component: {fileID: 1368188574}
+  - component: {fileID: 1368188573}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1368188572
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368188571}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 66978486}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.0000038147, y: 51}
+  m_SizeDelta: {x: 322.151, y: 48.28}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1368188573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368188571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: Press Start button on your Gamepad
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 21.25
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1368188574
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368188571}
   m_CullTransparentMesh: 1
 --- !u!1 &1370190082
 GameObject:
@@ -9387,6 +9618,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 6
   active: 0
+  Default: Keypad2
 --- !u!114 &1400429064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9493,10 +9725,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 1746675025}
+  SelectOnDown: {fileID: 80164831}
+  SelectOnRight: {fileID: 1784196476}
+  SelectOnLeft: {fileID: 1784196476}
+  SelectionButton: 0
 --- !u!1 &1479929421
 GameObject:
   m_ObjectHideFlags: 0
@@ -10075,6 +10308,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 1566109139}
   SelectOnRight: {fileID: 0}
   SelectOnLeft: {fileID: 0}
+  SelectionButton: 0
 --- !u!1 &1545839027
 GameObject:
   m_ObjectHideFlags: 0
@@ -10131,6 +10365,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 2
   active: 0
+  Default: D
 --- !u!114 &1545839030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10241,6 +10476,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 653283386}
   SelectOnRight: {fileID: 1645786787}
   SelectOnLeft: {fileID: 1645786787}
+  SelectionButton: 0
 --- !u!1 &1546116628
 GameObject:
   m_ObjectHideFlags: 0
@@ -10683,6 +10919,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 1541976721}
   SelectOnRight: {fileID: 0}
   SelectOnLeft: {fileID: 0}
+  SelectionButton: 0
 --- !u!1 &1622740472
 GameObject:
   m_ObjectHideFlags: 0
@@ -10739,6 +10976,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 0
   active: 0
+  Default: UpArrow
 --- !u!114 &1622740475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10845,10 +11083,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 526977664}
+  SelectOnDown: {fileID: 187989457}
+  SelectOnRight: {fileID: 780972479}
+  SelectOnLeft: {fileID: 780972479}
+  SelectionButton: 0
 --- !u!1 &1644821763
 GameObject:
   m_ObjectHideFlags: 0
@@ -10882,6 +11121,9 @@ MonoBehaviour:
   SelectionButton: {fileID: 1087197851}
   KeyBindButton: {fileID: 1909574578}
   SecondBack: {fileID: 386853851}
+  XboxButton: {fileID: 966821387}
+  PsButton: {fileID: 1205501240}
+  SelectionPanel: {fileID: 66978485}
 --- !u!4 &1644821765
 Transform:
   m_ObjectHideFlags: 0
@@ -10952,6 +11194,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 2
   active: 0
+  Default: RightArrow
 --- !u!114 &1645786790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11058,10 +11301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 187989457}
+  SelectOnDown: {fileID: 1725080953}
+  SelectOnRight: {fileID: 1545839027}
+  SelectOnLeft: {fileID: 1545839027}
+  SelectionButton: 0
 --- !u!1 &1649212732
 GameObject:
   m_ObjectHideFlags: 0
@@ -11386,6 +11630,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 9
   active: 0
+  Default: G
 --- !u!114 &1683515502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11496,6 +11741,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 780972479}
   SelectOnRight: {fileID: 1909574578}
   SelectOnLeft: {fileID: 526977664}
+  SelectionButton: 0
 --- !u!1 &1684789630
 GameObject:
   m_ObjectHideFlags: 0
@@ -11686,6 +11932,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 3
   active: 0
+  Default: LeftArrow
 --- !u!114 &1725080956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11792,10 +12039,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 1645786787}
+  SelectOnDown: {fileID: 10869869}
+  SelectOnRight: {fileID: 653283386}
+  SelectOnLeft: {fileID: 653283386}
+  SelectionButton: 0
 --- !u!1 &1729153171
 GameObject:
   m_ObjectHideFlags: 0
@@ -11986,6 +12234,7 @@ MonoBehaviour:
   Player: Keyboard2
   button: 5
   active: 0
+  Default: Keypad1
 --- !u!114 &1746675028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12092,10 +12341,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b9b79d01882ed43b120a21536bdc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectOnUp: {fileID: 0}
-  SelectOnDown: {fileID: 0}
-  SelectOnRight: {fileID: 0}
-  SelectOnLeft: {fileID: 0}
+  SelectOnUp: {fileID: 10869869}
+  SelectOnDown: {fileID: 1400429061}
+  SelectOnRight: {fileID: 1866055490}
+  SelectOnLeft: {fileID: 1866055490}
+  SelectionButton: 0
 --- !u!1 &1759572216
 GameObject:
   m_ObjectHideFlags: 0
@@ -12286,6 +12536,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 6
   active: 0
+  Default: C
 --- !u!114 &1784196479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12396,6 +12647,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 592944051}
   SelectOnRight: {fileID: 1400429061}
   SelectOnLeft: {fileID: 1400429061}
+  SelectionButton: 0
 --- !u!1 &1866055490
 GameObject:
   m_ObjectHideFlags: 0
@@ -12452,6 +12704,7 @@ MonoBehaviour:
   Player: Keyboard1
   button: 5
   active: 0
+  Default: F
 --- !u!114 &1866055493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12562,6 +12815,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 1784196476}
   SelectOnRight: {fileID: 1746675025}
   SelectOnLeft: {fileID: 1746675025}
+  SelectionButton: 0
 --- !u!1 &1881025954
 GameObject:
   m_ObjectHideFlags: 0
@@ -12907,6 +13161,7 @@ MonoBehaviour:
   SelectOnDown: {fileID: 1301684337}
   SelectOnRight: {fileID: 526977664}
   SelectOnLeft: {fileID: 1683515499}
+  SelectionButton: 0
 --- !u!1 &1937013178
 GameObject:
   m_ObjectHideFlags: 0
