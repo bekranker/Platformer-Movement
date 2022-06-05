@@ -234,18 +234,18 @@ public class InputSelection : MonoBehaviour
         {
             if(Input.GetJoystickNames()[i] != "" && Controllers[i] == "")
             {
-                //#region AutoDetect
-                //if (Input.GetJoystickNames()[i].ToLower().Contains("xbox"))
-                //{
-                //    Controllers[i] = "Xbox";
-                //    goto Second;
-                //}
-                //else if (Input.GetJoystickNames()[i].ToLower().Contains("dual"))
-                //{
-                //    Controllers[i] = "Ps";
-                //    goto Second;
-                //}
-                //#endregion
+                #region AutoDetect
+                if (Input.GetJoystickNames()[i].ToLower().Contains("xbox"))
+                {
+                    Controllers[i] = "Xbox";
+                    goto Second;
+                }
+                else if (Input.GetJoystickNames()[i].ToLower().Contains("dual"))
+                {
+                    Controllers[i] = "Ps";
+                    goto Second;
+                }
+                #endregion
 
                 SelectionPanel.SetActive(true);
                 if (!firstOpening)
@@ -274,14 +274,14 @@ public class InputSelection : MonoBehaviour
 
                 menu.SelectFirstStartButton();
             }
-            //else if (Input.GetJoystickNames()[i] == "")
-            //{
-            //    SelectionPanel.SetActive(false);
-            //    Controllers[i] = "";
-            //    PlayerPrefs.SetInt("PlayerIndex" + i, -1);
-            //}
+            else if (Input.GetJoystickNames()[i] == "")
+            {
+                SelectionPanel.SetActive(false);
+                Controllers[i] = "";
+                PlayerPrefs.SetInt("PlayerIndex" + i, -1);
+            }
 
-            Second:
+        Second:
 
             if (!playerIndexSet || !prevState.IsConnected)
             {

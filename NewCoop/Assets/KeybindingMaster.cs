@@ -5,6 +5,8 @@ using UnityEngine;
 public class KeybindingMaster : MonoBehaviour
 {
     [SerializeField] List<KeybindingScript> keybindingScripts;
+
+    KeybindingScript LastOpened;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,20 @@ public class KeybindingMaster : MonoBehaviour
         foreach (KeybindingScript keybindingScript in keybindingScripts)
         {
             keybindingScript.ResetDefault();
+        }
+    }
+
+    public void IamOpened(KeybindingScript keybinding)
+    {
+        ClosedLastOne();
+        LastOpened = keybinding;
+    }
+
+    public void ClosedLastOne()
+    {
+        if (LastOpened != null)
+        {
+            LastOpened.Close();
         }
     }
 }
