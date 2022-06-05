@@ -156,6 +156,11 @@ public class MovementManager : Librariy
         {
             rb.gravityScale = gravityScale;
         }
+
+        //if (rb.velocity.y > 0 && movementBehaviour.Jump == 1)
+        //{
+
+        //}
     }
     #endregion
 
