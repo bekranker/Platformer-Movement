@@ -17,14 +17,21 @@ public class MovementManager : Librariy
     [SerializeField] float coyotoJumpAmount;
     [SerializeField] float doubleJumpAmount;
     [SerializeField] float CoyotoTime = 0.1f;
+    [SerializeField] float jumpCutMultiplier;
+    [SerializeField] float jumpTime;
     [SerializeField] Vector2 checkPosSize;
     [SerializeField] Transform checkPos;
     [SerializeField] LayerMask layerMask;
     [SerializeField] int totalJump;
 
+    float jumpTimeCounter;
+    
     bool isGrounded = true;
     bool multipleJump;
     bool coyoteJump;
+    bool isJumped;
+
+
     int jumpCunter;
     Collider2D[] IsGrounded;
 
@@ -33,13 +40,20 @@ public class MovementManager : Librariy
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private MovementBehaviour movementBehaviour;
 
+    private void Start()
+    {
+        jumpTimeCounter = jumpTime;
+    }
+
     private void Update()
     {
-
         bool wasGrounded = isGrounded;
         if (IsGrounded.Length > 0)
         {
             isGrounded = true;
+            isJumped = true;
+            jumpTimeCounter = jumpTime;
+
             if (!wasGrounded)
             {
                 jumpCunter = totalJump;
@@ -55,12 +69,16 @@ public class MovementManager : Librariy
             }
         }
         isGrounded = (IsGrounded.Length > 0) ? true : false;
-        if (movementBehaviour.Jump == 1)
+        if (movementBehaviour.JumpDown == 1 && isJumped)
         {
             Jump();
         }
+        if (isJumped)
+        {
+            OnJump();
+        }
+        
     }
-
 
     IEnumerator CoyotoJumpCoroutine()
     {
@@ -68,7 +86,6 @@ public class MovementManager : Librariy
         yield return new WaitForSeconds(CoyotoTime);
         coyoteJump = false;
     }
-
 
     void FixedUpdate()
     {
@@ -91,7 +108,7 @@ public class MovementManager : Librariy
 
         #region Jump
         IsGrounded = Physics2D.OverlapBoxAll(checkPos.position, checkPosSize, 0, layerMask);
-        OnJump();
+        
         #endregion
     }
 
@@ -118,14 +135,28 @@ public class MovementManager : Librariy
                 jumpCunter--;
                 AddDoubleJumpForce();
             }
+            else
+            {
+                isJumped = false;
+            }
         }
     }
 
     #region Adding Jump
     private void AddJumpForce()
     {
-        rb.velocity = Vector2.zero;
-        rb.velocity += Vector2.up * 100 * jumpAmount * Time.fixedDeltaTime;
+        if (jumpTimeCounter > 0)
+        {
+            rb.velocity = Vector2.zero;
+            rb.velocity += Vector2.up * 100 * jumpAmount * Time.fixedDeltaTime;
+
+            jumpTimeCounter -= Time.deltaTime;
+        }
+        else
+        {
+            isJumped = false;
+        }
+        
     }
     #endregion
 
@@ -140,8 +171,11 @@ public class MovementManager : Librariy
     #region Adding CoyotoJump
     private void AddCoyotoJumpForce()
     {
-        rb.velocity = Vector2.zero;
-        rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
+        if (jumpTimeCounter > 0)
+        {
+            rb.velocity = Vector2.zero;
+            rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
+        }
     }
     #endregion
 
@@ -156,11 +190,19 @@ public class MovementManager : Librariy
         {
             rb.gravityScale = gravityScale;
         }
-
-        //if (rb.velocity.y > 0 && movementBehaviour.Jump == 1)
-        //{
-
-        //}
+        if (jumpTimeCounter > 0)
+        {
+            if (movementBehaviour.Jump == 1 && isJumped)
+            {
+                //rb.AddForce(Vector2.up * , ForceMode2D.Impulse);
+                rb.velocity += Vector2.up * Mathf.Sin(jumpTimeCounter);
+            }
+            if (movementBehaviour.Jump == 0 && isGrounded)
+            {
+                //rb.velocity = Vector2.zero;
+                jumpTimeCounter = jumpCunter;
+            }
+        }
     }
     #endregion
 
