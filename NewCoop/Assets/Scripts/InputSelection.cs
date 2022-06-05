@@ -25,6 +25,8 @@ public class InputSelection : MonoBehaviour
     [SerializeField] GameObject PlayButton;
 
 
+    [SerializeField] GameObject InputSelectionPanel;
+
     bool playerIndexSet = false;
     PlayerIndex playerIndex;
     GamePadState state;
@@ -33,6 +35,8 @@ public class InputSelection : MonoBehaviour
     [SerializeField] Menu menu;
 
     bool firstOpening;
+
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -72,36 +76,40 @@ public class InputSelection : MonoBehaviour
             PlayButton.SetActive(false);
         }
 
+
+        if (InputSelectionPanel.activeSelf)
+        {       
+
         #region Join
         //Join
-        if(PlayerPrefs.GetString("Keyboard1" + "Jump") != "")
+        if(PlayerPrefs.GetString("Keyboard1" + "Attack") != "")
         {
-            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard1" + "Jump"))))
+            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard1" + "Attack"))))
             {
                 GetPlayer("Keyboard1",-1);
             }
         }
-        if (PlayerPrefs.GetString("Keyboard2" + "Jump") != "")
+        if (PlayerPrefs.GetString("Keyboard2" + "Attack") != "")
         {
-            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard2" + "Jump"))))
+            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard2" + "Attack"))))
             {
                 GetPlayer("Keyboard2",-1);
             }
         }
 
-        if (Input.GetAxis("XboxButtonA") > 0 && Controllers[0] == "Xbox")
+        if (Input.GetAxis("XboxButtonX") > 0 && Controllers[0] == "Xbox")
         {
             GetPlayer("Xbox", PlayerPrefs.GetInt("PlayerIndex" + 0));
         }
-        if (Input.GetAxis("Xbox2ButtonA") > 0 && Controllers[1] == "Xbox") 
+        if (Input.GetAxis("Xbox2ButtonX") > 0 && Controllers[1] == "Xbox") 
         {
             GetPlayer("Xbox2", PlayerPrefs.GetInt("PlayerIndex" + 1));
         }
-        if (Input.GetAxis("PsButtonX") > 0 && Controllers[0] == "Ps")
+        if (Input.GetAxis("PsButtonSquare") > 0 && Controllers[0] == "Ps")
         {
             GetPlayer("Ps", PlayerPrefs.GetInt("PlayerIndex" + 0));
         }
-        if (Input.GetAxis("Ps2ButtonX") > 0 && Controllers[1] == "Ps")
+        if (Input.GetAxis("Ps2ButtonSquare") > 0 && Controllers[1] == "Ps")
         {
             GetPlayer("Ps2", PlayerPrefs.GetInt("PlayerIndex" + 1));
         }
@@ -197,7 +205,8 @@ public class InputSelection : MonoBehaviour
             }
         }
 
-        #endregion
+            #endregion
+        }
     }
 
     void GetPlayer(string ControllerName,int PlayerIndex)
@@ -224,7 +233,20 @@ public class InputSelection : MonoBehaviour
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
         {
             if(Input.GetJoystickNames()[i] != "" && Controllers[i] == "")
-            { 
+            {
+                //#region AutoDetect
+                //if (Input.GetJoystickNames()[i].ToLower().Contains("xbox"))
+                //{
+                //    Controllers[i] = "Xbox";
+                //    goto Second;
+                //}
+                //else if (Input.GetJoystickNames()[i].ToLower().Contains("dual"))
+                //{
+                //    Controllers[i] = "Ps";
+                //    goto Second;
+                //}
+                //#endregion
+
                 SelectionPanel.SetActive(true);
                 if (!firstOpening)
                 {
@@ -252,12 +274,14 @@ public class InputSelection : MonoBehaviour
 
                 menu.SelectFirstStartButton();
             }
-            else if (Input.GetJoystickNames()[i] == "")
-            {
-                SelectionPanel.SetActive(false);
-                Controllers[i] = "";
-                PlayerPrefs.SetInt("PlayerIndex" + i, -1);
-            }
+            //else if (Input.GetJoystickNames()[i] == "")
+            //{
+            //    SelectionPanel.SetActive(false);
+            //    Controllers[i] = "";
+            //    PlayerPrefs.SetInt("PlayerIndex" + i, -1);
+            //}
+
+            Second:
 
             if (!playerIndexSet || !prevState.IsConnected)
             {

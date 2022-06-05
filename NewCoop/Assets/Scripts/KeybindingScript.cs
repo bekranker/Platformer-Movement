@@ -21,6 +21,7 @@ public class KeybindingScript : MonoBehaviour
     [SerializeField] string Player;
     [SerializeField] Buttons button;
     [SerializeField] bool active;
+    [SerializeField] string Default;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,5 +53,10 @@ public class KeybindingScript : MonoBehaviour
     public void OnClick()
     {
         active = true;
+    }
+
+    public void ResetDefault()
+    {
+
     }
 }
