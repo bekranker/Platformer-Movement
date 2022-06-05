@@ -16,7 +16,8 @@ public class MovementManager : Librariy
     [Range(1f, 100f)] [SerializeField] float jumpAmount;
     [Range(1f, 100f)] [SerializeField] float coyotoJumpAmount;
     [Range(1f, 100f)] [SerializeField] float doubleJumpAmount;
-    [Range(0f, 1f)] [SerializeField] float CoyotoTime = 0.1f;
+    [Range(0f, 1f)] [SerializeField] float CoyotoTime;
+    [Range(0f, 1f)] [SerializeField] float BufferTime;
     [Range(1f, 100f)] [SerializeField] float jumpCutMultiplier;
     [Range(0f, 1f)] [SerializeField] float jumpTime;
     [SerializeField] Vector2 checkPosSize;
@@ -25,7 +26,8 @@ public class MovementManager : Librariy
     [SerializeField] int totalJump;
 
     float jumpTimeCounter;
-    
+    float bufferTimeCounter;
+
     bool isGrounded = true;
     bool multipleJump;
     bool coyoteJump;
@@ -71,7 +73,7 @@ public class MovementManager : Librariy
             }
         }
         isGrounded = (IsGrounded.Length > 0) ? true : false;
-        if (movementBehaviour.JumpDown == 1)
+        if (bufferTimeCounter > 0)
         {
             Jump();
             isJumped = true;
@@ -92,7 +94,14 @@ public class MovementManager : Librariy
         {
             isJumped = false;
         }
-        
+        if (movementBehaviour.JumpDown == 1)
+        {
+            bufferTimeCounter = BufferTime;
+        }
+        else
+        {
+            bufferTimeCounter -= Time.deltaTime;
+        }
     }
 
     IEnumerator CoyotoJumpCoroutine()
