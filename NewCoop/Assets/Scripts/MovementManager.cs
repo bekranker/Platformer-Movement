@@ -140,10 +140,9 @@ public class MovementManager : Librariy
             if (coyoteJump)
             {
                 multipleJump = true;
-                Debug.Log("Coyote jump is did");
                 AddCoyotoJumpForce();
             }
-            if (multipleJump && jumpCunter > 0)
+            else if (multipleJump && jumpCunter > 0)
             {
                 jumpCunter--;
                 AddDoubleJumpForce();
@@ -174,8 +173,8 @@ public class MovementManager : Librariy
     #region Adding CoyotoJump
     private void AddCoyotoJumpForce()
     {
-        rb.velocity = Vector2.zero;
-        rb.velocity += Vector2.up * 100 * movementBehaviour.x * coyotoJumpAmount * Time.fixedDeltaTime;
+        Debug.Log("Coyote jump is did");
+        rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
     }
     #endregion
 
@@ -190,22 +189,24 @@ public class MovementManager : Librariy
         {
             rb.gravityScale = gravityScale;
         }
-        if (rb.velocity.y < 0)
-        {
-            rb.gravityScale = gravityScale * fallingGravityScale;
-        }
+        //if (rb.velocity.y < 0)
+        //{
+        //    rb.gravityScale = gravityScale * fallingGravityScale;
+        //}
     }
     #endregion
 
 
+    #region JumpCut
     private void JumpCut()
     {
-        Debug.Log(rb.velocity);
-        rb.velocity += Vector2.up * jumpCutMultiplier * jumpAmount *Time.deltaTime;
+        rb.velocity += Vector2.up * jumpCutMultiplier * jumpAmount * Time.deltaTime;
         if (isGrounded)
         {
             jumpTimeCounter = jumpCunter;
         }
     }
+    #endregion
+
     #endregion
 }
