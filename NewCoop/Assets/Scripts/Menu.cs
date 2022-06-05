@@ -39,4 +39,8 @@ public class Menu : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(SecondBack);
     }
+    public void SelectKeyBindButton()
+    {
+        EventSystem.current.SetSelectedGameObject(KeyBindButton);
+    }
 }

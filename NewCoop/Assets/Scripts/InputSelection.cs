@@ -14,7 +14,7 @@ public class InputSelection : MonoBehaviour
     [SerializeField] TextMeshProUGUI ControllerDebug2;
 
     [SerializeField] string[] Players = new string[2];
-    [SerializeField] string[] Controllers = new string[2];
+    public List<string> Controllers = new List<string>(2);
 
     [SerializeField] GameObject SelectionPanel;
     [SerializeField] TextMeshProUGUI SelectionText;
