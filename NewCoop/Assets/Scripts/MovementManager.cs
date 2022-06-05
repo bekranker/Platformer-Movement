@@ -184,7 +184,7 @@ public class MovementManager : Librariy
     #region On Jumping
     private void OnJump()
     {
-        if (rb.velocity.y > 5)
+        if (rb.velocity.y > 3)
         {
             rb.gravityScale = gravityScale * fallingGravityScale;
         }
@@ -194,7 +194,7 @@ public class MovementManager : Librariy
         }
         if (jumpTimeCounter > 0)
         {
-            if (movementBehaviour.Jump == 1 && isJumped)
+            if (movementBehaviour.Jump == 1 && isJumped && jumpTimeCounter > 0)
             {
                 rb.velocity += Vector2.up * (1 - jumpTimeCounter) * Time.deltaTime;
             }

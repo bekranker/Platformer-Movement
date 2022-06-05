@@ -169,9 +169,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958de6995c7367b468f808d90fbc1312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainSpeed: 13
-  acceleration: 10
-  decceleration: 25
+  MainSpeed: 11
+  acceleration: 15
+  decceleration: 27
   velPower: 0.96
   fallingGravityScale: 2.5
   gravityScale: 1.2
