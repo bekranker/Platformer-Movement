@@ -174,7 +174,9 @@ public class MovementManager : Librariy
         if (jumpTimeCounter > 0)
         {
             rb.velocity = Vector2.zero;
-            rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
+            rb.velocity += Vector2.up * 100 * movementBehaviour.x *coyotoJumpAmount * Time.fixedDeltaTime;
+
+            jumpTimeCounter -= Time.deltaTime;
         }
     }
     #endregion
@@ -194,12 +196,10 @@ public class MovementManager : Librariy
         {
             if (movementBehaviour.Jump == 1 && isJumped)
             {
-                //rb.AddForce(Vector2.up * , ForceMode2D.Impulse);
                 rb.velocity += Vector2.up * Mathf.Sin(jumpTimeCounter);
             }
             if (movementBehaviour.Jump == 0 && isGrounded)
             {
-                //rb.velocity = Vector2.zero;
                 jumpTimeCounter = jumpCunter;
             }
         }
