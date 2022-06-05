@@ -196,7 +196,7 @@ public class MovementManager : Librariy
         {
             if (movementBehaviour.Jump == 1 && isJumped)
             {
-                rb.velocity += Vector2.up * Mathf.Sin(jumpTimeCounter);
+                rb.velocity += Vector2.up * (1 - jumpTimeCounter) * Time.deltaTime;
             }
             if (movementBehaviour.Jump == 0 && isGrounded)
             {
