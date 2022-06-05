@@ -50,6 +50,7 @@ public class MovementManager : Librariy
 
     private void Update()
     {
+        #region Ground Check and calculeting bools
         bool wasGrounded = isGrounded;
         if (IsGrounded.Length > 0)
         {
@@ -65,6 +66,7 @@ public class MovementManager : Librariy
                 Debug.Log("Landed");
             }
         }
+        
         else
         {
             if (wasGrounded)
@@ -72,12 +74,11 @@ public class MovementManager : Librariy
                 StartCoroutine(CoyotoJumpCoroutine());
             }
         }
+
         isGrounded = (IsGrounded.Length > 0) ? true : false;
-        if (bufferTimeCounter > 0)
-        {
-            Jump();
-            isJumped = true;
-        }
+        #endregion
+
+        #region Jumping With JumpCut
         if (isJumped && movementBehaviour.Jump == 1)
         {
             if (jumpTimeCounter > 0)
@@ -94,6 +95,14 @@ public class MovementManager : Librariy
         {
             isJumped = false;
         }
+        #endregion
+
+        #region Buffer
+        if (bufferTimeCounter > 0)
+        {
+            Jump();
+            isJumped = true;
+        }
         if (movementBehaviour.JumpDown == 1)
         {
             bufferTimeCounter = BufferTime;
@@ -102,8 +111,10 @@ public class MovementManager : Librariy
         {
             bufferTimeCounter -= Time.deltaTime;
         }
+        #endregion
     }
 
+    #region Coyoto Time bool calulate
     IEnumerator CoyotoJumpCoroutine()
     {
         coyoteJump = true;
@@ -111,6 +122,7 @@ public class MovementManager : Librariy
         coyoteJump = false;
         multipleJump = true;
     }
+    #endregion
 
     void FixedUpdate()
     {
@@ -138,31 +150,41 @@ public class MovementManager : Librariy
     }
 
     #region Jump Functions
-
     private void Jump()
     {
+        #region Normal Jump
         if (isGrounded)
         {
             jumpCunter--;
             AddJumpForce();
             multipleJump = true;
         }
+        #endregion
+
+        #region Not Normal
         else
         {
+            #region Coyoto Jump
             if (coyoteJump)
             {
                 AddCoyotoJumpForce();
             }
+            #endregion
+
+            #region Muliple Jumping
             if (multipleJump && jumpCunter > 0)
             {
                 jumpCunter--;
                 AddDoubleJumpForce();
             }
+            #endregion
+
             else
             {
                 isJumped = false;
             }
         }
+        #endregion
     }
 
     #region Adding Jump
