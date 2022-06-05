@@ -15,7 +15,7 @@ public class MovementBehaviour : MonoBehaviour
 {
     public string PlayerName;
     [SerializeField] Controls control;
-    public float x, y, RR, RL, Jump, Attack, Settings, Cancel;
+    public float x, y, RR, RL, JumpDown,Jump, Attack, Settings, Cancel;
 
     void Update()
     {
@@ -34,13 +34,13 @@ public class MovementBehaviour : MonoBehaviour
             {              
                 if(Input.GetButtonDown(control + "ButtonA"))
                 {
-                    Jump = 1;
+                    JumpDown = 1;
                 }
                 else
                 {
-                    Jump = 0;
+                    JumpDown = 0;
                 }
-                //Jump = Input.GetAxis(control + "ButtonA");
+                Jump = Input.GetAxis(control + "ButtonA");
                 Attack = Input.GetAxis(control + "ButtonX");
                 Cancel = Input.GetAxis(control + "ButtonB");
             }
@@ -48,13 +48,13 @@ public class MovementBehaviour : MonoBehaviour
             {
                 if(Input.GetButtonDown(control + "ButtonX"))
                 {
-                    Jump = 1;
+                    JumpDown = 1;
                 }
                 else
                 {
-                    Jump = 0;
+                    JumpDown = 0;
                 }
-                //Jump = Input.GetAxis(control + "ButtonX");
+                Jump = Input.GetAxis(control + "ButtonX");
                 Attack = Input.GetAxis(control + "ButtonSquare");
                 Cancel = Input.GetAxis(control + "ButtonO");
             }
@@ -132,6 +132,15 @@ public class MovementBehaviour : MonoBehaviour
             }
 
             if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(control + "Jump"))))
+            {
+                JumpDown = 1;
+            }
+            else
+            {
+                JumpDown = 0;
+            }
+
+            if (Input.GetKey((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(control + "Jump"))))
             {
                 Jump = 1;
             }
