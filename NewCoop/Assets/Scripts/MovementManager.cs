@@ -33,6 +33,7 @@ public class MovementManager : Librariy
 
 
     int jumpCunter;
+    int coyotoJumpCounter = 0;
     Collider2D[] IsGrounded;
 
 
@@ -53,6 +54,7 @@ public class MovementManager : Librariy
             isGrounded = true;
             isJumped = true;
             jumpTimeCounter = jumpTime;
+            coyotoJumpCounter = 0;
 
             if (!wasGrounded)
             {
@@ -98,6 +100,7 @@ public class MovementManager : Librariy
         coyoteJump = true;
         yield return new WaitForSeconds(CoyotoTime);
         coyoteJump = false;
+        multipleJump = true;
     }
 
     void FixedUpdate()
@@ -139,10 +142,9 @@ public class MovementManager : Librariy
         {
             if (coyoteJump)
             {
-                multipleJump = true;
                 AddCoyotoJumpForce();
             }
-            else if (multipleJump && jumpCunter > 0)
+            if (multipleJump && jumpCunter > 0)
             {
                 jumpCunter--;
                 AddDoubleJumpForce();
@@ -174,7 +176,13 @@ public class MovementManager : Librariy
     private void AddCoyotoJumpForce()
     {
         Debug.Log("Coyote jump is did");
-        rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
+
+        if (coyotoJumpCounter == 0)
+        {
+            rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
+            coyotoJumpCounter++;
+        }
+        
     }
     #endregion
 

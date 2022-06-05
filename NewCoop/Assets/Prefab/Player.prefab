@@ -174,14 +174,14 @@ MonoBehaviour:
   acceleration: 15
   decceleration: 27
   velPower: 0.96
-  fallingGravityScale: 2.5
-  gravityScale: 1.2
-  jumpAmount: 8
+  fallingGravityScale: 2.7
+  gravityScale: 1.25
+  jumpAmount: 7
   coyotoJumpAmount: 10
-  doubleJumpAmount: 6
-  CoyotoTime: 0.2
-  jumpCutMultiplier: 2.5
-  jumpTime: 0.25
+  doubleJumpAmount: 5
+  CoyotoTime: 0.17
+  jumpCutMultiplier: 1.95
+  jumpTime: 0.22
   checkPosSize: {x: 0.36, y: 0.36}
   checkPos: {fileID: 7461186936902632192}
   layerMask:
