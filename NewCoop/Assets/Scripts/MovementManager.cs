@@ -189,10 +189,10 @@ public class MovementManager : Librariy
         {
             rb.gravityScale = gravityScale;
         }
-        //if (rb.velocity.y < 0)
-        //{
-        //    rb.gravityScale = gravityScale * fallingGravityScale;
-        //}
+        if (rb.velocity.y < 0)
+        {
+            rb.gravityScale = gravityScale * fallingGravityScale;
+        }
     }
     #endregion
 
