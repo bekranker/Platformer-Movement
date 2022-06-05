@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] GameObject FirstStart, SelectionButton, KeyBindButton, SecondStart;
+    [SerializeField] GameObject FirstStart, SelectionButton, KeyBindButton, SecondBack;
 
     // Start is called before the first frame update
     void Start()
@@ -33,5 +33,10 @@ public class Menu : MonoBehaviour
     public void SelectFirstStartButton()
     {
         EventSystem.current.SetSelectedGameObject(FirstStart);
+    }
+
+    public void SelectSecondStartButton()
+    {
+        EventSystem.current.SetSelectedGameObject(SecondBack);
     }
 }

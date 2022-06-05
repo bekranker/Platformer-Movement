@@ -31,6 +31,8 @@ public class InputSelection : MonoBehaviour
     GamePadState prevState;
 
     [SerializeField] Menu menu;
+
+    bool firstOpening;
     // Start is called before the first frame update
     void Start()
     {
@@ -218,12 +220,18 @@ public class InputSelection : MonoBehaviour
 
     IEnumerator GetController()
     {
+
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
         {
             if(Input.GetJoystickNames()[i] != "" && Controllers[i] == "")
             { 
                 SelectionPanel.SetActive(true);
-                menu.SelectSelectionButton();
+                if (!firstOpening)
+                {
+                    menu.SelectSelectionButton();
+                    firstOpening = true;
+                }
+                
                 SelectionText.text = Input.GetJoystickNames()[i];
                 var waitForButton = new WaitForUIButtons(XboxButton,PsButton);
                 yield return waitForButton.Reset();
@@ -236,11 +244,13 @@ public class InputSelection : MonoBehaviour
                 else
                 {
                     Controllers[i] = "Ps";
-                }
-                menu.SelectFirstStartButton();
+                }            
 
                 Debug.Log(Input.GetJoystickNames()[i] +" "+ Controllers[i]);
                 SelectionPanel.SetActive(false);
+                firstOpening = false;
+
+                menu.SelectFirstStartButton();
             }
             else if (Input.GetJoystickNames()[i] == "")
             {
