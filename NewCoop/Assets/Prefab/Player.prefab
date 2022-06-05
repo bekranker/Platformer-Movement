@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4db4979638c927e4fa6f6c8e941f34fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlayerName: 
   control: 0
   x: 0
   y: 0
@@ -169,22 +170,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainSpeed: 13
-  acceleration: 7
+  acceleration: 10
   decceleration: 25
   velPower: 0.96
   fallingGravityScale: 2.5
   gravityScale: 1.2
-  jumpAmount: 20
-  CoyotoTime: 0.2
-  CoyotoTimeCounter: 0.2
-  JumpBuffer: 0.5
-  JumpBufferCounter: 0.5
+  jumpAmount: 10
+  coyotoJumpAmount: 12
   jumpCutMultiplayer: 15.45
+  doubleJumpAmount: 10
+  CoyotoTime: 0.2
   checkPosSize: {x: 0.36, y: 0.36}
   checkPos: {fileID: 7461186936902632192}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  CoyotoTimeCounter: 0.1
+  jumpCounter: 1
   rb: {fileID: 1174689607428651664}
   movementBehaviour: {fileID: 1174689607428651666}
 --- !u!114 &-240490266427339487

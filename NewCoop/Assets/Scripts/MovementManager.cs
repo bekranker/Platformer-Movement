@@ -14,17 +14,16 @@ public class MovementManager : Librariy
     [SerializeField] float fallingGravityScale;
     [SerializeField] float gravityScale;
     [SerializeField] float jumpAmount;
-    [SerializeField] float CoyotoTime = 0.2f;
-    [SerializeField] float CoyotoTimeCounter;
-    [SerializeField] float JumpBuffer = 0.2f;
-    [SerializeField] float JumpBufferCounter;
-    [SerializeField] float jumpCutMultiplayer;
+    [SerializeField] float coyotoJumpAmount;
+    [SerializeField] float doubleJumpAmount;
+    [SerializeField] float CoyotoTime = 0.1f;
     [SerializeField] Vector2 checkPosSize;
     [SerializeField] Transform checkPos;
     [SerializeField] LayerMask layerMask;
+    public float CoyotoTimeCounter;
     private bool IsGrouned;
     private bool IsJumped;
-
+    public int jumpCounter;
 
     [Header("----Componenets-----")]
     [SerializeField] private Rigidbody2D rb;
@@ -32,26 +31,34 @@ public class MovementManager : Librariy
 
     private void Update()
     {
-        #region JumpBuffering and CoyotoTime      
-        IsJumped = (JumpBufferCounter > 0 && CoyotoTimeCounter > 0) ? true : false;
-        CoyotoTimeCounter = (movementBehaviour.Jump == 0 && rb.velocity.y > 0f) ? 0f : CoyotoTimeCounter;
-        #endregion
+        jumpCounter = (IsGrouned) ? 2 : jumpCounter;
+        if (jumpCounter == -1 && IsGrouned)
+        {
+            CoyotoTimeCounter = CoyotoTime;
+        }
+        else
+        {
+            CoyotoTimeCounter = 0.1f;
+            CoyotoTimeCounter -= Time.deltaTime;
+        }
 
-        #region Coyoto
-        CoyotoTimeCounter = (IsGrouned) ? CoyotoTime : CoyotoTimeCounter - Time.deltaTime;
-        #endregion
-
-        #region Buffering
-        JumpBufferCounter = (rb.velocity.y < 1f && movementBehaviour.Jump == 1) ? JumpBuffer : JumpBufferCounter - Time.deltaTime;
-        #endregion
+        if (movementBehaviour.Jump == 1)
+        {
+            
+            if (jumpCounter == 2 && IsGrouned && rb.velocity.y == 0) { AddJumpForce();}
+            jumpCounter--;
+            if (jumpCounter == 1 && !IsGrouned) {AddDoubleJumpForce(); }
+            //if (CoyotoTimeCounter > 0 && !IsGrouned) AddCoyotoJumpForce();
+        }
     }
+
 
     void FixedUpdate()
     {
         #region Run
         //Direction
         float moveInput = movementBehaviour.x;
-        //Calculatþng direction we want to move in and our desired velocity
+        //Calculating direction we want to move in and our desired velocity
         float targetSpeed = moveInput * MainSpeed;
         //Calculeting difference between current velocity and desired velocity
         float speedDif = targetSpeed - rb.velocity.x;
@@ -67,10 +74,6 @@ public class MovementManager : Librariy
 
         #region Jump
         IsGrouned = Physics2D.OverlapBox(checkPos.position, checkPosSize, 1, layerMask);
-        if (IsJumped)
-        {
-            AddJumpForce();
-        }
         OnJump();
         #endregion
     }
@@ -80,9 +83,24 @@ public class MovementManager : Librariy
     #region Adding Jump
     private void AddJumpForce()
     {
-        rb.velocity += Vector2.up * jumpAmount;
-        JumpBufferCounter = 0f;
-        IsJumped = false;
+        rb.velocity = Vector2.zero;
+        rb.velocity += Vector2.up * 100 * jumpAmount * Time.fixedDeltaTime;
+    }
+    #endregion
+
+    #region Adding DoubleJump
+    private void AddDoubleJumpForce()
+    {
+        rb.velocity = Vector2.zero;
+        rb.velocity += Vector2.up * 100 * doubleJumpAmount * Time.fixedDeltaTime;
+    }
+    #endregion
+
+    #region Adding CoyotoJump
+    private void AddCoyotoJumpForce()
+    {
+        rb.velocity = Vector2.zero;
+        rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
     }
     #endregion
 
