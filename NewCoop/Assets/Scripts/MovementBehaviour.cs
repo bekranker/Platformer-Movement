@@ -49,6 +49,15 @@ public class MovementBehaviour : MonoBehaviour
                 {
                     CancelDown = 0;
                 }
+
+                if (Input.GetButtonDown(control + "ButtonX"))
+                {
+                    AttackDown = 1;
+                }
+                else
+                {
+                    AttackDown = 0;
+                }
                 Jump = Input.GetAxis(control + "ButtonA");
                 Attack = Input.GetAxis(control + "ButtonX");
                 Cancel = Input.GetAxis(control + "ButtonB");
@@ -71,6 +80,16 @@ public class MovementBehaviour : MonoBehaviour
                 else
                 {
                     CancelDown = 0;
+                }
+
+
+                if (Input.GetButtonDown(control + "ButtonSquare"))
+                {
+                    AttackDown = 1;
+                }
+                else
+                {
+                    AttackDown = 0;
                 }
                 Jump = Input.GetAxis(control + "ButtonX");
                 Attack = Input.GetAxis(control + "ButtonSquare");
@@ -174,6 +193,15 @@ public class MovementBehaviour : MonoBehaviour
             else
             {
                 CancelDown = 0;
+            }
+
+            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(control + "Attack"))))
+            {
+                AttackDown = 1;
+            }
+            else
+            {
+                AttackDown = 0;
             }
         }
 
