@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementManager : Librariy
+public class MovementManager : MonoBehaviour
 {
     [Header("-----Move Options-----")]
     [Range(1f,100f)][SerializeField] float MainSpeed;
@@ -18,6 +18,7 @@ public class MovementManager : Librariy
     [Range(1f, 100f)] [SerializeField] float doubleJumpAmount;
     [Range(0f, 1f)] [SerializeField] float CoyotoTime;
     [Range(0f, 1f)] [SerializeField] float BufferTime;
+    [Range(0f, 100f)] [SerializeField] float BufferAmount;
     [Range(1f, 100f)] [SerializeField] float jumpCutMultiplier;
     [Range(0f, 1f)] [SerializeField] float jumpTime;
     [SerializeField] Vector2 checkPosSize;
@@ -26,13 +27,13 @@ public class MovementManager : Librariy
     [SerializeField] int totalJump;
 
     float jumpTimeCounter;
-    float bufferTimeCounter;
+    public float bufferTimeCounter;
 
     bool isGrounded = true;
     bool multipleJump;
     bool coyoteJump;
     bool isJumped;
-
+    bool buffering;
 
     int jumpCunter;
     int coyotoJumpCounter = 0;
@@ -56,6 +57,7 @@ public class MovementManager : Librariy
         {
             isGrounded = true;
             isJumped = true;
+            buffering = false;
             jumpTimeCounter = jumpTime;
             coyotoJumpCounter = 0;
 
@@ -97,13 +99,20 @@ public class MovementManager : Librariy
         }
         #endregion
 
-        #region Buffer
-        if (bufferTimeCounter > 0)
+        #region Buffer And Other Jump
+        if (movementBehaviour.JumpDown == 1)
         {
             Jump();
             isJumped = true;
+            if (jumpCunter <= 0)
+            {
+                Debug.Log("jumpCounter þuan da:" + jumpCunter);
+                buffering = true;
+            }
+            
         }
-        if (movementBehaviour.JumpDown == 1)
+        #region buffer calculeting
+        if (buffering)
         {
             bufferTimeCounter = BufferTime;
         }
@@ -112,6 +121,20 @@ public class MovementManager : Librariy
             bufferTimeCounter -= Time.deltaTime;
         }
         #endregion
+
+        #endregion
+
+        #region Doing Buffer Jump
+        if (bufferTimeCounter > 0)
+        {
+            if (isGrounded)
+            {
+                AddBufferJumpForce();
+            }
+        }
+        #endregion
+
+        this.Wait(BufferTime, () => buffering = false);
     }
 
     #region Coyoto Time bool calulate
@@ -143,7 +166,7 @@ public class MovementManager : Librariy
         rb.AddForce(moveInput * Vector2.right);
         #endregion
 
-        #region Jump
+        #region Falling and IsGrounded
         IsGrounded = Physics2D.OverlapBoxAll(checkPos.position, checkPosSize, 0, layerMask);
         OnJump();
         #endregion
@@ -167,6 +190,7 @@ public class MovementManager : Librariy
             #region Coyoto Jump
             if (coyoteJump)
             {
+                jumpCunter--;
                 AddCoyotoJumpForce();
             }
             #endregion
@@ -174,20 +198,22 @@ public class MovementManager : Librariy
             #region Muliple Jumping
             if (multipleJump && jumpCunter > 0)
             {
+                Debug.Log("double jump");
                 jumpCunter--;
                 AddDoubleJumpForce();
             }
             #endregion
-
             else
             {
                 isJumped = false;
             }
         }
         #endregion
+
+        
     }
 
-    #region Adding Jump
+    #region Adding Normal Jump Force
     private void AddJumpForce()
     {
         rb.velocity = Vector2.zero;
@@ -195,7 +221,7 @@ public class MovementManager : Librariy
     }
     #endregion
 
-    #region Adding DoubleJump
+    #region Adding Double Jump Force
     private void AddDoubleJumpForce()
     {
         rb.velocity = Vector2.zero;
@@ -203,7 +229,7 @@ public class MovementManager : Librariy
     }
     #endregion
 
-    #region Adding CoyotoJump
+    #region Adding Coyoto Jump Force
     private void AddCoyotoJumpForce()
     {
         Debug.Log("Coyote jump is did");
@@ -215,6 +241,15 @@ public class MovementManager : Librariy
             coyotoJumpCounter++;
         }
         
+    }
+    #endregion
+
+    #region Add Jump Buffer Force
+    private void AddBufferJumpForce()
+    {
+        Debug.Log("Buffer jump is did");
+        rb.velocity = Vector2.zero;
+        rb.velocity += Vector2.up * 100 * BufferAmount * Time.fixedDeltaTime;
     }
     #endregion
 
@@ -235,7 +270,6 @@ public class MovementManager : Librariy
         }
     }
     #endregion
-
 
     #region JumpCut
     private void JumpCut()
