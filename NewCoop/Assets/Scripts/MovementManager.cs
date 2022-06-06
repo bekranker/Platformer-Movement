@@ -11,9 +11,9 @@ public class MovementManager : MonoBehaviour
     [Range(0.005f, 1f)] [SerializeField] float velPower;
 
     [Header("-----Jump Options-----")]
-    [Range(1f, 10f)] [SerializeField] float fallingGravityScale;
-    [Range(1f, 10f)] [SerializeField] float gravityScale;
-    [Range(1f, 100f)] [SerializeField] float jumpAmount;
+    [Range(1f, 10f)] public float fallingGravityScale;
+    [Range(1f, 10f)] public float gravityScale;
+    [Range(1f, 100f)] public float jumpAmount;
     [Range(1f, 100f)] [SerializeField] float coyotoJumpAmount;
     [Range(1f, 100f)] [SerializeField] float doubleJumpAmount;
     [Range(0.005f, 1f)] [SerializeField] float CoyotoTime;
@@ -21,7 +21,7 @@ public class MovementManager : MonoBehaviour
     [Range(0.005f, 100f)] [SerializeField] float BufferAmount;
     [Range(1f, 100f)] [SerializeField] float jumpCutMultiplier;
     [Range(0.005f, 1f)] [SerializeField] float jumpTime;
-    [Range(0.005f, 1f)] [SerializeField] float DashDistance;
+    [Range(0.005f, 100f)] [SerializeField] float DashDistance;
     [SerializeField] Vector2 checkPosSize;
     [SerializeField] Transform checkPos;
     [SerializeField] LayerMask layerMask;
@@ -35,10 +35,11 @@ public class MovementManager : MonoBehaviour
     bool coyoteJump;
     bool isJumped;
     bool buffering = false;
-    bool a;
-    bool isDashing;
+    bool IsCanDash;
+    public bool isDashing;
 
     public int jumpCounter;
+    public int dashCount;
     int coyotoJumpCounter = 0;
 
     Collider2D[] IsGrounded;
@@ -46,6 +47,7 @@ public class MovementManager : MonoBehaviour
 
     [Header("----Componenets-----")]
     [SerializeField] private Rigidbody2D rb;
+    [SerializeField] private BoxCollider2D boxC2D;
     [SerializeField] private MovementBehaviour movementBehaviour;
 
     private void Start()
@@ -84,64 +86,67 @@ public class MovementManager : MonoBehaviour
         isGrounded = (IsGrounded.Length > 0) ? true : false;
         #endregion
 
-        #region Jumping With JumpCut
-        if (isJumped && movementBehaviour.Jump == 1)
+        if (!isDashing)
         {
-            if (jumpTimeCounter > 0)
+            #region Jumping With JumpCut
+            if (isJumped && movementBehaviour.Jump == 1)
             {
-                JumpCut();
-                jumpTimeCounter -= Time.deltaTime;
+                if (jumpTimeCounter > 0)
+                {
+                    JumpCut();
+                    jumpTimeCounter -= Time.deltaTime;
+                }
+                else
+                {
+                    isJumped = false;
+                }
             }
-            else
+            if (movementBehaviour.Jump == 0)
             {
                 isJumped = false;
             }
-        }
-        if (movementBehaviour.Jump == 0)
-        {
-            isJumped = false;
-        }
-        #endregion
+            #endregion
 
-        #region Buffer And Other Jump
-        if (movementBehaviour.JumpDown == 1)
-        {
-            Jump();
-            isJumped = true;
-            if (jumpCounter <= 0) //burda
+            #region Buffer And Other Jump
+            if (movementBehaviour.JumpDown == 1)
             {
-                Debug.Log("jumpCounter þuan da:" + jumpCounter);
-                buffering = true;
+                Jump();
+                isJumped = true;
+                if (jumpCounter <= 0) //burda
+                {
+                    Debug.Log("jumpCounter þuan da:" + jumpCounter);
+                    buffering = true;
+                }
+
             }
-            
-        }
-        #region buffer calculeting
-        if (buffering)
-        {
-            bufferTimeCounter = BufferTime;
-        }
-        else
-        {
-            bufferTimeCounter -= Time.deltaTime;
-        }
-        #endregion
-
-        #endregion
-
-        #region Doing Buffer Jump
-        if (bufferTimeCounter > 0)
-        {
-            if (isGrounded)
+            #region buffer calculeting
+            if (buffering)
             {
-                multipleJump = true;
-                coyotoJumpCounter++;
-                jumpCounter--;
-                AddBufferJumpForce();
-                buffering = false;
+                bufferTimeCounter = BufferTime;
             }
-        }
-        #endregion
+            else
+            {
+                bufferTimeCounter -= Time.deltaTime;
+            }
+            #endregion
 
+            #endregion
+
+            #region Doing Buffer Jump
+            if (bufferTimeCounter > 0)
+            {
+                if (isGrounded)
+                {
+                    multipleJump = true;
+                    coyotoJumpCounter++;
+                    jumpCounter--;
+                    AddBufferJumpForce();
+                    buffering = false;
+                }
+            }
+            #endregion
+        }
+        
         this.Wait(BufferTime, () => buffering = false);
     }
 
@@ -163,14 +168,18 @@ public class MovementManager : MonoBehaviour
             Runing();
             OnJump();
         }
-        if (movementBehaviour.Cancel == 1)
-        {
-            StartCoroutine(Dash());
-        }
+        
         #endregion
 
         #region Falling and IsGrounded
         IsGrounded = Physics2D.OverlapBoxAll(checkPos.position, checkPosSize, 0, layerMask);
+
+        if (isGrounded)
+        {
+            IsCanDash = true;
+            dashCount = 0;
+        }
+
         #endregion
     }
 
@@ -302,15 +311,5 @@ public class MovementManager : MonoBehaviour
 
     #endregion
 
-    IEnumerator Dash()
-    {
-        isDashing = true;
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(new Vector2(DashDistance * movementBehaviour.x, 0f), ForceMode2D.Impulse);
-        float gravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        yield return new WaitForSeconds(0.3f);
-        isDashing = false;
-        rb.gravityScale = gravity;
-    }
+
 }

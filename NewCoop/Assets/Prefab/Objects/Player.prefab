@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1174689607428651666}
   - component: {fileID: 8863417478932801943}
   - component: {fileID: -1357828880346475618}
+  - component: {fileID: 8501669455338382702}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -106,8 +107,10 @@ MonoBehaviour:
   JumpDown: 0
   Jump: 0
   Attack: 0
+  AttackDown: 0
   Settings: 0
   Cancel: 0
+  CancelDown: 0
 --- !u!114 &8863417478932801943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +137,7 @@ MonoBehaviour:
   BufferAmount: 8.5
   jumpCutMultiplier: 2.5
   jumpTime: 0.2
+  DashDistance: 22
   checkPosSize: {x: 0.36, y: 0.36}
   checkPos: {fileID: 7461186936902632192}
   layerMask:
@@ -141,7 +145,11 @@ MonoBehaviour:
     m_Bits: 8
   totalJump: 2
   isGrounded: 1
+  isDashing: 0
+  jumpCounter: 2
+  dashCount: 0
   rb: {fileID: 1174689607428651664}
+  boxC2D: {fileID: 1174689607428651665}
   movementBehaviour: {fileID: 1174689607428651666}
 --- !u!114 &-1357828880346475618
 MonoBehaviour:
@@ -162,6 +170,25 @@ MonoBehaviour:
   movementBehaviour: {fileID: 1174689607428651666}
   movementManager: {fileID: 8863417478932801943}
   groundCheckPos: {fileID: 7461186936902632192}
+--- !u!114 &8501669455338382702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44346a86b9d01443b073a216b0ec3de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 1174689607428651664}
+  DashSpeed: 20
+  DashMultipler: 150
+  DashTime: 0.15
+  StartDashTime: 0.15
+  movementBehaviour: {fileID: 1174689607428651666}
+  movementManager: {fileID: 8863417478932801943}
 --- !u!1 &3436853962059038923
 GameObject:
   m_ObjectHideFlags: 0
@@ -417,7 +444,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4387145668700840436}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: f7835f488b0b8ce4195f7996a40d63ff, type: 2}
   m_IsTrigger: 0
