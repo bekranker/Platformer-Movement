@@ -30,10 +30,13 @@ public class PlatformerTools : MonoBehaviour
 
     private void Update()
     {
+        #region DASH
+        #region Direction
         if (direction == 0)
         {
             if (movementBehaviour.CancelDown == 1 && movementManager.dashCount < 1)
             {
+                rb.velocity = Vector2.zero;
                 if (movementBehaviour.x == -1)
                 {
                     direction = 1;
@@ -42,10 +45,22 @@ public class PlatformerTools : MonoBehaviour
                 {
                     direction = 2;
                 }
+                else if (movementBehaviour.Jump == 1)
+                {
+                    direction = 3;
+                }
+                else if (movementBehaviour.y == -1)
+                {
+                    direction = 4;
+                }
             }
         }
+        #endregion
+
+        #region After Press Cancel
         else
         {
+            #region Dashed
             if (DashTime <= 0)
             {
                 direction = 0;
@@ -53,14 +68,17 @@ public class PlatformerTools : MonoBehaviour
                 movementManager.isDashing = false;
                 _gravity = rb.gravityScale;
                 rb.gravityScale = movementManager.gravityScale;
-                boxCollider2D.isTrigger = false;
+
             }
+            #endregion
+
+            #region Dashing
             else
             {
                 DashTime -= Time.deltaTime;
                 movementManager.dashCount++;
                 movementManager.isDashing = true;
-                boxCollider2D.isTrigger = true;
+
                 rb.gravityScale = 0;
 
                 switch (direction)
@@ -73,12 +91,23 @@ public class PlatformerTools : MonoBehaviour
                         Debug.Log("Right dashed");
                         rb.velocity = Vector2.right * DashMultipler * DashSpeed * Time.fixedDeltaTime;
                         break;
+                    case 3:
+                        Debug.Log("Up Dashed");
+                        rb.velocity = Vector2.up * DashMultipler / 2 * DashSpeed * Time.fixedDeltaTime;
+                        break;
+                    case 4:
+                        Debug.Log("Down Dashed");
+                        rb.velocity = Vector2.down * DashMultipler * DashSpeed * Time.fixedDeltaTime;
+                        break;
                     default:
                         break;
                 }
             }
-            
+            #endregion
         }
+        #endregion
+        #endregion
+
     }
 }
 
