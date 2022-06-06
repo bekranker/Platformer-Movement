@@ -130,9 +130,10 @@ public class MovementManager : MonoBehaviour
         {
             if (isGrounded)
             {
-                jumpCunter--;
+                multipleJump = true;
                 coyotoJumpCounter++;
                 AddBufferJumpForce();
+                buffering = false;
             }
         }
         #endregion
@@ -206,6 +207,11 @@ public class MovementManager : MonoBehaviour
                 AddDoubleJumpForce();
             }
             #endregion
+            if (buffering && movementBehaviour.JumpDown == 1 && rb.velocity.y != 0)
+            {
+                jumpCunter--;
+                AddDoubleJumpForce();
+            }
             else
             {
                 isJumped = false;
@@ -241,7 +247,6 @@ public class MovementManager : MonoBehaviour
             rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
             coyotoJumpCounter++;
         }
-        
     }
     #endregion
 
@@ -251,7 +256,6 @@ public class MovementManager : MonoBehaviour
         Debug.Log("Buffer jump is did");
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * 100 * BufferAmount * Time.fixedDeltaTime;
-        
     }
     #endregion
 
