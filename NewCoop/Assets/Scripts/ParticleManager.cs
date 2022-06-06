@@ -35,7 +35,7 @@ public class ParticleManager : MonoBehaviour
         var forceOverLifetime = ps.forceOverLifetime;
         forceOverLifetime.enabled = true;
 
-        float distance = player.transform.position.x - a.transform.position.x;
+        float distance = Vector2.Distance(a.transform.position, player.transform.position);
         if (distance < 5)
         {
             forceOverLifetime.xMultiplier = movementBehaviour.x * velocityAmount;
