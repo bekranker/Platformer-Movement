@@ -8,7 +8,7 @@ public class MovementManager : MonoBehaviour
     [Range(1f,100f)][SerializeField] float MainSpeed;
     [Range(1f, 50f)] [SerializeField] float acceleration;
     [Range(1f, 50f)] [SerializeField] float decceleration;
-    [Range(0f, 1f)] [SerializeField] float velPower;
+    [Range(0.005f, 1f)] [SerializeField] float velPower;
 
     [Header("-----Jump Options-----")]
     [Range(1f, 10f)] [SerializeField] float fallingGravityScale;
@@ -16,11 +16,11 @@ public class MovementManager : MonoBehaviour
     [Range(1f, 100f)] [SerializeField] float jumpAmount;
     [Range(1f, 100f)] [SerializeField] float coyotoJumpAmount;
     [Range(1f, 100f)] [SerializeField] float doubleJumpAmount;
-    [Range(0f, 1f)] [SerializeField] float CoyotoTime;
-    [Range(0f, 1f)] [SerializeField] float BufferTime;
-    [Range(0f, 100f)] [SerializeField] float BufferAmount;
+    [Range(0.005f, 1f)] [SerializeField] float CoyotoTime;
+    [Range(0.005f, 1f)] [SerializeField] float BufferTime;
+    [Range(0.005f, 100f)] [SerializeField] float BufferAmount;
     [Range(1f, 100f)] [SerializeField] float jumpCutMultiplier;
-    [Range(0f, 1f)] [SerializeField] float jumpTime;
+    [Range(0.005f, 1f)] [SerializeField] float jumpTime;
     [SerializeField] Vector2 checkPosSize;
     [SerializeField] Transform checkPos;
     [SerializeField] LayerMask layerMask;
@@ -33,7 +33,7 @@ public class MovementManager : MonoBehaviour
     bool multipleJump;
     bool coyoteJump;
     bool isJumped;
-    bool buffering;
+    bool buffering = false;
 
     int jumpCunter;
     int coyotoJumpCounter = 0;
