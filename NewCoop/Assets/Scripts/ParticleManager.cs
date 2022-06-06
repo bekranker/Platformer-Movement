@@ -8,6 +8,7 @@ public class ParticleManager : MonoBehaviour
     [Header("-----Particles------")]
     [SerializeField] GameObject jumpParticle;
     [SerializeField] GameObject _walkParticule;
+    [SerializeField] GameObject _doubleParticule;
     
     [Header("------Jump Particle Settings------")]
     [Range(1,100)][SerializeField] float velocityAmount;
@@ -24,20 +25,22 @@ public class ParticleManager : MonoBehaviour
 
     Transform player;
     GameObject a;
-
+    GameObject doubleJumpParticleObject;
     private void Start()
     {
-        player = gameObject.transform;
+        
     }
 
     void Update()
     {
+        player = gameObject.transform;
         if (movementBehaviour.JumpDown == 1 && movementManager.isGrounded)
         {
             a = Instantiate(jumpParticle, groundCheckPos.position, Quaternion.identity);
         }
         JumpParticle();
         walkParticle();
+
     }
 
     void JumpParticle()
@@ -73,6 +76,33 @@ public class ParticleManager : MonoBehaviour
         else
         {
             _walkParticule.SetActive(false);
+        }
+    }
+
+    void DoubleJumpParticle()
+    {
+        if (_doubleParticule == null) return;
+
+        ParticleSystem ps = _doubleParticule.GetComponent<ParticleSystem>();
+
+        if (!movementManager.isGrounded && movementBehaviour.JumpDown == 1)
+        {
+            doubleJumpParticleObject = Instantiate(_doubleParticule, groundCheckPos.position, Quaternion.identity);
+        }
+
+        var forceOverLifetime = ps.forceOverLifetime;
+        forceOverLifetime.enabled = true;
+
+        float distance = Vector2.Distance(doubleJumpParticleObject.transform.position, player.transform.position);
+        if (distance < 5)
+        {
+            forceOverLifetime.xMultiplier = movementBehaviour.x * velocityAmount;
+            forceOverLifetime.yMultiplier = movementBehaviour.y * velocityAmount;
+        }
+        else
+        {
+            forceOverLifetime.xMultiplier -= Time.deltaTime;
+            forceOverLifetime.yMultiplier -= Time.deltaTime;
         }
     }
 }
