@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlatformerTools : MonoBehaviour
 {
     [Header("-----Dash-----")]
-    [SerializeField] float DashSpeed;
-    [SerializeField] float DashMultipler;
-    [SerializeField] float DashTime;
-    [SerializeField] float StartDashTime;
+    [Range(1,100)][SerializeField] float DashSpeed;
+    [Range(1, 500)] [SerializeField] float DashMultipler;
+    [Range(0.005f, 1f)] [SerializeField] float DashTime;
+    [Range(0.005f, 1f)] [SerializeField] float StartDashTime;
     
 
     [Header("-----Managers-----")]
