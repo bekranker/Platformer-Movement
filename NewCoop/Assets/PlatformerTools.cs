@@ -27,16 +27,17 @@ public class PlatformerTools : MonoBehaviour
     {
         if (direction == 0)
         {
-            
-            if (movementBehaviour.x == -1)
+            if (movementBehaviour.CancelDown == 1 && movementManager.dashCount < 1)
             {
-                direction = 1;
+                if (movementBehaviour.x == -1)
+                {
+                    direction = 1;
+                }
+                else if (movementBehaviour.x == 1)
+                {
+                    direction = 2;
+                }
             }
-            else if (movementBehaviour.x == 1)
-            {
-                direction = 2;
-            }
-
         }
         else
         {
@@ -51,33 +52,26 @@ public class PlatformerTools : MonoBehaviour
             else
             {
                 DashTime -= Time.deltaTime;
-                if (movementBehaviour.CancelDown == 1 && movementManager.dashCount < 1)
-                {
-                    movementManager.dashCount++;
-                    movementManager.isDashing = true;
-                    rb.gravityScale = 0;
+                movementManager.dashCount++;
+                movementManager.isDashing = true;
+                rb.gravityScale = 0;
 
-                    switch (direction)
-                    {
-                        case 1:
-                            Debug.Log("left dashed");
-                            rb.velocity = Vector2.left * DashMultipler * DashSpeed * Time.fixedDeltaTime;
-                            break;
-                        case 2:
-                            Debug.Log("Right dashed");
-                            rb.velocity = Vector2.right * DashMultipler * DashSpeed * Time.fixedDeltaTime;
-                            break;
-                        default:
-                            break;
-                    }
+                switch (direction)
+                {
+                    case 1:
+                        Debug.Log("left dashed");
+                        rb.velocity = Vector2.left * DashMultipler * DashSpeed * Time.fixedDeltaTime;
+                        break;
+                    case 2:
+                        Debug.Log("Right dashed");
+                        rb.velocity = Vector2.right * DashMultipler * DashSpeed * Time.fixedDeltaTime;
+                        break;
+                    default:
+                        break;
                 }
             }
             
         }
     }
 }
-
-
-
-
 

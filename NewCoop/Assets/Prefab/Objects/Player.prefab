@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 1174689607428651664}
   DashSpeed: 20
-  DashMultipler: 150
+  DashMultipler: 75
   DashTime: 0.15
   StartDashTime: 0.15
   movementBehaviour: {fileID: 1174689607428651666}
