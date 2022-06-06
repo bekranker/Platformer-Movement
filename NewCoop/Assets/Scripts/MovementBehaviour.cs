@@ -15,7 +15,7 @@ public class MovementBehaviour : MonoBehaviour
 {
     public string PlayerName;
     [SerializeField] Controls control;
-    public float x, y, RR, RL, JumpDown,Jump, Attack, Settings, Cancel;
+    public float x, y, RR, RL, JumpDown,Jump, Attack,AttackDown, Settings, Cancel,CancelDown;
 
     void Update()
     {
@@ -40,6 +40,15 @@ public class MovementBehaviour : MonoBehaviour
                 {
                     JumpDown = 0;
                 }
+
+                if (Input.GetButtonDown(control + "ButtonB"))
+                {
+                    CancelDown = 1;
+                }
+                else
+                {
+                    CancelDown = 0;
+                }
                 Jump = Input.GetAxis(control + "ButtonA");
                 Attack = Input.GetAxis(control + "ButtonX");
                 Cancel = Input.GetAxis(control + "ButtonB");
@@ -53,6 +62,15 @@ public class MovementBehaviour : MonoBehaviour
                 else
                 {
                     JumpDown = 0;
+                }
+
+                if (Input.GetButtonDown(control + "ButtonO"))
+                {
+                    CancelDown = 1;
+                }
+                else
+                {
+                    CancelDown = 0;
                 }
                 Jump = Input.GetAxis(control + "ButtonX");
                 Attack = Input.GetAxis(control + "ButtonSquare");
@@ -147,6 +165,15 @@ public class MovementBehaviour : MonoBehaviour
             else
             {
                 Jump = 0;
+            }
+
+            if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(control + "Cancel"))))
+            {
+                CancelDown = 1;
+            }
+            else
+            {
+                CancelDown = 0;
             }
         }
 
