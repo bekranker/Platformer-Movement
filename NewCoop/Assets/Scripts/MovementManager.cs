@@ -35,7 +35,7 @@ public class MovementManager : MonoBehaviour
     bool isJumped;
     bool buffering = false;
 
-    int jumpCunter;
+    int jumpCounter;
     int coyotoJumpCounter = 0;
 
     Collider2D[] IsGrounded;
@@ -64,7 +64,7 @@ public class MovementManager : MonoBehaviour
 
             if (!wasGrounded)
             {
-                jumpCunter = totalJump;
+                jumpCounter = totalJump;
                 multipleJump = false;
                 Debug.Log("Landed");
             }
@@ -105,9 +105,9 @@ public class MovementManager : MonoBehaviour
         {
             Jump();
             isJumped = true;
-            if (jumpCunter <= 0)
+            if (jumpCounter <= 0)
             {
-                Debug.Log("jumpCounter þuan da:" + jumpCunter);
+                Debug.Log("jumpCounter þuan da:" + jumpCounter);
                 buffering = true;
             }
             
@@ -132,6 +132,7 @@ public class MovementManager : MonoBehaviour
             {
                 multipleJump = true;
                 coyotoJumpCounter++;
+                jumpCounter--;
                 AddBufferJumpForce();
                 buffering = false;
             }
@@ -182,7 +183,7 @@ public class MovementManager : MonoBehaviour
         #region Normal Jump
         if (isGrounded)
         {
-            jumpCunter--;
+            jumpCounter--;
             AddJumpForce();
             multipleJump = true;
         }
@@ -194,24 +195,20 @@ public class MovementManager : MonoBehaviour
             #region Coyoto Jump
             if (coyoteJump)
             {
-                jumpCunter--;
+                jumpCounter--;
                 AddCoyotoJumpForce();
             }
             #endregion
 
             #region Muliple Jumping
-            if (multipleJump && jumpCunter > 0)
+            if (multipleJump && jumpCounter > 0)
             {
                 Debug.Log("double jump");
-                jumpCunter--;
+                jumpCounter--;
                 AddDoubleJumpForce();
             }
             #endregion
-            if (buffering && movementBehaviour.JumpDown == 1 && rb.velocity.y != 0)
-            {
-                jumpCunter--;
-                AddDoubleJumpForce();
-            }
+            
             else
             {
                 isJumped = false;
@@ -283,7 +280,7 @@ public class MovementManager : MonoBehaviour
         rb.velocity += Vector2.up * jumpCutMultiplier * jumpAmount * Time.deltaTime;
         if (isGrounded)
         {
-            jumpTimeCounter = jumpCunter;
+            jumpTimeCounter = jumpCounter;
         }
     }
     #endregion

@@ -78,31 +78,4 @@ public class ParticleManager : MonoBehaviour
             _walkParticule.SetActive(false);
         }
     }
-
-    void DoubleJumpParticle()
-    {
-        if (_doubleParticule == null) return;
-
-        ParticleSystem ps = _doubleParticule.GetComponent<ParticleSystem>();
-
-        if (!movementManager.isGrounded && movementBehaviour.JumpDown == 1)
-        {
-            doubleJumpParticleObject = Instantiate(_doubleParticule, groundCheckPos.position, Quaternion.identity);
-        }
-
-        var forceOverLifetime = ps.forceOverLifetime;
-        forceOverLifetime.enabled = true;
-
-        float distance = Vector2.Distance(doubleJumpParticleObject.transform.position, player.transform.position);
-        if (distance < 5)
-        {
-            forceOverLifetime.xMultiplier = movementBehaviour.x * velocityAmount;
-            forceOverLifetime.yMultiplier = movementBehaviour.y * velocityAmount;
-        }
-        else
-        {
-            forceOverLifetime.xMultiplier -= Time.deltaTime;
-            forceOverLifetime.yMultiplier -= Time.deltaTime;
-        }
-    }
 }
