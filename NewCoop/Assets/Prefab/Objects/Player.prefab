@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpParticle: {fileID: 8227339459606187491, guid: bb4b5864cc101dc47864f04603d8f641, type: 3}
   _walkParticule: {fileID: 8789413196721812345}
-  velocityAmount: 13
+  velocityAmount: 49
   movementBehaviour: {fileID: 1174689607428651666}
   movementManager: {fileID: 8863417478932801943}
   groundCheckPos: {fileID: 7461186936902632192}
