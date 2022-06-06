@@ -251,6 +251,7 @@ public class MovementManager : MonoBehaviour
         Debug.Log("Buffer jump is did");
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * 100 * BufferAmount * Time.fixedDeltaTime;
+        jumpCunter--;
     }
     #endregion
 
