@@ -43,8 +43,8 @@ public class ParticleManager : MonoBehaviour
         }
         else
         {
-            forceOverLifetime.xMultiplier = 0;
-            forceOverLifetime.yMultiplier =0 ;
+            forceOverLifetime.xMultiplier -= Time.deltaTime;
+            forceOverLifetime.yMultiplier -= Time.deltaTime;
         }
         
     }
