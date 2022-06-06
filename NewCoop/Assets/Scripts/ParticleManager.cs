@@ -34,7 +34,7 @@ public class ParticleManager : MonoBehaviour
     void Update()
     {
         player = gameObject.transform;
-        if (movementBehaviour.JumpDown == 1 && movementManager.isGrounded)
+        if (movementBehaviour.JumpDown == 1 && (movementManager.isGrounded || player.GetComponent<Rigidbody2D>().velocity.y == 0))
         {
             a = Instantiate(jumpParticle, groundCheckPos.position, Quaternion.identity);
         }

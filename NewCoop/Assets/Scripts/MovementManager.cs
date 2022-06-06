@@ -21,6 +21,7 @@ public class MovementManager : MonoBehaviour
     [Range(0.005f, 100f)] [SerializeField] float BufferAmount;
     [Range(1f, 100f)] [SerializeField] float jumpCutMultiplier;
     [Range(0.005f, 1f)] [SerializeField] float jumpTime;
+    [Range(0.005f, 1f)] [SerializeField] float DashDistance;
     [SerializeField] Vector2 checkPosSize;
     [SerializeField] Transform checkPos;
     [SerializeField] LayerMask layerMask;
@@ -34,8 +35,10 @@ public class MovementManager : MonoBehaviour
     bool coyoteJump;
     bool isJumped;
     bool buffering = false;
+    bool a;
+    bool isDashing;
 
-    int jumpCounter;
+    public int jumpCounter;
     int coyotoJumpCounter = 0;
 
     Collider2D[] IsGrounded;
@@ -105,7 +108,7 @@ public class MovementManager : MonoBehaviour
         {
             Jump();
             isJumped = true;
-            if (jumpCounter <= 0)
+            if (jumpCounter <= 0) //burda
             {
                 Debug.Log("jumpCounter þuan da:" + jumpCounter);
                 buffering = true;
@@ -155,6 +158,24 @@ public class MovementManager : MonoBehaviour
     void FixedUpdate()
     {
         #region Run
+        if (!isDashing)
+        {
+            Runing();
+            OnJump();
+        }
+        if (movementBehaviour.Cancel == 1)
+        {
+            StartCoroutine(Dash());
+        }
+        #endregion
+
+        #region Falling and IsGrounded
+        IsGrounded = Physics2D.OverlapBoxAll(checkPos.position, checkPosSize, 0, layerMask);
+        #endregion
+    }
+
+    private void Runing()
+    {
         //Direction
         float moveInput = movementBehaviour.x;
         //Calculating direction we want to move in and our desired velocity
@@ -169,12 +190,6 @@ public class MovementManager : MonoBehaviour
         rb.velocity = new Vector2(moveInput * MainSpeed, rb.velocity.y);
         //Moving with forces
         rb.AddForce(moveInput * Vector2.right);
-        #endregion
-
-        #region Falling and IsGrounded
-        IsGrounded = Physics2D.OverlapBoxAll(checkPos.position, checkPosSize, 0, layerMask);
-        OnJump();
-        #endregion
     }
 
     #region Jump Functions
@@ -286,4 +301,16 @@ public class MovementManager : MonoBehaviour
     #endregion
 
     #endregion
+
+    IEnumerator Dash()
+    {
+        isDashing = true;
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(new Vector2(DashDistance * movementBehaviour.x, 0f), ForceMode2D.Impulse);
+        float gravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        yield return new WaitForSeconds(0.3f);
+        isDashing = false;
+        rb.gravityScale = gravity;
+    }
 }
