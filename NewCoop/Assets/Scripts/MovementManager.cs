@@ -212,8 +212,6 @@ public class MovementManager : MonoBehaviour
             }
         }
         #endregion
-
-        
     }
 
     #region Adding Normal Jump Force

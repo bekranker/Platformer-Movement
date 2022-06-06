@@ -130,7 +130,7 @@ MonoBehaviour:
   coyotoJumpAmount: 9
   doubleJumpAmount: 8
   CoyotoTime: 0.2
-  BufferTime: 0.45
+  BufferTime: 0.35
   BufferAmount: 8.5
   jumpCutMultiplier: 2.5
   jumpTime: 0.2
