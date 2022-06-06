@@ -17,6 +17,7 @@ public class PlatformerTools : MonoBehaviour
 
     [Header("-----Others-----")]
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] BoxCollider2D boxCollider2D;
 
     private int direction;
     private float _gravity;
@@ -52,12 +53,14 @@ public class PlatformerTools : MonoBehaviour
                 movementManager.isDashing = false;
                 _gravity = rb.gravityScale;
                 rb.gravityScale = movementManager.gravityScale;
+                boxCollider2D.isTrigger = false;
             }
             else
             {
                 DashTime -= Time.deltaTime;
                 movementManager.dashCount++;
                 movementManager.isDashing = true;
+                boxCollider2D.isTrigger = true;
                 rb.gravityScale = 0;
 
                 switch (direction)
