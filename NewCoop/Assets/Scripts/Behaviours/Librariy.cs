@@ -5,12 +5,12 @@ namespace UnityEngine
 {
     public class Librariy : MonoBehaviour
     {
-        //public virtual async Task Wait(UnityAction action = null, int second = 1)
-        //{
-        //    if (second <= 0) return;
-        //    await Task.Delay(second);
-        //    action();
-        //}
+        public static void _WaitTask(UnityAction action = null, int second = 1)
+        {
+            if (second <= 0) return;
+            Task.Delay(second);
+            action();
+        }
     }
     
 }

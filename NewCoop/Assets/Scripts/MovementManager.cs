@@ -29,7 +29,7 @@ public class MovementManager : MonoBehaviour
     float jumpTimeCounter;
     float bufferTimeCounter;
 
-    bool isGrounded = true;
+    public bool isGrounded = true;
     bool multipleJump;
     bool coyoteJump;
     bool isJumped;
@@ -130,6 +130,8 @@ public class MovementManager : MonoBehaviour
         {
             if (isGrounded)
             {
+                jumpCunter--;
+                coyotoJumpCounter++;
                 AddBufferJumpForce();
             }
         }
@@ -251,7 +253,7 @@ public class MovementManager : MonoBehaviour
         Debug.Log("Buffer jump is did");
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * 100 * BufferAmount * Time.fixedDeltaTime;
-        jumpCunter--;
+        
     }
     #endregion
 
