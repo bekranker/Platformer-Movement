@@ -5,22 +5,26 @@ using UnityEngine;
 public class PlatformerTools : MonoBehaviour
 {
     [Header("-----Dash-----")]
-    [SerializeField] Rigidbody2D rb;
     [SerializeField] float DashSpeed;
     [SerializeField] float DashMultipler;
     [SerializeField] float DashTime;
     [SerializeField] float StartDashTime;
     
-    private int direction;
-    float a;
+
     [Header("-----Managers-----")]
     [SerializeField] MovementBehaviour movementBehaviour;
     [SerializeField] MovementManager movementManager;
 
+    [Header("-----Others-----")]
+    [SerializeField] Rigidbody2D rb;
+
+    private int direction;
+    private float _gravity;
+
     private void Start()
     {
         DashTime = StartDashTime;
-        a = movementManager.gravityScale;
+        _gravity = movementManager.gravityScale;
     }
 
     private void Update()
@@ -46,7 +50,7 @@ public class PlatformerTools : MonoBehaviour
                 direction = 0;
                 DashTime = StartDashTime;
                 movementManager.isDashing = false;
-                a = rb.gravityScale;
+                _gravity = rb.gravityScale;
                 rb.gravityScale = movementManager.gravityScale;
             }
             else
