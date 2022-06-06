@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
+
+    [Header("-----Particles------")]
     [SerializeField] GameObject jumpParticle;
+    [SerializeField] GameObject _walkParticule;
+    
+    [Header("------Jump Particle Settings------")]
+    [Range(1,100)][SerializeField] float velocityAmount;
+
+    //[Header("------Jump Particle Settings------")]
+
+
+    [Header("-----Managers-----")]
     [SerializeField] MovementBehaviour movementBehaviour;
     [SerializeField] MovementManager movementManager;
+
+    [Header("-----Other------")]
     [SerializeField] Transform groundCheckPos;
-    [Range(1,100)][SerializeField] float velocityAmount;
+
     Transform player;
     GameObject a;
 
@@ -23,10 +36,11 @@ public class ParticleManager : MonoBehaviour
         {
             a = Instantiate(jumpParticle, groundCheckPos.position, Quaternion.identity);
         }
-        particle();
+        JumpParticle();
+        walkParticle();
     }
 
-    void particle()
+    void JumpParticle()
     {
         if (a == null) return;
 
@@ -47,5 +61,18 @@ public class ParticleManager : MonoBehaviour
             forceOverLifetime.yMultiplier -= Time.deltaTime;
         }
         
+    }
+    void walkParticle()
+    {
+        ParticleSystem ps = _walkParticule.GetComponent<ParticleSystem>();
+
+        if (movementManager.isGrounded)
+        {
+            _walkParticule.SetActive(true);
+        }
+        else
+        {
+            _walkParticule.SetActive(false);
+        }
     }
 }

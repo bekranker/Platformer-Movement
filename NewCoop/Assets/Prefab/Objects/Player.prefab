@@ -156,10 +156,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpParticle: {fileID: 8227339459606187491, guid: bb4b5864cc101dc47864f04603d8f641, type: 3}
+  _walkParticule: {fileID: 8789413196721812345}
+  velocityAmount: 13
   movementBehaviour: {fileID: 1174689607428651666}
   movementManager: {fileID: 8863417478932801943}
   groundCheckPos: {fileID: 7461186936902632192}
-  velocityAmount: 28
 --- !u!1 &3436853962059038923
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,7 +451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8789413196721812345}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.323, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1174689607428651678}
