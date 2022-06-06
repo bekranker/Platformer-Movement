@@ -6,6 +6,7 @@ TagManager:
   tags:
   - UIManager
   - InputSelection
+  - KeybindingMaster
   layers:
   - Default
   - TransparentFX

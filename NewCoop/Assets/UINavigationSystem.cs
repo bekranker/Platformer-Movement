@@ -93,14 +93,14 @@ public class UINavigationSystem : MonoBehaviour
 
             if (PlayerPrefs.GetString("Keyboard1" + "Jump") != "")
             {
-                if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard1" + "Jump"))))
+                if (Input.GetKeyUp((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard1" + "Jump"))))
                 {
                     gameObject.GetComponent<Button>().onClick.Invoke();
                 }
             }
             if (PlayerPrefs.GetString("Keyboard2" + "Jump") != "")
             {
-                if (Input.GetKeyDown((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard2" + "Jump"))))
+                if (Input.GetKeyUp((KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("Keyboard2" + "Jump"))))
                 {
                     gameObject.GetComponent<Button>().onClick.Invoke();
                 }
@@ -125,11 +125,11 @@ public class UINavigationSystem : MonoBehaviour
                 SelectUI(SelectOnLeft);
             }
 
-            if(Input.GetButtonDown("XboxButtonA") && inputSelection.Controllers[0] == "Xbox")
+            if(Input.GetButtonUp("XboxButtonA") && inputSelection.Controllers[0] == "Xbox")
             {
                 gameObject.GetComponent<Button>().onClick.Invoke();
             }
-            if (Input.GetButtonDown("Xbox2ButtonA") && inputSelection.Controllers[1] == "Xbox")
+            if (Input.GetButtonUp("Xbox2ButtonA") && inputSelection.Controllers[1] == "Xbox")
             {
                 gameObject.GetComponent<Button>().onClick.Invoke();
             }
@@ -153,11 +153,11 @@ public class UINavigationSystem : MonoBehaviour
                 SelectUI(SelectOnLeft);
             }
 
-            if (Input.GetButtonDown("PsButtonX") && inputSelection.Controllers[0] == "Ps")
+            if (Input.GetButtonUp("PsButtonX") && inputSelection.Controllers[0] == "Ps")
             {
                 gameObject.GetComponent<Button>().onClick.Invoke();
             }
-            if (Input.GetButtonDown("PsButtonX") && inputSelection.Controllers[1] == "Ps")
+            if (Input.GetButtonUp("PsButtonX") && inputSelection.Controllers[1] == "Ps")
             {
                 gameObject.GetComponent<Button>().onClick.Invoke();
             }
