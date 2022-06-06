@@ -27,7 +27,7 @@ public class MovementManager : MonoBehaviour
     [SerializeField] int totalJump;
 
     float jumpTimeCounter;
-    public float bufferTimeCounter;
+    float bufferTimeCounter;
 
     bool isGrounded = true;
     bool multipleJump;
@@ -37,6 +37,7 @@ public class MovementManager : MonoBehaviour
 
     int jumpCunter;
     int coyotoJumpCounter = 0;
+
     Collider2D[] IsGrounded;
 
 

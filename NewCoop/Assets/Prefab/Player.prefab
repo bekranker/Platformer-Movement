@@ -171,17 +171,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainSpeed: 13
-  acceleration: 15
-  decceleration: 25
-  velPower: 0.95
+  acceleration: 16
+  decceleration: 24
+  velPower: 0.78
   fallingGravityScale: 2.65
   gravityScale: 1.35
-  jumpAmount: 9
-  coyotoJumpAmount: 9.5
-  doubleJumpAmount: 9
+  jumpAmount: 8.5
+  coyotoJumpAmount: 9
+  doubleJumpAmount: 8
   CoyotoTime: 0.2
-  BufferTime: 0.5
-  BufferAmount: 10
+  BufferTime: 0.45
+  BufferAmount: 8.5
   jumpCutMultiplier: 2.5
   jumpTime: 0.2
   checkPosSize: {x: 0.36, y: 0.36}
@@ -190,7 +190,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   totalJump: 2
-  bufferTimeCounter: 0.5
   rb: {fileID: 1174689607428651664}
   movementBehaviour: {fileID: 1174689607428651666}
 --- !u!1 &3906685668936121284
