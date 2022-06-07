@@ -112,7 +112,7 @@ public class UINavigationSystem : MonoBehaviour
             {
                 SelectUI(SelectOnUp);
             }
-            if ((Input.GetAxisRaw("XboxDpadVertical") < 0 || Input.GetAxisRaw("Xbox2DpadVertical") > 0) && inputSelection.Controllers.Contains("Xbox"))
+            if ((Input.GetAxisRaw("XboxDpadVertical") < 0 || Input.GetAxisRaw("Xbox2DpadVertical") < 0) && inputSelection.Controllers.Contains("Xbox"))
             {
                 SelectUI(SelectOnDown);
             }
@@ -120,7 +120,7 @@ public class UINavigationSystem : MonoBehaviour
             {
                 SelectUI(SelectOnRight);
             }
-            if ((Input.GetAxisRaw("XboxDpadHorizontal") < 0 || Input.GetAxisRaw("Xbox2DpadHorizontal") > 0) && inputSelection.Controllers.Contains("Xbox"))
+            if ((Input.GetAxisRaw("XboxDpadHorizontal") < 0 || Input.GetAxisRaw("Xbox2DpadHorizontal") < 0) && inputSelection.Controllers.Contains("Xbox"))
             {
                 SelectUI(SelectOnLeft);
             }
@@ -140,7 +140,7 @@ public class UINavigationSystem : MonoBehaviour
             {
                 SelectUI(SelectOnUp);
             }
-            if ((Input.GetAxisRaw("PsDpadVertical") < 0 || Input.GetAxisRaw("Ps2DpadVertical") > 0) && inputSelection.Controllers.Contains("Ps"))
+            if ((Input.GetAxisRaw("PsDpadVertical") < 0 || Input.GetAxisRaw("Ps2DpadVertical") < 0) && inputSelection.Controllers.Contains("Ps"))
             {
                 SelectUI(SelectOnDown);
             }
@@ -148,7 +148,7 @@ public class UINavigationSystem : MonoBehaviour
             {
                 SelectUI(SelectOnRight);
             }
-            if ((Input.GetAxisRaw("PsDpadHorizontal") < 0 || Input.GetAxisRaw("Ps2DpadHorizontal") > 0) && inputSelection.Controllers.Contains("Ps"))
+            if ((Input.GetAxisRaw("PsDpadHorizontal") < 0 || Input.GetAxisRaw("Ps2DpadHorizontal") < 0) && inputSelection.Controllers.Contains("Ps"))
             {
                 SelectUI(SelectOnLeft);
             }

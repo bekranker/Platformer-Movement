@@ -5,42 +5,42 @@ using UnityEngine;
 public class MovementManager : MonoBehaviour
 {
     [Header("-----Move Options-----")]
-    [Range(1f,100f)][SerializeField] float MainSpeed;
-    [Range(1f, 50f)] [SerializeField] float acceleration;
-    [Range(1f, 50f)] [SerializeField] float decceleration;
-    [Range(0.005f, 1f)] [SerializeField] float velPower;
+    [Range(1f,100f)] public float MainSpeed;
+    [Range(1f, 50f)] public float acceleration;
+    [Range(1f, 50f)] public float decceleration;
+    [Range(0.005f, 1f)] public float velPower;
 
     [Header("-----Jump Options-----")]
     [Range(1f, 10f)] public float fallingGravityScale;
     [Range(1f, 10f)] public float gravityScale;
     [Range(1f, 100f)] public float jumpAmount;
-    [Range(1f, 100f)] [SerializeField] float coyotoJumpAmount;
-    [Range(1f, 100f)] [SerializeField] float doubleJumpAmount;
-    [Range(0.005f, 1f)] [SerializeField] float CoyotoTime;
-    [Range(0.005f, 1f)] [SerializeField] float BufferTime;
-    [Range(0.005f, 100f)] [SerializeField] float BufferAmount;
-    [Range(1f, 100f)] [SerializeField] float jumpCutMultiplier;
-    [Range(0.005f, 1f)] [SerializeField] float jumpTime;
-    [Range(0.005f, 100f)] [SerializeField] float DashDistance;
-    [SerializeField] Vector2 checkPosSize;
-    [SerializeField] Transform checkPos;
-    [SerializeField] LayerMask layerMask;
-    [SerializeField] int totalJump;
+    [Range(1f, 100f)] public float coyotoJumpAmount;
+    [Range(1f, 100f)] public float doubleJumpAmount;
+    [Range(0.005f, 1f)] public float CoyotoTime;
+    [Range(0.005f, 1f)] public float BufferTime;
+    [Range(0.005f, 100f)] public float BufferAmount;
+    [Range(1f, 100f)] public float jumpCutMultiplier;
+    [Range(0.005f, 1f)] public float jumpTime;
+    [Range(0.005f, 100f)] public float DashDistance;
+    public Vector2 checkPosSize;
+    public Transform checkPos;
+    public LayerMask layerMask;
+    public int totalJump;
 
-    float jumpTimeCounter;
-    float bufferTimeCounter;
+    public float jumpTimeCounter;
+    public float bufferTimeCounter;
 
     public bool isGrounded = true;
-    bool multipleJump;
-    bool coyoteJump;
-    bool isJumped;
-    bool buffering = false;
-    bool IsCanDash;
+    public bool multipleJump;
+    public bool coyoteJump;
+    public bool isJumped;
+    public bool buffering = false;
+    public bool IsCanDash;
     public bool isDashing;
 
     public int jumpCounter;
     public int dashCount;
-    int coyotoJumpCounter = 0;
+    public int coyotoJumpCounter = 0;
 
     Collider2D[] IsGrounded;
 
@@ -50,115 +50,94 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private BoxCollider2D boxC2D;
     [SerializeField] private MovementBehaviour movementBehaviour;
 
-    private void Start()
-    {
-        jumpTimeCounter = jumpTime;
-    }
+    //private void Start()
+    //{
+    //    jumpTimeCounter = jumpTime;
+    //}
 
-    private void Update()
-    {
-        #region Ground Check and calculeting bools
-        bool wasGrounded = isGrounded;
-        if (IsGrounded.Length > 0)
-        {
-            isGrounded = true;
-            isJumped = true;
-            buffering = false;
-            jumpTimeCounter = jumpTime;
-            coyotoJumpCounter = 0;
+    //private void Update()
+    //{
+    //    #region Ground Check and calculeting bools
+    //    bool wasGrounded = isGrounded;
+    //    if (IsGrounded.Length > 0)
+    //    {
+    //        isGrounded = true;
+    //        isJumped = true;
+    //        buffering = false;
+    //        jumpTimeCounter = jumpTime;
+    //        coyotoJumpCounter = 0;
 
-            if (!wasGrounded)
-            {
-                jumpCounter = totalJump;
-                multipleJump = false;
-                Debug.Log("Landed");
-            }
-        }
-        
-        else
-        {
-            if (wasGrounded)
-            {
-                StartCoroutine(CoyotoJumpCoroutine());
-            }
-        }
+    //        if (!wasGrounded)
+    //        {
+    //            jumpCounter = totalJump;
+    //            multipleJump = false;
+    //            Debug.Log("Landed");
+    //        }
+    //    }
 
-        isGrounded = (IsGrounded.Length > 0) ? true : false;
-        #endregion
+    //    else
+    //    {
+    //        if (wasGrounded)
+    //        {
+    //            StartCoroutine(CoyotoJumpCoroutine());
+    //        }
+    //    }
 
-        if (!isDashing)
-        {
-            #region Jumping With JumpCut
-            if (isJumped && movementBehaviour.Jump == 1)
-            {
-                if (jumpTimeCounter > 0)
-                {
-                    JumpCut();
-                    jumpTimeCounter -= Time.deltaTime;
-                }
-                else
-                {
-                    isJumped = false;
-                }
-            }
-            if (movementBehaviour.Jump == 0)
-            {
-                isJumped = false;
-            }
-            #endregion
+    //    isGrounded = (IsGrounded.Length > 0) ? true : false;
+    //    #endregion
 
-            #region Buffer And Other Jump
-            if (movementBehaviour.JumpDown == 1)
-            {
-                Jump();
-                isJumped = true;
-                if (jumpCounter <= 0) //burda
-                {
-                    Debug.Log("jumpCounter þuan da:" + jumpCounter);
-                    buffering = true;
-                }
+    //    if (!isDashing)
+    //    {
+    //        #region Jumping With JumpCut
 
-            }
-            #region buffer calculeting
-            if (buffering)
-            {
-                bufferTimeCounter = BufferTime;
-            }
-            else
-            {
-                bufferTimeCounter -= Time.deltaTime;
-            }
-            #endregion
+    //        if (movementBehaviour.Jump == 0)
+    //        {
+    //            isJumped = false;
+    //        }
+    //        #endregion
 
-            #endregion
+    //        #region Buffer And Other Jump
+    //        if (movementBehaviour.JumpDown == 1)
+    //        {
+    //            Jump();
+    //            isJumped = true;
+    //            if (jumpCounter <= 0) //burda
+    //            {
+    //                Debug.Log("jumpCounter þuan da:" + jumpCounter);
+    //                buffering = true;
+    //            }
 
-            #region Doing Buffer Jump
-            if (bufferTimeCounter > 0)
-            {
-                if (isGrounded)
-                {
-                    multipleJump = true;
-                    coyotoJumpCounter++;
-                    jumpCounter--;
-                    AddBufferJumpForce();
-                    buffering = false;
-                }
-            }
-            #endregion
-        }
-        
-        this.Wait(BufferTime, () => buffering = false);
-    }
+    //        }
+    //        #region buffer calculeting
+    //        if (buffering)
+    //        {
+    //            bufferTimeCounter = BufferTime;
+    //        }
+    //        else
+    //        {
+    //            bufferTimeCounter -= Time.deltaTime;
+    //        }
+    //        #endregion
 
-    #region Coyoto Time bool calulate
-    IEnumerator CoyotoJumpCoroutine()
-    {
-        coyoteJump = true;
-        yield return new WaitForSeconds(CoyotoTime);
-        coyoteJump = false;
-        multipleJump = true;
-    }
-    #endregion
+    //        #endregion
+
+    //        #region Doing Buffer Jump
+    //        if (bufferTimeCounter > 0)
+    //        {
+    //            if (isGrounded)
+    //            {
+    //                multipleJump = true;
+    //                coyotoJumpCounter++;
+    //                jumpCounter--;
+    //                AddBufferJumpForce();
+    //                buffering = false;
+    //            }
+    //        }
+    //        #endregion
+    //    }
+
+    //    this.Wait(BufferTime, () => buffering = false);
+    //}
 
     void FixedUpdate()
     {
@@ -166,20 +145,7 @@ public class MovementManager : MonoBehaviour
         if (!isDashing)
         {
             Runing();
-            OnJump();
         }
-        
-        #endregion
-
-        #region Falling and IsGrounded
-        IsGrounded = Physics2D.OverlapBoxAll(checkPos.position, checkPosSize, 0, layerMask);
-
-        if (isGrounded)
-        {
-            IsCanDash = true;
-            dashCount = 0;
-        }
-
         #endregion
     }
 
@@ -201,48 +167,48 @@ public class MovementManager : MonoBehaviour
         rb.AddForce(moveInput * Vector2.right);
     }
 
-    #region Jump Functions
-    private void Jump()
-    {
-        #region Normal Jump
-        if (isGrounded)
-        {
-            jumpCounter--;
-            AddJumpForce();
-            multipleJump = true;
-        }
-        #endregion
+    //#region Jump Functions
+    //private void Jump()
+    //{
+    //    #region Normal Jump
+    //    if (isGrounded)
+    //    {
+    //        jumpCounter--;
+    //        AddJumpForce();
+    //        multipleJump = true;
+    //    }
+    //    #endregion
 
-        #region Not Normal
-        else
-        {
-            #region Coyoto Jump
-            if (coyoteJump)
-            {
-                jumpCounter--;
-                AddCoyotoJumpForce();
-            }
-            #endregion
+    //    #region Not Normal
+    //    else
+    //    {
+    //        #region Coyoto Jump
+    //        if (coyoteJump)
+    //        {
+    //            jumpCounter--;
+    //            AddCoyotoJumpForce();
+    //        }
+    //        #endregion
 
-            #region Muliple Jumping
-            if (multipleJump && jumpCounter > 0)
-            {
-                Debug.Log("double jump");
-                jumpCounter--;
-                AddDoubleJumpForce();
-            }
-            #endregion
-            
-            else
-            {
-                isJumped = false;
-            }
-        }
-        #endregion
-    }
+    //        #region Muliple Jumping
+    //        if (multipleJump && jumpCounter > 0)
+    //        {
+    //            Debug.Log("double jump");
+    //            jumpCounter--;
+    //            AddDoubleJumpForce();
+    //        }
+    //        #endregion
+
+    //        else
+    //        {
+    //            isJumped = false;
+    //        }
+    //    }
+    //    #endregion
+    //}
 
     #region Adding Normal Jump Force
-    private void AddJumpForce()
+    public void AddJumpForce()
     {
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * 100 * jumpAmount * Time.fixedDeltaTime;
@@ -250,7 +216,7 @@ public class MovementManager : MonoBehaviour
     #endregion
 
     #region Adding Double Jump Force
-    private void AddDoubleJumpForce()
+    public void AddDoubleJumpForce()
     {
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * 100 * doubleJumpAmount * Time.fixedDeltaTime;
@@ -258,7 +224,7 @@ public class MovementManager : MonoBehaviour
     #endregion
 
     #region Adding Coyoto Jump Force
-    private void AddCoyotoJumpForce()
+    public void AddCoyotoJumpForce()
     {
         Debug.Log("Coyote jump is did");
 
@@ -272,7 +238,7 @@ public class MovementManager : MonoBehaviour
     #endregion
 
     #region Add Jump Buffer Force
-    private void AddBufferJumpForce()
+    public void AddBufferJumpForce()
     {
         Debug.Log("Buffer jump is did");
         rb.velocity = Vector2.zero;
@@ -280,36 +246,27 @@ public class MovementManager : MonoBehaviour
     }
     #endregion
 
-    #region On Jumping
-    private void OnJump()
-    {
-        if (rb.velocity.y > 3)
-        {
-            rb.gravityScale = gravityScale * fallingGravityScale;
-        }
-        if(rb.velocity.y == 0)
-        {
-            rb.gravityScale = gravityScale;
-        }
-        if (rb.velocity.y < 0)
-        {
-            rb.gravityScale = gravityScale * fallingGravityScale;
-        }
-    }
-    #endregion
+    //#region On Jumping
+    //private void OnJump()
+    //{
+    //    if (rb.velocity.y > 3)
+    //    {
+    //        rb.gravityScale = gravityScale * fallingGravityScale;
+    //    }
+    //    if(rb.velocity.y == 0)
+    //    {
+    //        rb.gravityScale = gravityScale;
+    //    }
+    //    if (rb.velocity.y < 0)
+    //    {
+    //        rb.gravityScale = gravityScale * fallingGravityScale;
+    //    }
+    //}
+    //#endregion
 
-    #region JumpCut
-    private void JumpCut()
-    {
-        rb.velocity += Vector2.up * jumpCutMultiplier * jumpAmount * Time.deltaTime;
-        if (isGrounded)
-        {
-            jumpTimeCounter = jumpCounter;
-        }
-    }
-    #endregion
 
-    #endregion
+
+    //#endregion
 
 
 }

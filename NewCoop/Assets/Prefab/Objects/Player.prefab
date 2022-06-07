@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1174689607428651678}
-  - component: {fileID: 1174689607428651664}
-  - component: {fileID: 1174689607428651665}
   - component: {fileID: 1174689607428651666}
-  - component: {fileID: 8863417478932801943}
-  - component: {fileID: -1357828880346475618}
-  - component: {fileID: 8501669455338382702}
+  - component: {fileID: 2615919772899749030}
+  - component: {fileID: 8505177524007123630}
+  - component: {fileID: 7235418268055531539}
+  - component: {fileID: 5696987263579804961}
+  - component: {fileID: 5999124978200234611}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -39,53 +39,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1174689607428651664
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174689607428651667}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1.5
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 0
-  m_CollisionDetection: 1
-  m_Constraints: 4
---- !u!61 &1174689607428651665
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174689607428651667}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: f7835f488b0b8ce4195f7996a40d63ff, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &1174689607428651666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,7 +64,118 @@ MonoBehaviour:
   Settings: 0
   Cancel: 0
   CancelDown: 0
---- !u!114 &8863417478932801943
+--- !u!114 &2615919772899749030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 129793a993677c8438eaf264768529b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementBehaviour: {fileID: 1174689607428651666}
+  _groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _wallLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  _cornerCorrectLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  _movementAcceleration: 70
+  _maxMoveSpeed: 12
+  _groundLinearDrag: 7
+  _jumpForce: 12
+  _airLinearDrag: 1.5
+  _fallMultiplier: 12
+  _lowJumpFallMultiplier: 4
+  _downMultiplier: 12
+  _extraJumps: 1
+  _hangTime: 0.1
+  _jumpBufferLength: 0.1
+  _wallSlideModifier: 0.5
+  _wallRunModifier: 0.85
+  _wallJumpXVelocityHaltDelay: 0.2
+  _dashSpeed: 15
+  _dashLength: 0.3
+  _dashBufferLength: 0.1
+  _groundRaycastLength: 0.53
+  _groundRaycastOffset: {x: 0.49, y: 0, z: 0}
+  _wallRaycastLength: 0.81
+  _topRaycastLength: 0.6
+  _edgeRaycastOffset: {x: 0.33, y: 0, z: 0}
+  _innerRaycastOffset: {x: 0.04, y: 0, z: 0}
+--- !u!50 &8505177524007123630
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &7235418268055531539
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!114 &5696987263579804961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44346a86b9d01443b073a216b0ec3de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DashSpeed: 3
+  DashMultipler: 45
+  DashTime: 0.2
+  StartDashTime: 0.14
+  movementBehaviour: {fileID: 1174689607428651666}
+  movementManager: {fileID: 5999124978200234611}
+  rb: {fileID: 8505177524007123630}
+--- !u!114 &5999124978200234611
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,72 +188,41 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainSpeed: 13
-  acceleration: 16
-  decceleration: 24
-  velPower: 0.78
-  fallingGravityScale: 2.65
-  gravityScale: 1.35
-  jumpAmount: 8.5
-  coyotoJumpAmount: 9
-  doubleJumpAmount: 8
+  acceleration: 50
+  decceleration: 10
+  velPower: 0.96
+  fallingGravityScale: 5
+  gravityScale: 2.3
+  jumpAmount: 7
+  coyotoJumpAmount: 7.5
+  doubleJumpAmount: 7
   CoyotoTime: 0.2
   BufferTime: 0.35
-  BufferAmount: 8.5
-  jumpCutMultiplier: 2.5
-  jumpTime: 0.2
-  DashDistance: 22
-  checkPosSize: {x: 0.36, y: 0.36}
+  BufferAmount: 7
+  jumpCutMultiplier: 47
+  jumpTime: 0
+  DashDistance: 0
+  checkPosSize: {x: 0, y: 0}
   checkPos: {fileID: 7461186936902632192}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
   totalJump: 2
+  jumpTimeCounter: 0
+  bufferTimeCounter: 0
   isGrounded: 1
+  multipleJump: 0
+  coyoteJump: 0
+  isJumped: 0
+  buffering: 0
+  IsCanDash: 0
   isDashing: 0
   jumpCounter: 2
-  dashCount: 0
-  rb: {fileID: 1174689607428651664}
-  boxC2D: {fileID: 1174689607428651665}
+  dashCount: 1
+  coyotoJumpCounter: 0
+  rb: {fileID: 8505177524007123630}
+  boxC2D: {fileID: 7235418268055531539}
   movementBehaviour: {fileID: 1174689607428651666}
---- !u!114 &-1357828880346475618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174689607428651667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f628d12fa8b00614cae9add7e3dcfece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpParticle: {fileID: 8227339459606187491, guid: bb4b5864cc101dc47864f04603d8f641, type: 3}
-  _walkParticule: {fileID: 8789413196721812345}
-  _doubleParticule: {fileID: 5317139398204422639, guid: 424d6a2d0a17c7d4092f43d055c3f442, type: 3}
-  velocityAmount: 61
-  movementBehaviour: {fileID: 1174689607428651666}
-  movementManager: {fileID: 8863417478932801943}
-  groundCheckPos: {fileID: 7461186936902632192}
---- !u!114 &8501669455338382702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174689607428651667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e44346a86b9d01443b073a216b0ec3de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DashSpeed: 20
-  DashMultipler: 75
-  DashTime: 0.15
-  StartDashTime: 0.15
-  movementBehaviour: {fileID: 1174689607428651666}
-  movementManager: {fileID: 8863417478932801943}
-  rb: {fileID: 1174689607428651664}
-  boxCollider2D: {fileID: 1174689607428651665}
 --- !u!1 &3436853962059038923
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,10 +478,10 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4387145668700840436}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: f7835f488b0b8ce4195f7996a40d63ff, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

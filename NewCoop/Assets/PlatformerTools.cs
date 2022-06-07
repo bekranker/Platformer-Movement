@@ -17,7 +17,6 @@ public class PlatformerTools : MonoBehaviour
 
     [Header("-----Others-----")]
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] BoxCollider2D boxCollider2D;
 
     private int direction;
     private float _gravity;
@@ -108,6 +107,93 @@ public class PlatformerTools : MonoBehaviour
         #endregion
         #endregion
 
+        if (movementManager.isGrounded && !movementManager.buffering)
+        {
+            movementManager.jumpCounter = 2;
+        }
+        else if (movementManager.isGrounded && movementManager.buffering)
+        {
+            movementManager.jumpCounter = 1;
+        }
+
+        if (movementManager.isGrounded && !movementManager.buffering) //jump bufferingsiz yere deðme
+        {
+            if (movementBehaviour.JumpDown == 1 && movementManager.jumpCounter > 0) //zýplamaya bastýktan sonra yerde olmayacaðý için burasý 1 kere çalýþýr.
+            {
+                movementManager.AddJumpForce();
+                movementManager.jumpCounter--;
+            }
+            movementManager.coyoteJump = false;
+        }
+        else if(movementManager.isGrounded && movementManager.buffering) //jump buffering ile yere deðince
+        {
+            
+            movementManager.coyoteJump = false;
+
+            if (movementBehaviour.JumpDown == 1)
+            {
+                movementManager.jumpCounter--;
+                if (movementManager.bufferTimeCounter > 0 && movementManager.jumpCounter > 0)
+                {
+                    movementManager.AddBufferJumpForce();
+                }
+            }
+        }
+        else // yere deðmeyince olanlar burada. Normal Jump  buraya eklenmeli
+        {
+            StartCoroutine(CoyotoJumpCoroutine()); //Coyoto time baþlar
+            if (movementBehaviour.Jump == 1)
+            {
+                if (movementManager.jumpCounter > 0 && movementManager.jumpTimeCounter > 0)
+                {
+                    movementManager.jumpTimeCounter -= Time.deltaTime;
+                    JumpCut();
+                }
+                else
+                {
+                    movementManager.isJumped = false;
+                }
+            }
+            else
+            {
+                movementManager.isJumped = false;
+            }
+            
+        }
     }
+
+    private void FixedUpdate()
+    {
+        movementManager.isGrounded = Physics2D.OverlapBox(movementManager.checkPos.position, movementManager.checkPosSize, 0, movementManager.layerMask);
+    }
+
+    #region DoubleJump
+    private void DoubleJump()
+    {
+        movementManager.AddDoubleJumpForce();
+    }
+    #endregion
+
+
+    #region Jump Cut
+    private void JumpCut()
+    {
+        rb.velocity += Vector2.up * movementManager.jumpCutMultiplier * movementManager.jumpAmount * Time.deltaTime;
+        if (movementManager.isGrounded)
+        {
+            movementManager.jumpTimeCounter = movementManager.jumpCounter;
+        }
+    }
+    #endregion
+
+    #region CoyoteTime Calculate
+    IEnumerator CoyotoJumpCoroutine()
+    {
+        movementManager.coyoteJump = true;
+        yield return new WaitForSeconds(movementManager.CoyotoTime);
+        movementManager.coyoteJump = false;
+        movementManager.multipleJump = true;
+    }
+    #endregion
 }
 
