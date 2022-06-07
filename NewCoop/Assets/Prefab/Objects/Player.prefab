@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1174689607428651678}
   - component: {fileID: 1174689607428651666}
-  - component: {fileID: 2615919772899749030}
   - component: {fileID: 8505177524007123630}
   - component: {fileID: 7235418268055531539}
   - component: {fileID: 5696987263579804961}
@@ -64,51 +63,6 @@ MonoBehaviour:
   Settings: 0
   Cancel: 0
   CancelDown: 0
---- !u!114 &2615919772899749030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174689607428651667}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 129793a993677c8438eaf264768529b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementBehaviour: {fileID: 1174689607428651666}
-  _groundLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  _wallLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  _cornerCorrectLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  _movementAcceleration: 70
-  _maxMoveSpeed: 12
-  _groundLinearDrag: 7
-  _jumpForce: 12
-  _airLinearDrag: 1.5
-  _fallMultiplier: 12
-  _lowJumpFallMultiplier: 4
-  _downMultiplier: 12
-  _extraJumps: 1
-  _hangTime: 0.1
-  _jumpBufferLength: 0.1
-  _wallSlideModifier: 0.5
-  _wallRunModifier: 0.85
-  _wallJumpXVelocityHaltDelay: 0.2
-  _dashSpeed: 15
-  _dashLength: 0.3
-  _dashBufferLength: 0.1
-  _groundRaycastLength: 0.53
-  _groundRaycastOffset: {x: 0.49, y: 0, z: 0}
-  _wallRaycastLength: 0.81
-  _topRaycastLength: 0.6
-  _edgeRaycastOffset: {x: 0.33, y: 0, z: 0}
-  _innerRaycastOffset: {x: 0.04, y: 0, z: 0}
 --- !u!50 &8505177524007123630
 Rigidbody2D:
   serializedVersion: 4
@@ -200,7 +154,7 @@ MonoBehaviour:
   BufferTime: 0.35
   BufferAmount: 7
   jumpCutMultiplier: 47
-  jumpTime: 0
+  jumpTime: 0.11
   DashDistance: 0
   checkPosSize: {x: 0, y: 0}
   checkPos: {fileID: 7461186936902632192}
@@ -217,7 +171,7 @@ MonoBehaviour:
   buffering: 0
   IsCanDash: 0
   isDashing: 0
-  jumpCounter: 2
+  jumpCounter: 0
   dashCount: 1
   coyotoJumpCounter: 0
   rb: {fileID: 8505177524007123630}
