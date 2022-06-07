@@ -4562,6 +4562,11 @@ MonoBehaviour:
   Controllers:
   - 
   - 
+  - 
+  - 
+  - 
+  - 
+  ControllersIndexs: ffffffffffffffff
   SelectionPanel: {fileID: 66978485}
   SelectionText: {fileID: 377256776}
   XboxButton: {fileID: 966821389}
@@ -4569,6 +4574,7 @@ MonoBehaviour:
   PlayButton: {fileID: 949050179}
   InputSelectionPanel: {fileID: 1178810203}
   menu: {fileID: 1644821764}
+  NewControllerList: []
 --- !u!4 &563741255
 Transform:
   m_ObjectHideFlags: 0
@@ -7322,7 +7328,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 966821387}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -8865,7 +8871,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205501240}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 

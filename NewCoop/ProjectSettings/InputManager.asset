@@ -404,7 +404,7 @@ InputManager:
     invert: 0
     type: 2
     axis: 7
-    joyNum: 1
+    joyNum: 4
   - serializedVersion: 3
     m_Name: Ps2DpadVertical
     descriptiveName: 

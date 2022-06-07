@@ -16,6 +16,9 @@ public class InputSelection : MonoBehaviour
     [SerializeField] string[] Players = new string[2];
     public List<string> Controllers = new List<string>(2);
 
+
+    public List<int> ControllersIndexs = new List<int>(2);
+
     [SerializeField] GameObject SelectionPanel;
     [SerializeField] TextMeshProUGUI SelectionText;
 
@@ -36,7 +39,7 @@ public class InputSelection : MonoBehaviour
 
     bool firstOpening;
 
-    
+    [SerializeField] List<string> NewControllerList = new List<string>();
     // Start is called before the first frame update
     void Start()
     {
@@ -48,18 +51,18 @@ public class InputSelection : MonoBehaviour
     {
         StartCoroutine(GetController());
 
-        if(Controllers[0] != "")
+        if(ControllersIndexs[0] != -1 && Controllers[ControllersIndexs[0]] != "")
         {
-            ControllerDebug1.text = Controllers[0] + Input.GetJoystickNames()[0];
+            ControllerDebug1.text = Controllers[ControllersIndexs[0]] + Input.GetJoystickNames()[ControllersIndexs[0]];
         }
         else
         {
             ControllerDebug1.text = "No Controller";
         }
 
-        if(Controllers[1] != "")
+        if(ControllersIndexs[1] != -1 && Controllers[ControllersIndexs[1]] != "")
         {
-            ControllerDebug2.text = Controllers[1] + Input.GetJoystickNames()[1];
+            ControllerDebug2.text = Controllers[ControllersIndexs[1]] + Input.GetJoystickNames()[ControllersIndexs[1]];
         }
         else
         {
@@ -97,19 +100,19 @@ public class InputSelection : MonoBehaviour
             }
         }
 
-        if (Input.GetAxis("XboxButtonX") > 0 && Controllers[0] == "Xbox")
+        if (ControllersIndexs[0] != -1 && Input.GetAxis("XboxButtonX") > 0 && Controllers[ControllersIndexs[0]] == "Xbox")
         {
             GetPlayer("Xbox", PlayerPrefs.GetInt("PlayerIndex" + 0));
         }
-        if (Input.GetAxis("Xbox2ButtonX") > 0 && Controllers[1] == "Xbox") 
+        if (ControllersIndexs[1] != -1 && Input.GetAxis("Xbox2ButtonX") > 0 && Controllers[ControllersIndexs[1]] == "Xbox") 
         {
             GetPlayer("Xbox2", PlayerPrefs.GetInt("PlayerIndex" + 1));
         }
-        if (Input.GetAxis("PsButtonSquare") > 0 && Controllers[0] == "Ps")
+        if (ControllersIndexs[0] != -1 && Input.GetAxis("PsButtonSquare") > 0 && Controllers[ControllersIndexs[0]] == "Ps")
         {
             GetPlayer("Ps", PlayerPrefs.GetInt("PlayerIndex" + 0));
         }
-        if (Input.GetAxis("Ps2ButtonSquare") > 0 && Controllers[1] == "Ps")
+        if (ControllersIndexs[1] != -1 && Input.GetAxis("Ps2ButtonSquare") > 0 && Controllers[ControllersIndexs[1]] == "Ps")
         {
             GetPlayer("Ps2", PlayerPrefs.GetInt("PlayerIndex" + 1));
         }
@@ -229,6 +232,14 @@ public class InputSelection : MonoBehaviour
 
     IEnumerator GetController()
     {
+        foreach (var item in Input.GetJoystickNames())
+        {
+            if(item != "" && !NewControllerList.Contains(item))
+            {
+                NewControllerList.Add(item);
+            }           
+        }
+
 
         for (int i = 0; i < Input.GetJoystickNames().Length; i++)
         {
@@ -238,11 +249,29 @@ public class InputSelection : MonoBehaviour
                 if (Input.GetJoystickNames()[i].ToLower().Contains("xbox"))
                 {
                     Controllers[i] = "Xbox";
+                    if (ControllersIndexs[0] == -1)
+                    {
+                        ControllersIndexs[0] = i;
+                    }
+                    else
+                    {
+                        ControllersIndexs[1] = i;
+                        Debug.Log("Helloooo");
+                    }
                     goto Second;
                 }
                 else if (Input.GetJoystickNames()[i].ToLower().Contains("dual"))
                 {
                     Controllers[i] = "Ps";
+                    if (ControllersIndexs[0] == -1)
+                    {
+                        ControllersIndexs[0] = i;
+                    }
+                    else
+                    {
+                        ControllersIndexs[1] = i;
+                        Debug.Log("Helloooo");
+                    }
                     goto Second;
                 }
                 #endregion
@@ -269,6 +298,17 @@ public class InputSelection : MonoBehaviour
                 }            
 
                 Debug.Log(Input.GetJoystickNames()[i] +" "+ Controllers[i]);
+
+                if (ControllersIndexs[0] == -1)
+                {
+                    ControllersIndexs[0] = i;
+                }
+                else if (ControllersIndexs[0] != i)
+                {
+                    ControllersIndexs[1] = i;
+                    Debug.Log("Helloooo"+i);
+                }
+
                 SelectionPanel.SetActive(false);
                 firstOpening = false;
 
@@ -277,6 +317,17 @@ public class InputSelection : MonoBehaviour
             else if (Input.GetJoystickNames()[i] == "")
             {
                 SelectionPanel.SetActive(false);
+                Debug.LogWarning(i);
+                if(ControllersIndexs[0] == i)
+                {
+                    ControllersIndexs[0] = -1;
+                    Debug.Log("He");
+                }
+                else if (ControllersIndexs[1] == i)
+                {
+                    ControllersIndexs[1] = -1;
+                    Debug.Log("He2" + i);
+                }
                 Controllers[i] = "";
                 PlayerPrefs.SetInt("PlayerIndex" + i, -1);
             }

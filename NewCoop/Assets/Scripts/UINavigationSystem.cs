@@ -125,11 +125,11 @@ public class UINavigationSystem : MonoBehaviour
                 SelectUI(SelectOnLeft);
             }
 
-            if(Input.GetButtonUp("XboxButtonA") && inputSelection.Controllers[0] == "Xbox")
+            if(Input.GetButtonUp("XboxButtonA") && inputSelection.Controllers[inputSelection.ControllersIndexs[0]] == "Xbox")
             {
                 gameObject.GetComponent<Button>().onClick.Invoke();
             }
-            if (Input.GetButtonUp("Xbox2ButtonA") && inputSelection.Controllers[1] == "Xbox")
+            if (Input.GetButtonUp("Xbox2ButtonA") && inputSelection.Controllers[inputSelection.ControllersIndexs[1]] == "Xbox")
             {
                 gameObject.GetComponent<Button>().onClick.Invoke();
             }
@@ -153,11 +153,11 @@ public class UINavigationSystem : MonoBehaviour
                 SelectUI(SelectOnLeft);
             }
 
-            if (Input.GetButtonUp("PsButtonX") && inputSelection.Controllers[0] == "Ps")
+            if (Input.GetButtonUp("PsButtonX") && inputSelection.Controllers[inputSelection.ControllersIndexs[0]] == "Ps")
             {
                 gameObject.GetComponent<Button>().onClick.Invoke();
             }
-            if (Input.GetButtonUp("PsButtonX") && inputSelection.Controllers[1] == "Ps")
+            if (Input.GetButtonUp("PsButtonX") && inputSelection.Controllers[inputSelection.ControllersIndexs[1]] == "Ps")
             {
                 gameObject.GetComponent<Button>().onClick.Invoke();
             }
