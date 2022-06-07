@@ -22,26 +22,21 @@ public class MovementManager : MonoBehaviour
     [Range(1f, 100f)] public float jumpCutMultiplier;
     [Range(0.005f, 1f)] public float jumpTime;
     [Range(0.005f, 100f)] public float DashDistance;
-    public Vector2 checkPosSize;
+
+    [HideInInspector] public float jumpTimeCounter;
+    [HideInInspector] public Vector2 checkPosSize;
+    [HideInInspector] public bool isGrounded = true;
+    [HideInInspector] public bool coyoteJump;
+    [HideInInspector] public bool isJumped;
+    [HideInInspector] public bool buffering = false;
+    [HideInInspector] public bool IsCanDash;
+    [HideInInspector] public bool isDashing;
+    [HideInInspector] public int dashCount;
+
     public Transform checkPos;
     public LayerMask layerMask;
     public int totalJump;
-
-    public float jumpTimeCounter;
-    public float bufferTimeCounter;
-
-    public bool isGrounded = true;
-    public bool multipleJump;
-    public bool coyoteJump;
-    public bool isJumped;
-    public bool buffering = false;
-    public bool IsCanDash;
-    public bool isDashing;
-
     public int jumpCounter;
-    public int dashCount;
-    public int coyotoJumpCounter = 0;
-
 
     [Header("----Componenets-----")]
     [SerializeField] private Rigidbody2D rb;
@@ -86,8 +81,8 @@ public class MovementManager : MonoBehaviour
     }
     #endregion
 
-    #region Adding Double Jump Force
-    public void AddDoubleJumpForce()
+    #region Add DoubleJump
+    public void AddDoubleJump()
     {
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * 100 * doubleJumpAmount * Time.fixedDeltaTime;
@@ -99,12 +94,8 @@ public class MovementManager : MonoBehaviour
     {
         Debug.Log("Coyote jump is did");
 
-        if (coyotoJumpCounter == 0)
-        {
-            rb.velocity = Vector2.zero;
-            rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
-            coyotoJumpCounter++;
-        }
+        rb.velocity = Vector2.zero;
+        rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
     }
     #endregion
 
@@ -118,7 +109,7 @@ public class MovementManager : MonoBehaviour
     #endregion
 
     #region On Jumping
-    private void OnJump()
+    public void OnJump()
     {
         if (rb.velocity.y > 3)
         {

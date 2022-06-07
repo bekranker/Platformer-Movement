@@ -145,7 +145,7 @@ MonoBehaviour:
   acceleration: 50
   decceleration: 10
   velPower: 0.96
-  fallingGravityScale: 5
+  fallingGravityScale: 2
   gravityScale: 2.3
   jumpAmount: 7
   coyotoJumpAmount: 7.5
@@ -154,26 +154,23 @@ MonoBehaviour:
   BufferTime: 0.35
   BufferAmount: 7
   jumpCutMultiplier: 47
-  jumpTime: 0.11
-  DashDistance: 0
-  checkPosSize: {x: 0, y: 0}
-  checkPos: {fileID: 7461186936902632192}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
-  totalJump: 2
+  jumpTime: 0.14
+  DashDistance: 53
   jumpTimeCounter: 0
-  bufferTimeCounter: 0
+  checkPosSize: {x: 0, y: 0}
   isGrounded: 1
-  multipleJump: 0
   coyoteJump: 0
   isJumped: 0
   buffering: 0
   IsCanDash: 0
   isDashing: 0
-  jumpCounter: 0
   dashCount: 1
-  coyotoJumpCounter: 0
+  checkPos: {fileID: 7461186936902632192}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  totalJump: 1
+  jumpCounter: 1
   rb: {fileID: 8505177524007123630}
   boxC2D: {fileID: 7235418268055531539}
   movementBehaviour: {fileID: 1174689607428651666}

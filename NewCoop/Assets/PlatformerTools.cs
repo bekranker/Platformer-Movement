@@ -107,6 +107,9 @@ public class PlatformerTools : MonoBehaviour
         #endregion
         #endregion
 
+        movementManager.jumpCounter = (movementManager.isGrounded) ? movementManager.totalJump : movementManager.jumpCounter;
+        movementManager.jumpTimeCounter = (movementManager.isGrounded) ? movementManager.jumpTime : movementManager.jumpTimeCounter;
+
         if (movementBehaviour.JumpDown == 1)
         {
             ///<summary>
@@ -120,15 +123,45 @@ public class PlatformerTools : MonoBehaviour
             {
                 if (!movementManager.isGrounded && !movementManager.buffering)
                 {
-                    StartCoroutine(CoyotoJumpCoroutine());
+                    movementManager.coyoteJump = true;
+                    movementManager.jumpCounter--;
+                    movementManager.AddDoubleJump();
+                    this.Wait(movementManager.CoyotoTime, () => movementManager.coyoteJump = false);
                 }
                 else if (movementManager.isGrounded && !movementManager.buffering && !movementManager.coyoteJump)
                 {
+                    movementManager.jumpCounter--;
                     movementManager.AddJumpForce();
                 }
                 else if (movementManager.isGrounded && movementManager.coyoteJump)
                 {
+                    movementManager.jumpCounter--;
                     movementManager.AddCoyotoJumpForce();
+                }
+            }
+            else if (movementManager.isGrounded && !movementManager.coyoteJump && movementManager.buffering)
+            {
+                
+                movementManager.jumpCounter--;
+                movementManager.AddBufferJumpForce();
+            }
+            else if (movementManager.jumpCounter < 0)
+            {
+                movementManager.jumpCounter--;
+                movementManager.buffering = true;
+                this.Wait(movementManager.BufferTime, () => movementManager.buffering = false);
+            }
+            
+        }
+
+        if (movementBehaviour.Jump == 1)
+        {
+            movementManager.jumpTimeCounter -= Time.deltaTime;
+            if (movementManager.jumpCounter > 0)
+            {
+                if (movementManager.jumpTimeCounter > 0)
+                {
+                    JumpCut();
                 }
             }
         }
@@ -138,15 +171,8 @@ public class PlatformerTools : MonoBehaviour
     private void FixedUpdate()
     {
         movementManager.isGrounded = Physics2D.OverlapBox(movementManager.checkPos.position, movementManager.checkPosSize, 0, movementManager.layerMask);
+        movementManager.OnJump();
     }
-
-    #region DoubleJump
-    private void DoubleJump()
-    {
-        movementManager.AddDoubleJumpForce();
-    }
-    #endregion
-
 
     #region Jump Cut
     private void JumpCut()
@@ -156,16 +182,6 @@ public class PlatformerTools : MonoBehaviour
         {
             movementManager.jumpTimeCounter = movementManager.jumpCounter;
         }
-    }
-    #endregion
-
-    #region CoyoteTime Calculate
-    IEnumerator CoyotoJumpCoroutine()
-    {
-        movementManager.coyoteJump = true;
-        yield return new WaitForSeconds(movementManager.CoyotoTime);
-        movementManager.coyoteJump = false;
-        movementManager.multipleJump = true;
     }
     #endregion
 }
