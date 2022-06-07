@@ -141,7 +141,6 @@ public class PlatformerTools : MonoBehaviour
             }
             else if (movementManager.isGrounded && !movementManager.coyoteJump && movementManager.buffering)
             {
-                
                 movementManager.jumpCounter--;
                 movementManager.AddBufferJumpForce();
             }
@@ -154,17 +153,17 @@ public class PlatformerTools : MonoBehaviour
             
         }
 
-        if (movementBehaviour.Jump == 1)
-        {
-            movementManager.jumpTimeCounter -= Time.deltaTime;
-            if (movementManager.jumpCounter > 0)
-            {
-                if (movementManager.jumpTimeCounter > 0)
-                {
-                    JumpCut();
-                }
-            }
-        }
+        //if (movementBehaviour.Jump == 1)
+        //{
+        //    movementManager.jumpTimeCounter -= Time.deltaTime;
+        //    if (movementManager.jumpCounter > 0)
+        //    {
+        //        if (movementManager.jumpTimeCounter > 0)
+        //        {
+        //            JumpCut();
+        //        }
+        //    }
+        //}
 
     }
 
