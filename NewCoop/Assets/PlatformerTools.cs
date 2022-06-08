@@ -139,31 +139,23 @@ public class PlatformerTools : MonoBehaviour
                     movementManager.AddCoyotoJumpForce();
                 }
             }
-            else if (movementManager.isGrounded && !movementManager.coyoteJump && movementManager.buffering)
+            else if (movementManager.jumpCounter <= 0)
             {
-                movementManager.jumpCounter--;
-                movementManager.AddBufferJumpForce();
-            }
-            else if (movementManager.jumpCounter < 0)
-            {
-                movementManager.jumpCounter--;
                 movementManager.buffering = true;
+                movementManager.jumpCounter--;
                 this.Wait(movementManager.BufferTime, () => movementManager.buffering = false);
             }
-            
+        }
+        if (!movementManager.coyoteJump && movementManager.buffering)
+        {
+            if (movementManager.isGrounded)
+            {
+                Debug.Log("I am here");
+                
+                movementManager.AddBufferJumpForce();
+            }
         }
 
-        //if (movementBehaviour.Jump == 1)
-        //{
-        //    movementManager.jumpTimeCounter -= Time.deltaTime;
-        //    if (movementManager.jumpCounter > 0)
-        //    {
-        //        if (movementManager.jumpTimeCounter > 0)
-        //        {
-        //            JumpCut();
-        //        }
-        //    }
-        //}
 
     }
 

@@ -151,7 +151,7 @@ MonoBehaviour:
   coyotoJumpAmount: 10.5
   doubleJumpAmount: 10
   CoyotoTime: 0.2
-  BufferTime: 0.35
+  BufferTime: 0.32
   BufferAmount: 7
   jumpCutMultiplier: 47
   jumpTime: 0.14
@@ -169,8 +169,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
-  totalJump: 1
-  jumpCounter: 1
+  totalJump: 2
+  jumpCounter: 2
   rb: {fileID: 8505177524007123630}
   boxC2D: {fileID: 7235418268055531539}
   movementBehaviour: {fileID: 1174689607428651666}
