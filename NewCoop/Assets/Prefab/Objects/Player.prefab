@@ -147,12 +147,12 @@ MonoBehaviour:
   velPower: 0.96
   fallingGravityScale: 2
   gravityScale: 1.5
-  jumpAmount: 10
-  coyotoJumpAmount: 10.5
-  doubleJumpAmount: 10
-  CoyotoTime: 0.2
-  BufferTime: 0.32
-  BufferAmount: 7
+  jumpAmount: 9
+  coyotoJumpAmount: 9.5
+  doubleJumpAmount: 7
+  CoyotoTime: 0.47
+  BufferTime: 0.35
+  BufferAmount: 6
   jumpCutMultiplier: 47
   jumpTime: 0.14
   DashDistance: 53

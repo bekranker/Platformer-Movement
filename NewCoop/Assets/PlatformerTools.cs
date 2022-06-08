@@ -106,9 +106,14 @@ public class PlatformerTools : MonoBehaviour
         }
         #endregion
         #endregion
+        bool wasGrounded = movementManager.isGrounded;
 
         movementManager.jumpCounter = (movementManager.isGrounded) ? movementManager.totalJump : movementManager.jumpCounter;
         movementManager.jumpTimeCounter = (movementManager.isGrounded) ? movementManager.jumpTime : movementManager.jumpTimeCounter;
+        if (!movementManager.isGrounded)
+        {
+            this.Wait(movementManager.CoyotoTime, () => movementManager.coyoteJump = false);
+        }
 
         if (movementBehaviour.JumpDown == 1)
         {
@@ -118,31 +123,33 @@ public class PlatformerTools : MonoBehaviour
             /// bir kereliðine çaðýrýlýr.
             /// 
             /// 
-            ///<summart>///
+            ///<summary>///
             if (movementManager.jumpCounter > 0)
             {
-                if (!movementManager.isGrounded && !movementManager.buffering)
+                if (movementManager.isGrounded && !movementManager.buffering && !movementManager.coyoteJump)
                 {
-                    movementManager.coyoteJump = true;
-                    movementManager.jumpCounter--;
-                    movementManager.AddDoubleJump();
-                    this.Wait(movementManager.CoyotoTime, () => movementManager.coyoteJump = false);
-                }
-                else if (movementManager.isGrounded && !movementManager.buffering && !movementManager.coyoteJump)
-                {
+                    Debug.Log("Normal Jump is working");
                     movementManager.jumpCounter--;
                     movementManager.AddJumpForce();
                 }
-                else if (movementManager.isGrounded && movementManager.coyoteJump)
+                else if (rb.velocity.y != 0 && !movementManager.buffering && !movementManager.coyoteJump)
                 {
                     movementManager.jumpCounter--;
+                    Debug.Log("Double Jump is working");
+                    movementManager.AddDoubleJump();
+                    movementManager.coyoteJump = true;
+                }
+                else if (!movementManager.isGrounded && movementManager.coyoteJump && !movementManager.buffering)
+                {
+                    movementManager.jumpCounter--;
+                    Debug.Log("Coyote is working");
                     movementManager.AddCoyotoJumpForce();
+                    movementManager.coyoteJump = false;
                 }
             }
             else if (movementManager.jumpCounter <= 0)
             {
                 movementManager.buffering = true;
-                movementManager.jumpCounter--;
                 this.Wait(movementManager.BufferTime, () => movementManager.buffering = false);
             }
         }
@@ -150,19 +157,21 @@ public class PlatformerTools : MonoBehaviour
         {
             if (movementManager.isGrounded)
             {
-                Debug.Log("I am here");
-                
                 movementManager.AddBufferJumpForce();
+                movementManager.buffering = false;
             }
         }
-
-
     }
 
     private void FixedUpdate()
     {
         movementManager.isGrounded = Physics2D.OverlapBox(movementManager.checkPos.position, movementManager.checkPosSize, 0, movementManager.layerMask);
         movementManager.OnJump();
+    }
+    private void OnDrawGizmos()
+    {
+        UnityEditor.Handles.color = Color.yellow;
+        Gizmos.DrawWireSphere(movementManager.checkPos.position, 0.3f);
     }
 
     #region Jump Cut

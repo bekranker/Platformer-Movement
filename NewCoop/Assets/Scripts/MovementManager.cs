@@ -92,8 +92,6 @@ public class MovementManager : MonoBehaviour
     #region Adding Coyoto Jump Force
     public void AddCoyotoJumpForce()
     {
-        Debug.Log("Coyote jump is did");
-
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
     }
@@ -102,7 +100,6 @@ public class MovementManager : MonoBehaviour
     #region Add Jump Buffer Force
     public void AddBufferJumpForce()
     {
-        Debug.Log("Buffer jump is did");
         rb.velocity = Vector2.zero;
         rb.velocity += Vector2.up * 100 * BufferAmount * Time.fixedDeltaTime;
     }
