@@ -160,6 +160,7 @@ MonoBehaviour:
   checkPosSize: {x: 0, y: 0}
   isGrounded: 1
   coyoteJump: 0
+  coyoteTimeCounter: 0
   isJumped: 0
   buffering: 0
   IsCanDash: 0

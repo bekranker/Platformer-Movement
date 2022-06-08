@@ -27,6 +27,7 @@ public class MovementManager : MonoBehaviour
     [HideInInspector] public Vector2 checkPosSize;
     [HideInInspector] public bool isGrounded = true;
     [HideInInspector] public bool coyoteJump;
+    [HideInInspector] public float coyoteTimeCounter;
     [HideInInspector] public bool isJumped;
     [HideInInspector] public bool buffering = false;
     [HideInInspector] public bool IsCanDash;
