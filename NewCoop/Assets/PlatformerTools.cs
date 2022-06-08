@@ -44,7 +44,7 @@ public class PlatformerTools : MonoBehaviour
                 {
                     direction = 2;
                 }
-                else if (movementBehaviour.Jump == 1)
+                else if (movementBehaviour.Jump == 1 || movementBehaviour.JumpDown == 1)
                 {
                     direction = 3;
                 }
@@ -92,7 +92,7 @@ public class PlatformerTools : MonoBehaviour
                         break;
                     case 3:
                         Debug.Log("Up Dashed");
-                        rb.velocity = Vector2.up * DashMultipler / 2 * DashSpeed * Time.fixedDeltaTime;
+                        rb.velocity = Vector2.up * DashMultipler  * DashSpeed * Time.fixedDeltaTime;
                         break;
                     case 4:
                         Debug.Log("Down Dashed");
@@ -142,6 +142,12 @@ public class PlatformerTools : MonoBehaviour
                 this.Wait(movementManager.BufferTime, () => movementManager.buffering = false);
             }
         }
+
+        if (movementBehaviour.Jump == 1)
+        {
+            //burasý sürekli çalýþýr bu yüzden burada deðerleri true ||false || calculeting yapýlmamasý gerekli.
+            movementManager.JumpCut();
+        }
         #endregion
     }
 
@@ -156,16 +162,7 @@ public class PlatformerTools : MonoBehaviour
         Gizmos.DrawWireSphere(movementManager.checkPos.position, 0.3f);
     }
 
-    #region Jump Cut
-    private void JumpCut()
-    {
-        rb.velocity += Vector2.up * movementManager.jumpCutMultiplier * movementManager.jumpAmount * Time.deltaTime;
-        if (movementManager.isGrounded)
-        {
-            movementManager.jumpTimeCounter = movementManager.jumpCounter;
-        }
-    }
-    #endregion
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

@@ -153,7 +153,7 @@ MonoBehaviour:
   CoyotoTime: 0.47
   BufferTime: 0.35
   BufferAmount: 6
-  jumpCutMultiplier: 47
+  jumpCutMultiplier: 0.48
   jumpTime: 0.14
   DashDistance: 53
   ClampGravityMin: 1

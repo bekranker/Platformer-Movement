@@ -14,12 +14,11 @@ public class MovementManager : MonoBehaviour
     [Range(1f, 10f)] public float fallingGravityScale;
     [Range(1f, 10f)] public float gravityScale;
     [Range(1f, 100f)] public float jumpAmount;
-    [Range(1f, 100f)] public float coyotoJumpAmount;
     [Range(1f, 100f)] public float doubleJumpAmount;
     [Range(0.005f, 1f)] public float CoyotoTime;
     [Range(0.005f, 1f)] public float BufferTime;
     [Range(0.005f, 100f)] public float BufferAmount;
-    [Range(1f, 100f)] public float jumpCutMultiplier;
+    [Range(0.005f, 1f)] public float jumpCutMultiplier;
     [Range(0.005f, 1f)] public float jumpTime;
     [Range(0.005f, 100f)] public float DashDistance;
     [Range(0.005f, 100f)] public float ClampGravityMin;
@@ -88,22 +87,6 @@ public class MovementManager : MonoBehaviour
     }
     #endregion
 
-    #region Add DoubleJump
-    public void AddDoubleJump()
-    {
-        rb.velocity = Vector2.zero;
-        rb.velocity += Vector2.up * 100 * doubleJumpAmount * Time.fixedDeltaTime;
-    }
-    #endregion
-
-    #region Adding Coyoto Jump Force
-    public void AddCoyotoJumpForce()
-    {
-        rb.velocity = Vector2.zero;
-        rb.velocity += Vector2.up * 100 * coyotoJumpAmount * Time.fixedDeltaTime;
-    }
-    #endregion
-
     #region Add Jump Buffer Force
     public void AddBufferJumpForce()
     {
@@ -128,5 +111,22 @@ public class MovementManager : MonoBehaviour
             rb.gravityScale = gravityScale * fallingGravityScale;
         }
     }
-    #endregion
+    #endregion    
+    
+    #region Jump Cut
+    public void JumpCut()
+    {
+        if (isGrounded)
+        {
+            jumpTimeCounter = jumpCounter;
+        }
+        jumpCutMultiplier -= Time.deltaTime;
+        if (jumpCutMultiplier > 0)
+        {
+            rb.velocity += Vector2.up * jumpAmount / 1.1f * Time.deltaTime;
+        }
+        
+
+    }
+#endregion
 }
