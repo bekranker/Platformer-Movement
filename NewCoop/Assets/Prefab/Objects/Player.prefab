@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44346a86b9d01443b073a216b0ec3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DashSpeed: 3
+  DashSpeed: 35
   DashMultipler: 45
   DashTime: 0.2
   StartDashTime: 0.14
@@ -156,6 +156,8 @@ MonoBehaviour:
   jumpCutMultiplier: 47
   jumpTime: 0.14
   DashDistance: 53
+  ClampGravityMin: 1
+  ClampGravityMax: 2
   jumpTimeCounter: 0
   checkPosSize: {x: 0, y: 0}
   isGrounded: 1
@@ -165,7 +167,7 @@ MonoBehaviour:
   buffering: 0
   IsCanDash: 0
   isDashing: 0
-  dashCount: 1
+  dashCount: 0
   checkPos: {fileID: 7461186936902632192}
   layerMask:
     serializedVersion: 2

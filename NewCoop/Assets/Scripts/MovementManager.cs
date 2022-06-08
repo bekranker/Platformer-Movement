@@ -22,6 +22,8 @@ public class MovementManager : MonoBehaviour
     [Range(1f, 100f)] public float jumpCutMultiplier;
     [Range(0.005f, 1f)] public float jumpTime;
     [Range(0.005f, 100f)] public float DashDistance;
+    [Range(0.005f, 100f)] public float ClampGravityMin;
+    [Range(0.005f, 100f)] public float ClampGravityMax;
 
     [HideInInspector] public float jumpTimeCounter;
     [HideInInspector] public Vector2 checkPosSize;
@@ -32,8 +34,8 @@ public class MovementManager : MonoBehaviour
     [HideInInspector] public bool buffering = false;
     [HideInInspector] public bool IsCanDash;
     [HideInInspector] public bool isDashing;
-    [HideInInspector] public int dashCount;
 
+    public int dashCount;
     public Transform checkPos;
     public LayerMask layerMask;
     public int totalJump;
@@ -52,6 +54,10 @@ public class MovementManager : MonoBehaviour
         {
             Runing();
         }
+        #endregion
+
+        #region Physiccal Settigns
+        
         #endregion
     }
 

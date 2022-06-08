@@ -116,6 +116,7 @@ public class PlatformerTools : MonoBehaviour
         }
         #endregion
 
+        #region Jumping
         if (movementBehaviour.JumpDown == 1)
         {
             ///<summary>
@@ -141,6 +142,7 @@ public class PlatformerTools : MonoBehaviour
                 this.Wait(movementManager.BufferTime, () => movementManager.buffering = false);
             }
         }
+        #endregion
     }
 
     private void FixedUpdate()
@@ -167,8 +169,10 @@ public class PlatformerTools : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        #region if we are touched the ground
         if (collision.gameObject.tag == "Ground")
         {
+            movementManager.dashCount = 0;
             movementManager.jumpCounter = movementManager.totalJump;
             if (!movementManager.coyoteJump && movementManager.buffering)
             {
@@ -177,6 +181,7 @@ public class PlatformerTools : MonoBehaviour
                 movementManager.buffering = false;
             }
         }
+        #endregion
     }
 }
 
