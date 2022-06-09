@@ -116,17 +116,7 @@ public class MovementManager : MonoBehaviour
     #region Jump Cut
     public void JumpCut()
     {
-        if (isGrounded)
-        {
-            jumpTimeCounter = jumpCounter;
-        }
-        jumpCutMultiplier -= Time.deltaTime;
-        if (jumpCutMultiplier > 0)
-        {
-            rb.velocity += Vector2.up * jumpAmount / 1.1f * Time.deltaTime;
-        }
-        
-
+        rb.velocity += Vector2.up * jumpAmount / jumpCutMultiplier * Time.deltaTime;
     }
 #endregion
 }
