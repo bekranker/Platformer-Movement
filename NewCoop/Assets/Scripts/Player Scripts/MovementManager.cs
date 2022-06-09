@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementManager : MonoBehaviour
+public class MovementManager : Librariy
 {
     [Header("-----Move Options-----")]
     [Range(1f,100f)] public float MainSpeed;
@@ -43,7 +43,7 @@ public class MovementManager : MonoBehaviour
     [Header("----Componenets-----")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D boxC2D;
-    [SerializeField] private MovementBehaviour movementBehaviour;
+    [SerializeField] private MovementBehaviour Input;
 
 
     void FixedUpdate()
@@ -54,16 +54,12 @@ public class MovementManager : MonoBehaviour
             Runing();
         }
         #endregion
-
-        #region Physiccal Settigns
-        
-        #endregion
     }
 
     private void Runing()
     {
         //Direction
-        float moveInput = movementBehaviour.x;
+        float moveInput = Input.x;
         //Calculating direction we want to move in and our desired velocity
         float targetSpeed = moveInput * MainSpeed;
         //Calculeting difference between current velocity and desired velocity
@@ -83,7 +79,7 @@ public class MovementManager : MonoBehaviour
     public void AddJumpForce()
     {
         rb.velocity = Vector2.zero;
-        rb.velocity += Vector2.up * 100 * jumpAmount * Time.fixedDeltaTime;
+        _AddVelocity(rb, jumpAmount);
     }
     #endregion
 
@@ -91,7 +87,7 @@ public class MovementManager : MonoBehaviour
     public void AddBufferJumpForce()
     {
         rb.velocity = Vector2.zero;
-        rb.velocity += Vector2.up * 100 * BufferAmount * Time.fixedDeltaTime;
+        _AddVelocity(rb, BufferAmount);
     }
     #endregion
 
@@ -118,5 +114,6 @@ public class MovementManager : MonoBehaviour
     {
         rb.velocity += Vector2.up * jumpAmount / jumpCutMultiplier * Time.deltaTime;
     }
-#endregion
+
+    #endregion
 }

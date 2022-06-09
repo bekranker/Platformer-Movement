@@ -12,7 +12,7 @@ public class PlatformerTools : MonoBehaviour
     
 
     [Header("-----Managers-----")]
-    [SerializeField] MovementBehaviour movementBehaviour;
+    [SerializeField] MovementBehaviour Inputs;
     [SerializeField] MovementManager movementManager;
 
     [Header("-----Others-----")]
@@ -33,22 +33,22 @@ public class PlatformerTools : MonoBehaviour
         #region Direction
         if (direction == 0)
         {
-            if (movementBehaviour.CancelDown == 1 && movementManager.dashCount < 1)
+            if (Inputs.CancelDown == 1 && movementManager.dashCount < 1)
             {
                 rb.velocity = Vector2.zero;
-                if (movementBehaviour.x == -1)
+                if (Inputs.x == -1)
                 {
                     direction = 1;
                 }
-                else if (movementBehaviour.x == 1)
+                else if (Inputs.x == 1)
                 {
                     direction = 2;
                 }
-                else if (movementBehaviour.Jump == 1 || movementBehaviour.JumpDown == 1)
+                else if (Inputs.Jump == 1 || Inputs.JumpDown == 1)
                 {
                     direction = 3;
                 }
-                else if (movementBehaviour.y == -1)
+                else if (Inputs.y == -1)
                 {
                     direction = 4;
                 }
@@ -110,14 +110,11 @@ public class PlatformerTools : MonoBehaviour
         #region calculatings
         movementManager.coyoteTimeCounter = (movementManager.coyoteJump) ? movementManager.coyoteTimeCounter - Time.deltaTime : movementManager.coyoteTimeCounter = 0.15f;
         movementManager.jumpTimeCounter = (movementManager.isGrounded) ? movementManager.jumpTime : movementManager.jumpTimeCounter;
-        if (!movementManager.isGrounded)
-        {
-            this.Wait(movementManager.CoyotoTime, () => movementManager.coyoteJump = false);
-        }
+        if (!movementManager.isGrounded) this.Wait(movementManager.CoyotoTime, () => movementManager.coyoteJump = false);
         #endregion
 
         #region Jumping
-        if (movementBehaviour.JumpDown == 1)
+        if (Inputs.JumpDown == 1)
         {
             ///<summary>
             ///
@@ -143,9 +140,9 @@ public class PlatformerTools : MonoBehaviour
             }
         }
 
-        if (movementBehaviour.Jump == 1)
+        if (Inputs.Jump == 1)
         {
-            //burasý sürekli çalýþýr bu yüzden burada deðerleri true ||false || calculeting yapýlmamasý gerekli.
+            //burasý sürekli çalýþýr bu yüzden burada deðerleri true ||false || calculate yapýlmamasý gerekli.
             movementManager.JumpCut();
         }
         #endregion

@@ -128,7 +128,7 @@ MonoBehaviour:
   DashMultipler: 45
   DashTime: 0.2
   StartDashTime: 0.14
-  movementBehaviour: {fileID: 1174689607428651666}
+  Inputs: {fileID: 1174689607428651666}
   movementManager: {fileID: 5999124978200234611}
   rb: {fileID: 8505177524007123630}
 --- !u!114 &5999124978200234611
@@ -177,7 +177,7 @@ MonoBehaviour:
   jumpCounter: 2
   rb: {fileID: 8505177524007123630}
   boxC2D: {fileID: 7235418268055531539}
-  movementBehaviour: {fileID: 1174689607428651666}
+  Input: {fileID: 1174689607428651666}
 --- !u!114 &3185881680145486794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +209,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d58ecca0a521940b0e5b42e99ff56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Input: {fileID: 1174689607428651666}
+  movementManager: {fileID: 5999124978200234611}
 --- !u!1 &3436853962059038923
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,10 @@ namespace UnityEngine
             Task.Delay(second);
             action();
         }
+        public virtual void _AddVelocity(Rigidbody2D rb, float value)
+        {
+            rb.velocity += Vector2.up * 100 * value * Time.fixedDeltaTime;
+        }
     }
     
 }
