@@ -31,13 +31,16 @@ public class ParticleManager : MonoBehaviour
         {
             a = Instantiate(jumpParticle, groundCheckPos.position, Quaternion.identity);
         }
-        if (!movementManager.isGrounded && movementBehaviour.JumpDown == 1 && movementManager.jumpCounter > 0)
+        
+        if (movementBehaviour.JumpDown == 1)
         {
-            Instantiate(_doubleParticule, groundCheckPos.position, Quaternion.identity);
+            if (player.GetComponent<Rigidbody2D>().velocity.y != 0 && !movementManager.isGrounded)
+            {
+                doubleJumpParticleObject = Instantiate(_doubleParticule, groundCheckPos.position, Quaternion.identity);
+            }
         }
         JumpParticle();
         walkParticle();
-
     }
 
     void JumpParticle()
@@ -60,8 +63,30 @@ public class ParticleManager : MonoBehaviour
             forceOverLifetime.xMultiplier -= Time.deltaTime;
             forceOverLifetime.yMultiplier -= Time.deltaTime;
         }
-
     }
+
+    void DoubleJumpParticle()
+    {
+        if (doubleJumpParticleObject == null) return;
+
+        ParticleSystem ps = doubleJumpParticleObject.GetComponent<ParticleSystem>();
+
+        var forceOverLifetime = ps.forceOverLifetime;
+        forceOverLifetime.enabled = true;
+
+        float distance = Vector2.Distance(a.transform.position, player.transform.position);
+        if (distance < 3)
+        {
+            forceOverLifetime.xMultiplier = movementBehaviour.x * velocityAmount;
+            forceOverLifetime.yMultiplier = movementBehaviour.y * velocityAmount;
+        }
+        else
+        {
+            forceOverLifetime.xMultiplier -= Time.deltaTime;
+            forceOverLifetime.yMultiplier -= Time.deltaTime;
+        }
+    }
+
     void walkParticle()
     {
         ParticleSystem ps = _walkParticule.GetComponent<ParticleSystem>();
