@@ -33,13 +33,12 @@ public class MovementManager : Librariy
     [HideInInspector] public bool buffering = false;
     [HideInInspector] public bool IsCanDash;
     [HideInInspector] public bool isDashing;
-    [HideInInspector] public int dashCount = 0;
-    [HideInInspector] public int jumpCounter;
 
+    public int dashCount;
     public Transform checkPos;
     public LayerMask layerMask;
     public int totalJump;
-
+    public int jumpCounter;
 
     [Header("----Componenets-----")]
     [SerializeField] private Rigidbody2D rb;

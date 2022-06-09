@@ -9,7 +9,7 @@ namespace UnityEngine
         {
             if (second <= 0) return;
             Task.Delay(second);
-            action.Invoke();
+            action();
         }
         public virtual void _AddVelocity(Rigidbody2D rb, float value)
         {
