@@ -92,7 +92,7 @@ public class PlatformerTools : MonoBehaviour
                         break;
                     case 3:
                         Debug.Log("Up Dashed");
-                        rb.velocity = Vector2.up * DashMultipler  * DashSpeed * Time.fixedDeltaTime;
+                        rb.velocity = Vector2.up * DashMultipler / 1.5f  * DashSpeed * Time.fixedDeltaTime;
                         break;
                     case 4:
                         Debug.Log("Down Dashed");
@@ -156,29 +156,34 @@ public class PlatformerTools : MonoBehaviour
         movementManager.isGrounded = Physics2D.OverlapBox(movementManager.checkPos.position, movementManager.checkPosSize, 0, movementManager.layerMask);
         movementManager.OnJump();
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        #region Jump Buffer
+        #region if we are touched the ground
+        if (collision.gameObject.tag == "Ground")
+        {
+            Vector2 direction = collision.GetContact(0).normal;
+            if (direction.y == 1)
+            {
+                movementManager.dashCount = 0;
+                movementManager.jumpCounter = movementManager.totalJump;
+                if (!movementManager.coyoteJump && movementManager.buffering)
+                {
+                    movementManager.jumpCounter--;
+                    movementManager.AddBufferJumpForce();
+                    movementManager.buffering = false;
+                }
+            }
+            
+        }
+        #endregion
+        #endregion
+    }
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.color = Color.yellow;
         Gizmos.DrawWireSphere(movementManager.checkPos.position, 0.3f);
-    }
-
-
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        #region if we are touched the ground
-        if (collision.gameObject.tag == "Ground")
-        {
-            movementManager.dashCount = 0;
-            movementManager.jumpCounter = movementManager.totalJump;
-            if (!movementManager.coyoteJump && movementManager.buffering)
-            {
-                movementManager.jumpCounter--;
-                movementManager.AddBufferJumpForce();
-                movementManager.buffering = false;
-            }
-        }
-        #endregion
     }
 }
 

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7235418268055531539}
   - component: {fileID: 5696987263579804961}
   - component: {fileID: 5999124978200234611}
+  - component: {fileID: 3185881680145486794}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -142,13 +143,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainSpeed: 13
-  acceleration: 50
-  decceleration: 10
+  acceleration: 14
+  decceleration: 28.1
   velPower: 0.96
   fallingGravityScale: 2
   gravityScale: 1.5
   jumpAmount: 9
-  coyotoJumpAmount: 9.5
   doubleJumpAmount: 7
   CoyotoTime: 0.47
   BufferTime: 0.35
@@ -177,6 +177,25 @@ MonoBehaviour:
   rb: {fileID: 8505177524007123630}
   boxC2D: {fileID: 7235418268055531539}
   movementBehaviour: {fileID: 1174689607428651666}
+--- !u!114 &3185881680145486794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f628d12fa8b00614cae9add7e3dcfece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpParticle: {fileID: 8227339459606187491, guid: bb4b5864cc101dc47864f04603d8f641, type: 3}
+  _walkParticule: {fileID: 8789413196721812345}
+  _doubleParticule: {fileID: 5317139398204422639, guid: 424d6a2d0a17c7d4092f43d055c3f442, type: 3}
+  velocityAmount: 56
+  movementBehaviour: {fileID: 1174689607428651666}
+  movementManager: {fileID: 5999124978200234611}
+  groundCheckPos: {fileID: 7461186936902632192}
 --- !u!1 &3436853962059038923
 GameObject:
   m_ObjectHideFlags: 0
