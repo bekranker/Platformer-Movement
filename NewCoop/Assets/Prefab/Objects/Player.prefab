@@ -9,12 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1174689607428651678}
-  - component: {fileID: 1174689607428651666}
   - component: {fileID: 8505177524007123630}
   - component: {fileID: 7235418268055531539}
+  - component: {fileID: 1174689607428651666}
   - component: {fileID: 5696987263579804961}
   - component: {fileID: 5999124978200234611}
   - component: {fileID: 3185881680145486794}
+  - component: {fileID: -1997890853334288288}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -39,31 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1174689607428651666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174689607428651667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db4979638c927e4fa6f6c8e941f34fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerName: 
-  control: 0
-  x: 0
-  y: 0
-  RR: 0
-  RL: 0
-  JumpDown: 0
-  Jump: 0
-  Attack: 0
-  AttackDown: 0
-  Settings: 0
-  Cancel: 0
-  CancelDown: 0
 --- !u!50 &8505177524007123630
 Rigidbody2D:
   serializedVersion: 4
@@ -111,6 +87,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1174689607428651666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4db4979638c927e4fa6f6c8e941f34fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerName: 
+  control: 0
+  x: 0
+  y: 0
+  RR: 0
+  RL: 0
+  JumpDown: 0
+  Jump: 0
+  Attack: 0
+  AttackDown: 0
+  Settings: 0
+  Cancel: 0
+  CancelDown: 0
 --- !u!114 &5696987263579804961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +197,18 @@ MonoBehaviour:
   movementBehaviour: {fileID: 1174689607428651666}
   movementManager: {fileID: 5999124978200234611}
   groundCheckPos: {fileID: 7461186936902632192}
+--- !u!114 &-1997890853334288288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d58ecca0a521940b0e5b42e99ff56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3436853962059038923
 GameObject:
   m_ObjectHideFlags: 0
