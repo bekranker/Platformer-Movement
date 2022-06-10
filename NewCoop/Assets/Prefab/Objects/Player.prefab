@@ -134,7 +134,7 @@ MonoBehaviour:
   rayPointRight: {fileID: 6481808576846847748}
   TopRayDistance: {x: 0.12, y: 0, z: 0}
   RayDistance: {x: 0.02, y: 0, z: 0}
-  DistanceOfRays: 47
+  DistanceOfRays: 4
   JumpSupportAmount: 0.03
   DashSpeed: 35
   DashMultipler: 45
