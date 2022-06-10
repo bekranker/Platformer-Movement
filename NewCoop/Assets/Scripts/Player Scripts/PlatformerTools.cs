@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class PlatformerTools : MonoBehaviour
 {
+
+    [Header("-----Jump Support to Corner-----")]
+    [SerializeField] Transform rayPointTopLeft;
+    [SerializeField] Transform rayPointTopRight;
+    [SerializeField] Transform rayPointLeft;
+    [SerializeField] Transform rayPointRight;
+    [SerializeField] Vector3 TopRayDistance;
+    [SerializeField] Vector3 RayDistance;
+    [Range(0f, 100f)][SerializeField] float DistanceOfRays;
+    [Range(0.005f, 100f)][SerializeField] float JumpSupportAmount;
+
+
     [Header("-----Dash-----")]
-    [Range(1,100)][SerializeField] float DashSpeed;
-    [Range(1, 500)] [SerializeField] float DashMultipler;
+    [Range(1f,100f)][SerializeField] float DashSpeed;
+    [Range(1f, 500f)] [SerializeField] float DashMultipler;
     [Range(0.005f, 1f)] [SerializeField] float DashTime;
     [Range(0.005f, 1f)] [SerializeField] float StartDashTime;
     
@@ -21,6 +33,14 @@ public class PlatformerTools : MonoBehaviour
     private int direction;
     private float _gravity;
 
+    private Vector3 TopRightRay;
+    private Vector3 TopLeftRay;
+    private Vector3 RightRay;
+    private Vector3 LeftRay;
+
+
+    public bool right, left, Tops;
+
     private void Start()
     {
         DashTime = StartDashTime;
@@ -29,6 +49,17 @@ public class PlatformerTools : MonoBehaviour
 
     private void Update()
     {
+
+        #region Corner Jump Support
+        TopRightRay = rayPointTopRight.position + TopRayDistance;
+        TopLeftRay = rayPointTopLeft.position - TopRayDistance;
+        RightRay = rayPointRight.position + RayDistance;
+        LeftRay = rayPointLeft.position - RayDistance;
+
+        Ray();
+
+        #endregion
+
         #region DASH
         #region Direction
         if (direction == 0)
@@ -152,6 +183,7 @@ public class PlatformerTools : MonoBehaviour
     {
         movementManager.isGrounded = Physics2D.OverlapBox(movementManager.checkPos.position, movementManager.checkPosSize, 0, movementManager.layerMask);
         movementManager.OnJump();
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -177,10 +209,48 @@ public class PlatformerTools : MonoBehaviour
         #endregion
         #endregion
     }
+
+    private void Ray()
+    {
+        //Sadece bu ikisinden birisi deðiyorsa Corner support çalýþýcak
+        RaycastHit2D TopLeft = Physics2D.Raycast(TopLeftRay, Vector2.up * DistanceOfRays);
+        RaycastHit2D TopRight = Physics2D.Raycast(TopRightRay, Vector2.up * DistanceOfRays);
+        
+        //Yukarýdakiler deðerken bunlardan ehrhangi biri deðiyorsa corner support çalýþmayacak.
+        RaycastHit2D Left = Physics2D.Raycast(LeftRay, Vector2.up * DistanceOfRays);
+        RaycastHit2D Right = Physics2D.Raycast(RightRay, Vector2.up * DistanceOfRays);
+
+        if (TopLeft.collider == null && TopRight.collider == null) return;
+        else
+        {
+            if (TopRight.collider.tag == "Ground" && Right.collider.tag != "Ground")
+            {
+                right = true;
+                left = false;
+                transform.position += Vector3.left * 10 * JumpSupportAmount;
+            }
+            if (TopLeft.collider.tag == "Ground" && Left.collider.tag != "Ground")
+            {
+                Debug.Log("en sol deðdi");
+                left = true;
+                right = false;
+                transform.position += Vector3.right * 10 * JumpSupportAmount;
+            }
+        }
+        
+        
+    }
+
+
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.color = Color.yellow;
         Gizmos.DrawWireSphere(movementManager.checkPos.position, 0.3f);
+
+        Debug.DrawRay(TopLeftRay, Vector2.up * DistanceOfRays, Color.yellow);
+        Debug.DrawRay(TopRightRay, Vector2.up * DistanceOfRays, Color.yellow);
+        Debug.DrawRay(RightRay, Vector2.up * DistanceOfRays, Color.green);
+        Debug.DrawRay(LeftRay, Vector2.up * DistanceOfRays, Color.green);
     }
 }
 
