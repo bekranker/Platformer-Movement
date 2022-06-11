@@ -245,12 +245,12 @@ public class PlatformerTools : MonoBehaviour
             if (TopRight.collider.tag == "Ground" && Right.collider.tag != "Ground")
             {
 
-                transform.position += Vector3.left * 10 * JumpSupportAmount;
+                transform.position += Vector3.left * 10 * JumpSupportAmount * Time.deltaTime;
             }
             if (TopLeft.collider.tag == "Ground" && Left.collider.tag != "Ground")
             {
                 Debug.Log("en sol deðdi");
-                transform.position += Vector3.right * 10 * JumpSupportAmount;
+                transform.position += Vector3.right * 10 * JumpSupportAmount * Time.deltaTime;
             }
         }
     }
