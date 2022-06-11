@@ -39,7 +39,8 @@ public class PlatformerTools : MonoBehaviour
     private Vector3 LeftRay;
 
 
-    public bool right, left, Tops;
+    private bool leftContact;
+    private bool RightContact;
 
     private void Start()
     {
@@ -56,7 +57,7 @@ public class PlatformerTools : MonoBehaviour
         RightRay = rayPointRight.position + RayDistance;
         LeftRay = rayPointLeft.position - RayDistance;
 
-        Ray();
+        JumpSupport();
 
         #endregion
 
@@ -204,18 +205,30 @@ public class PlatformerTools : MonoBehaviour
                     movementManager.buffering = false;
                 }
             }
-            
+            if (direction.x == 1 || direction.x == -1)
+            {
+                transform.position += Vector3.up * 10 * JumpSupportAmount;
+            }
         }
         #endregion
         #endregion
     }
 
-    private void Ray()
+    #region Jump Support System
+    private void JumpSupport()
+    {
+        if (Inputs.Jump == 1 || Inputs.JumpDown == 1)
+        {
+            OnJumpingSupportRay();
+        }
+
+    }
+    private void OnJumpingSupportRay()
     {
         //Sadece bu ikisinden birisi deðiyorsa Corner support çalýþýcak
         RaycastHit2D TopLeft = Physics2D.Raycast(TopLeftRay, Vector2.up * DistanceOfRays);
         RaycastHit2D TopRight = Physics2D.Raycast(TopRightRay, Vector2.up * DistanceOfRays);
-        
+
         //Yukarýdakiler deðerken bunlardan ehrhangi biri deðiyorsa corner support çalýþmayacak.
         RaycastHit2D Left = Physics2D.Raycast(LeftRay, Vector2.up * DistanceOfRays);
         RaycastHit2D Right = Physics2D.Raycast(RightRay, Vector2.up * DistanceOfRays);
@@ -225,22 +238,17 @@ public class PlatformerTools : MonoBehaviour
         {
             if (TopRight.collider.tag == "Ground" && Right.collider.tag != "Ground")
             {
-                right = true;
-                left = false;
+
                 transform.position += Vector3.left * 10 * JumpSupportAmount;
             }
             if (TopLeft.collider.tag == "Ground" && Left.collider.tag != "Ground")
             {
                 Debug.Log("en sol deðdi");
-                left = true;
-                right = false;
                 transform.position += Vector3.right * 10 * JumpSupportAmount;
             }
         }
-        
-        
     }
-
+    #endregion
 
     private void OnDrawGizmos()
     {

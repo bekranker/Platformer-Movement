@@ -134,7 +134,7 @@ MonoBehaviour:
   rayPointRight: {fileID: 6481808576846847748}
   TopRayDistance: {x: 0.12, y: 0, z: 0}
   RayDistance: {x: 0.02, y: 0, z: 0}
-  DistanceOfRays: 4
+  DistanceOfRays: 1
   JumpSupportAmount: 0.03
   DashSpeed: 35
   DashMultipler: 45
@@ -143,9 +143,6 @@ MonoBehaviour:
   Inputs: {fileID: 1174689607428651666}
   movementManager: {fileID: 5999124978200234611}
   rb: {fileID: 8505177524007123630}
-  right: 0
-  left: 0
-  Tops: 0
 --- !u!114 &5999124978200234611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958de6995c7367b468f808d90fbc1312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxFallGravity: 20
+  minFallGravity: -20
   MainSpeed: 13
   acceleration: 14
   decceleration: 28.1

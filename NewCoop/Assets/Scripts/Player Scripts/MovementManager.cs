@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class MovementManager : Librariy
 {
+
+    [Header("-----Physical Settings-----")]
+    [Range(-50f, 50f)] [SerializeField] float maxFallGravity;
+    [Range(-50f, 50f)] [SerializeField] float minFallGravity;
+
+
     [Header("-----Move Options-----")]
     [Range(1f,100f)] public float MainSpeed;
     [Range(1f, 50f)] public float acceleration;
@@ -53,6 +59,10 @@ public class MovementManager : Librariy
         {
             Runing();
         }
+        #endregion
+
+        #region Physical Settings
+        rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, minFallGravity, maxFallGravity));
         #endregion
     }
 
