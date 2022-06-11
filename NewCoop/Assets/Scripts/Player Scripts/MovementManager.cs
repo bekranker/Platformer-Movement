@@ -8,6 +8,11 @@ public class MovementManager : Librariy
     [Header("-----Physical Settings-----")]
     [Range(-50f, 50f)] [SerializeField] float maxFallGravity;
     [Range(-50f, 50f)] [SerializeField] float minFallGravity;
+    [Range(1f, 100f)] public float AxeMainSpeed;
+    [Range(1f, 50f)] public float AxeAcceleration;
+    [Range(1f, 50f)] public float AxeDecceleration;
+    [Range(0.005f, 1f)] public float AxeVelPower;
+
 
 
     [Header("-----Move Options-----")]
@@ -50,6 +55,13 @@ public class MovementManager : Librariy
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D boxC2D;
     [SerializeField] private MovementBehaviour Input;
+    [SerializeField] private CombatManager combatManager;
+
+
+    private void Update()
+    {
+        CalculatingStatues();
+    }
 
 
     void FixedUpdate()
@@ -84,6 +96,17 @@ public class MovementManager : Librariy
         rb.AddForce(moveInput * Vector2.right);
     }
 
+    private void CalculatingStatues()
+    {
+        if (combatManager.HasAxe)
+        {
+            MainSpeed = AxeMainSpeed;
+            acceleration = AxeAcceleration;
+            decceleration = AxeDecceleration;
+            velPower = AxeVelPower;
+            totalJump = 1;
+        }
+    }
 
     #region Adding Normal Jump Force
     public void AddJumpForce()
