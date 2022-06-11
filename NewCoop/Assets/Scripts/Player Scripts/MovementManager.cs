@@ -60,7 +60,10 @@ public class MovementManager : Librariy
 
     private void Update()
     {
-        CalculatingStatues();
+        if (Input.JumpDown == 1)
+        {
+            CalculatingStatues();
+        }
     }
 
 
@@ -98,13 +101,25 @@ public class MovementManager : Librariy
 
     private void CalculatingStatues()
     {
+        float _MainSpeed = MainSpeed;
+        float _acceleration = acceleration;
+        float _decceleration = decceleration;
+        float _velPower = velPower;
         if (combatManager.HasAxe)
-        {
+        { 
             MainSpeed = AxeMainSpeed;
             acceleration = AxeAcceleration;
             decceleration = AxeDecceleration;
             velPower = AxeVelPower;
             totalJump = 1;
+        }
+        else if (!combatManager.HasAxe)
+        {
+            MainSpeed = _MainSpeed;
+            acceleration = _acceleration;
+            decceleration = _decceleration;
+            velPower = _velPower;
+            totalJump = 2;
         }
     }
 

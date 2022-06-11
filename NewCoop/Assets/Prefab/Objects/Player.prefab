@@ -135,7 +135,7 @@ MonoBehaviour:
   TopRayDistance: {x: 0.12, y: 0, z: 0}
   RayDistance: {x: 0.02, y: 0, z: 0}
   DistanceOfRays: 1
-  JumpSupportAmount: 0.03
+  JumpSupportAmount: 0.005
   DashSpeed: 35
   DashMultipler: 45
   DashTime: 0.2
@@ -157,6 +157,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxFallGravity: 20
   minFallGravity: -20
+  AxeMainSpeed: 1
+  AxeAcceleration: 45
+  AxeDecceleration: 10
+  AxeVelPower: 0.9
   MainSpeed: 13
   acceleration: 14
   decceleration: 28.1

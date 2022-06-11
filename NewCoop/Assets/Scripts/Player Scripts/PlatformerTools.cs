@@ -205,9 +205,13 @@ public class PlatformerTools : MonoBehaviour
                     movementManager.buffering = false;
                 }
             }
-            if (direction.x == 1 || direction.x == -1)
+            if (direction.x == 1)
             {
-                transform.position += Vector3.up * 10 * JumpSupportAmount;
+                transform.position += Vector3.up + Vector3.left * 1.1f * JumpSupportAmount * Time.fixedDeltaTime;
+            }
+            if (direction.x == -1)
+            {
+                transform.position += Vector3.up + Vector3.right * 1.1f * JumpSupportAmount * Time.fixedDeltaTime;
             }
         }
         #endregion
