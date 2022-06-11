@@ -10,8 +10,11 @@ public class PlatformerTools : MonoBehaviour
     [SerializeField] Transform rayPointTopRight;
     [SerializeField] Transform rayPointLeft;
     [SerializeField] Transform rayPointRight;
+    [SerializeField] Transform rayPointLeftFeed;
+    [SerializeField] Transform rayPointRightFeed;
     [SerializeField] Vector3 TopRayDistance;
     [SerializeField] Vector3 RayDistance;
+    [SerializeField] Vector3 FeedRayDistance;
     [Range(0f, 100f)][SerializeField] float DistanceOfRays;
     [Range(0.005f, 100f)][SerializeField] float JumpSupportAmount;
     [Range(0.005f, 1f)][SerializeField] float JumpSupportMultiplyAmount;
@@ -38,10 +41,9 @@ public class PlatformerTools : MonoBehaviour
     private Vector3 TopLeftRay;
     private Vector3 RightRay;
     private Vector3 LeftRay;
+    private Vector3 LeftFeedRay;
+    private Vector3 RightFeedRay;
 
-
-    private bool leftContact;
-    private bool RightContact;
 
     private void Start()
     {
@@ -57,6 +59,8 @@ public class PlatformerTools : MonoBehaviour
         TopLeftRay = rayPointTopLeft.position - TopRayDistance;
         RightRay = rayPointRight.position + RayDistance;
         LeftRay = rayPointLeft.position - RayDistance;
+        LeftFeedRay = rayPointLeftFeed.position - FeedRayDistance;
+        RightFeedRay = rayPointRightFeed.position + FeedRayDistance;
 
         JumpSupport();
 
@@ -149,6 +153,7 @@ public class PlatformerTools : MonoBehaviour
         #region Jumping
         if (Inputs.JumpDown == 1)
         {
+            movementManager.JumpCutTimeCounter = movementManager.JumpCutTimer;
             ///<summary>
             ///
             /// eðer bir kez zýplarsa aþþaðýdaki koþullarý sýrasýyla yerine getirecek. Basýlý tutma iþe yaramaz, bütün fonksiyonlar 
@@ -175,9 +180,15 @@ public class PlatformerTools : MonoBehaviour
 
         if (Inputs.Jump == 1)
         {
+            movementManager.jumpTimeCounter -= Time.deltaTime;
+
             //burasý sürekli çalýþýr bu yüzden burada deðerleri true ||false || calculate yapýlmamasý gerekli.
-            movementManager.JumpCut();
+            if (movementManager.jumpTimeCounter > 0 && !movementManager.isGrounded)
+            {
+                movementManager.JumpCut();
+            }
         }
+
         #endregion
     }
 
@@ -185,8 +196,8 @@ public class PlatformerTools : MonoBehaviour
     {
         movementManager.isGrounded = Physics2D.OverlapBox(movementManager.checkPos.position, movementManager.checkPosSize, 0, movementManager.layerMask);
         movementManager.OnJump();
-        
     }
+
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -206,15 +217,17 @@ public class PlatformerTools : MonoBehaviour
                     movementManager.buffering = false;
                 }
             }
-            if (direction.x == 1)
-            {
-                transform.position += Vector3.up + Vector3.right * JumpSupportMultiplyAmount * JumpSupportAmount * Time.fixedDeltaTime;
-            }
-            if (direction.x == -1)
-            {
-                transform.position += Vector3.up + Vector3.left * JumpSupportMultiplyAmount * JumpSupportAmount * Time.fixedDeltaTime;
-            }
-
+            //if (Inputs.Jump == 1)
+            //{
+            //    if (direction.x == 1)
+            //    {
+            //        transform.position += Vector3.up + Vector3.right * JumpSupportMultiplyAmount * JumpSupportAmount * Time.fixedDeltaTime;
+            //    }
+            //    if (direction.x == -1)
+            //    {
+            //        transform.position += Vector3.up + Vector3.left * JumpSupportMultiplyAmount * JumpSupportAmount * Time.fixedDeltaTime;
+            //    }
+            //}
         }
         #endregion
         #endregion
@@ -227,8 +240,17 @@ public class PlatformerTools : MonoBehaviour
         {
             OnJumpingSupportRay();
         }
-
     }
+
+
+    private void AfterJumpSupportSystem()
+    {
+        //Eðer Bu ikisinden biris deðiyorsa Support çalýþacak
+        RaycastHit2D LeftFeed = Physics2D.Raycast(LeftFeedRay, Vector2.left * DistanceOfRays);
+        RaycastHit2D RightFeed = Physics2D.Raycast(RightFeedRay, Vector2.right * DistanceOfRays);
+    }
+
+
     private void OnJumpingSupportRay()
     {
         //Sadece bu ikisinden birisi deðiyorsa Corner support çalýþýcak
@@ -244,12 +266,10 @@ public class PlatformerTools : MonoBehaviour
         {
             if (TopRight.collider.tag == "Ground" && Right.collider.tag != "Ground")
             {
-
                 transform.position += Vector3.left * 10 * JumpSupportAmount * Time.deltaTime;
             }
             if (TopLeft.collider.tag == "Ground" && Left.collider.tag != "Ground")
             {
-                Debug.Log("en sol deðdi");
                 transform.position += Vector3.right * 10 * JumpSupportAmount * Time.deltaTime;
             }
         }
@@ -265,6 +285,8 @@ public class PlatformerTools : MonoBehaviour
         Debug.DrawRay(TopRightRay, Vector2.up * DistanceOfRays, Color.yellow);
         Debug.DrawRay(RightRay, Vector2.up * DistanceOfRays, Color.green);
         Debug.DrawRay(LeftRay, Vector2.up * DistanceOfRays, Color.green);
+        Debug.DrawRay(LeftFeedRay, Vector2.left * DistanceOfRays, Color.blue);
+        Debug.DrawRay(RightFeedRay, Vector2.right * DistanceOfRays, Color.blue);
     }
 }
 

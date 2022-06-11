@@ -13,8 +13,6 @@ public class MovementManager : Librariy
     [Range(1f, 50f)] public float AxeDecceleration;
     [Range(0.005f, 1f)] public float AxeVelPower;
 
-
-
     [Header("-----Move Options-----")]
     [Range(1f,100f)] public float MainSpeed;
     [Range(1f, 50f)] public float acceleration;
@@ -25,6 +23,7 @@ public class MovementManager : Librariy
     [Range(1f, 10f)] public float fallingGravityScale;
     [Range(1f, 10f)] public float gravityScale;
     [Range(1f, 100f)] public float jumpAmount;
+    [Range(1f, 100f)] public float jumpCutAmount;
     [Range(1f, 100f)] public float doubleJumpAmount;
     [Range(0.005f, 1f)] public float CoyotoTime;
     [Range(0.005f, 1f)] public float BufferTime;
@@ -44,7 +43,9 @@ public class MovementManager : Librariy
     [HideInInspector] public bool buffering = false;
     [HideInInspector] public bool IsCanDash;
     [HideInInspector] public bool isDashing;
+    [HideInInspector] public float JumpCutTimeCounter;
 
+    public float JumpCutTimer;
     public int dashCount;
     public Transform checkPos;
     public LayerMask layerMask;
@@ -56,7 +57,11 @@ public class MovementManager : Librariy
     [SerializeField] private BoxCollider2D boxC2D;
     [SerializeField] private MovementBehaviour Input;
     [SerializeField] private CombatManager combatManager;
+    private void Start()
+    {
+        JumpCutTimeCounter = JumpCutTimer;
 
+    }
 
     private void Update()
     {
@@ -160,8 +165,7 @@ public class MovementManager : Librariy
     #region Jump Cut
     public void JumpCut()
     {
-        rb.velocity += Vector2.up * jumpAmount / jumpCutMultiplier * Time.deltaTime;
+        rb.velocity += Vector2.up * jumpCutAmount * Time.fixedDeltaTime;
     }
-
     #endregion
 }

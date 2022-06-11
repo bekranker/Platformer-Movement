@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &272952205366610609
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2810944542247605970}
+  m_Layer: 6
+  m_Name: LeftFeeds
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2810944542247605970
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272952205366610609}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.418, y: -0.189, z: 0}
+  m_LocalScale: {x: 0.2409, y: 0.0497, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1174689607428651678}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174689607428651667
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,6 +71,8 @@ Transform:
   - {fileID: 5174218090465143767}
   - {fileID: 1977880876350232507}
   - {fileID: 6481808576846847748}
+  - {fileID: 2810944542247605970}
+  - {fileID: 7207987638265940863}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -132,10 +164,13 @@ MonoBehaviour:
   rayPointTopRight: {fileID: 5174218090465143767}
   rayPointLeft: {fileID: 1977880876350232507}
   rayPointRight: {fileID: 6481808576846847748}
+  rayPointLeftFeed: {fileID: 2810944542247605970}
+  rayPointRightFeed: {fileID: 7207987638265940863}
   TopRayDistance: {x: 0.12, y: 0, z: 0}
   RayDistance: {x: 0.02, y: 0, z: 0}
+  FeedRayDistance: {x: 0, y: 0, z: 0}
   DistanceOfRays: 1
-  JumpSupportAmount: 12
+  JumpSupportAmount: 3
   JumpSupportMultiplyAmount: 1
   DashSpeed: 35
   DashMultipler: 45
@@ -167,13 +202,14 @@ MonoBehaviour:
   decceleration: 28.1
   velPower: 0.96
   fallingGravityScale: 2
-  gravityScale: 1.5
-  jumpAmount: 9
+  gravityScale: 1.8
+  jumpAmount: 6.5
+  jumpCutAmount: 12.5
   doubleJumpAmount: 7
   CoyotoTime: 0.47
   BufferTime: 0.35
   BufferAmount: 6
-  jumpCutMultiplier: 1
+  jumpCutMultiplier: 0.35
   jumpTime: 0.14
   DashDistance: 53
   ClampGravityMin: 1
@@ -187,6 +223,8 @@ MonoBehaviour:
   buffering: 0
   IsCanDash: 0
   isDashing: 0
+  JumpCutTimeCounter: 0
+  JumpCutTimer: 0.18
   dashCount: 0
   checkPos: {fileID: 7461186936902632192}
   layerMask:
@@ -261,6 +299,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1174689607428651678}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3128889716720430015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7207987638265940863}
+  m_Layer: 6
+  m_Name: RightFeeds
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7207987638265940863
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3128889716720430015}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.419, y: -0.189, z: 0}
+  m_LocalScale: {x: 0.2409, y: 0.0497, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1174689607428651678}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3436853962059038923
 GameObject:
@@ -550,7 +618,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 4387145668700840436}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: f7835f488b0b8ce4195f7996a40d63ff, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
