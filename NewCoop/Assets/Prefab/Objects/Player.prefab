@@ -135,7 +135,8 @@ MonoBehaviour:
   TopRayDistance: {x: 0.12, y: 0, z: 0}
   RayDistance: {x: 0.02, y: 0, z: 0}
   DistanceOfRays: 1
-  JumpSupportAmount: 0.005
+  JumpSupportAmount: 12
+  JumpSupportMultiplyAmount: 1
   DashSpeed: 35
   DashMultipler: 45
   DashTime: 0.2
@@ -466,7 +467,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285888588723379317}
   - component: {fileID: 7598881639893597004}
-  - component: {fileID: 4230657165692822625}
+  - component: {fileID: 4450109142655411944}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Head
@@ -528,7 +529,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -539,8 +540,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &4230657165692822625
-CircleCollider2D:
+--- !u!61 &4450109142655411944
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -548,13 +549,23 @@ CircleCollider2D:
   m_GameObject: {fileID: 4387145668700840436}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: f7835f488b0b8ce4195f7996a40d63ff, type: 2}
-  m_IsTrigger: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.50000006
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &6962630132055241278
 GameObject:
   m_ObjectHideFlags: 0

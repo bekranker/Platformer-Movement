@@ -14,6 +14,7 @@ public class PlatformerTools : MonoBehaviour
     [SerializeField] Vector3 RayDistance;
     [Range(0f, 100f)][SerializeField] float DistanceOfRays;
     [Range(0.005f, 100f)][SerializeField] float JumpSupportAmount;
+    [Range(0.005f, 1f)][SerializeField] float JumpSupportMultiplyAmount;
 
 
     [Header("-----Dash-----")]
@@ -207,12 +208,13 @@ public class PlatformerTools : MonoBehaviour
             }
             if (direction.x == 1)
             {
-                transform.position += Vector3.up + Vector3.left * 1.1f * JumpSupportAmount * Time.fixedDeltaTime;
+                transform.position += Vector3.up + Vector3.right * JumpSupportMultiplyAmount * JumpSupportAmount * Time.fixedDeltaTime;
             }
             if (direction.x == -1)
             {
-                transform.position += Vector3.up + Vector3.right * 1.1f * JumpSupportAmount * Time.fixedDeltaTime;
+                transform.position += Vector3.up + Vector3.left * JumpSupportMultiplyAmount * JumpSupportAmount * Time.fixedDeltaTime;
             }
+
         }
         #endregion
         #endregion
