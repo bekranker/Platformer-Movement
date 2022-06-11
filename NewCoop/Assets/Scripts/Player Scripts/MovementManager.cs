@@ -23,7 +23,6 @@ public class MovementManager : Librariy
     [Range(1f, 10f)] public float fallingGravityScale;
     [Range(1f, 10f)] public float gravityScale;
     [Range(1f, 100f)] public float jumpAmount;
-    [Range(1f, 100f)] public float jumpCutAmount;
     [Range(1f, 100f)] public float doubleJumpAmount;
     [Range(0.005f, 1f)] public float CoyotoTime;
     [Range(0.005f, 1f)] public float BufferTime;
@@ -45,7 +44,7 @@ public class MovementManager : Librariy
     [HideInInspector] public bool isDashing;
     [HideInInspector] public float JumpCutTimeCounter;
 
-    public float JumpCutTimer;
+    [Range(1f, 10f)]  public float JumpCutTimer;
     public int dashCount;
     public Transform checkPos;
     public LayerMask layerMask;
@@ -82,7 +81,11 @@ public class MovementManager : Librariy
         #endregion
 
         #region Physical Settings
-        rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, minFallGravity, maxFallGravity));
+        if (!isDashing)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, minFallGravity, maxFallGravity));
+        }
+        
         #endregion
     }
 
@@ -165,7 +168,11 @@ public class MovementManager : Librariy
     #region Jump Cut
     public void JumpCut()
     {
-        rb.velocity += Vector2.up * jumpCutAmount * Time.fixedDeltaTime;
+        //rb.velocity += Vector2.up * jumpCutAmount * Time.fixedDeltaTime;
+        if (rb.velocity.y > 0)
+        {
+            rb.AddForce(Vector2.down * rb.velocity.y * (1 - JumpCutTimeCounter), ForceMode2D.Impulse);
+        }
     }
     #endregion
 }

@@ -178,17 +178,18 @@ public class PlatformerTools : MonoBehaviour
             }
         }
 
+        //burasý sürekli çalýþýr bu yüzden burada deðerleri true ||false || calculate yapýlmamasý gerekli.
         if (Inputs.Jump == 1)
         {
             movementManager.jumpTimeCounter -= Time.deltaTime;
-
-            //burasý sürekli çalýþýr bu yüzden burada deðerleri true ||false || calculate yapýlmamasý gerekli.
-            if (movementManager.jumpTimeCounter > 0 && !movementManager.isGrounded)
+            if (movementManager.jumpCounter > 0)
             {
-                movementManager.JumpCut();
+                if (movementManager.jumpTimeCounter > 0 && !movementManager.isGrounded)
+                {
+                    movementManager.JumpCut();
+                }
             }
         }
-
         #endregion
     }
 

@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958de6995c7367b468f808d90fbc1312, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFallGravity: 20
+  maxFallGravity: 15
   minFallGravity: -20
   AxeMainSpeed: 1
   AxeAcceleration: 45
@@ -201,14 +201,14 @@ MonoBehaviour:
   acceleration: 14
   decceleration: 28.1
   velPower: 0.96
-  fallingGravityScale: 2
-  gravityScale: 1.8
-  jumpAmount: 6.5
-  jumpCutAmount: 12.5
-  doubleJumpAmount: 7
+  fallingGravityScale: 1.95
+  gravityScale: 1.5
+  jumpAmount: 8
+  jumpCutAmount: 15
+  doubleJumpAmount: 9
   CoyotoTime: 0.47
-  BufferTime: 0.35
-  BufferAmount: 6
+  BufferTime: 0.25
+  BufferAmount: 8
   jumpCutMultiplier: 0.35
   jumpTime: 0.14
   DashDistance: 53
@@ -224,7 +224,7 @@ MonoBehaviour:
   IsCanDash: 0
   isDashing: 0
   JumpCutTimeCounter: 0
-  JumpCutTimer: 0.18
+  JumpCutTimer: 1.9
   dashCount: 0
   checkPos: {fileID: 7461186936902632192}
   layerMask:
@@ -619,7 +619,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: f7835f488b0b8ce4195f7996a40d63ff, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
