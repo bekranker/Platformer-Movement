@@ -191,6 +191,7 @@ public class PlatformerTools : MonoBehaviour
                         Debug.Log("Coyoto is working");
                         movementManager.jumpCounter--;
                         movementManager.AddCoyoteTimeForce();
+                        movementManager.coyoteJump = false;
                     }
                 }
             }
@@ -238,6 +239,7 @@ public class PlatformerTools : MonoBehaviour
                 if (!movementManager.coyoteJump && movementManager.buffering)
                 {
                     movementManager.jumpCounter--;
+                    Debug.Log("Buffering");
                     movementManager.AddBufferJumpForce();
                     movementManager.buffering = false;
                 }

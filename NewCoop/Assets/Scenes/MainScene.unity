@@ -201,7 +201,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16487037}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.017074212, y: -1.5635338, z: -9.745965}
+  m_LocalPosition: {x: 0.017074212, y: -2.57, z: -9.745965}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 359786508}
@@ -721,7 +721,7 @@ GameObject:
   - component: {fileID: 549385943}
   m_Layer: 3
   m_Name: Square (10)
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -843,8 +843,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773820264}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.78, y: -6.0379, z: 0}
-  m_LocalScale: {x: 4.8895397, y: 2.9988408, z: 1}
+  m_LocalPosition: {x: -12.78, y: -6.0309, z: 0}
+  m_LocalScale: {x: 4.8895397, y: 3.0129352, z: 1}
   m_Children: []
   m_Father: {fileID: 2074537834}
   m_RootOrder: 3

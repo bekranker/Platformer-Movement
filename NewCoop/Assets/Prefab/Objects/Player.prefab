@@ -220,7 +220,7 @@ MonoBehaviour:
   CoyoteAmount: 9
   coyoteJump: 0
   coyoteTimeCounter: 0
-  BufferTime: 0.25
+  BufferTime: 0.74
   BufferAmount: 9
   buffering: 0
   DashDistance: 53
