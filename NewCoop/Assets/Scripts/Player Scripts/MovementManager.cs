@@ -63,9 +63,7 @@ public class MovementManager : Librariy
     [Header("-----Double Jump Settings-----")]
     [Range(1f, 100f)] public float doubleJumpAmount;
 
-
-
-
+    [BackgroundColor(1f, 0f, 1f, 1f)]
     [Header("----Componenets-----")]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D boxC2D;

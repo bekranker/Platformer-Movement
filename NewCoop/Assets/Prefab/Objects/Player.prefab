@@ -194,6 +194,8 @@ MonoBehaviour:
   AxeAcceleration: 45
   AxeDecceleration: 10
   AxeVelPower: 0.9
+  ClampGravityMin: 1
+  ClampGravityMax: 2
   MainSpeed: 13
   acceleration: 14
   decceleration: 28.1
@@ -201,33 +203,32 @@ MonoBehaviour:
   fallingGravityScale: 1.95
   gravityScale: 1.5
   jumpAmount: 8
-  doubleJumpAmount: 9
-  CoyotoTime: 0.15
-  BufferTime: 0.25
-  BufferAmount: 9
+  JumpCutTimer: 1.9
   jumpCutMultiplier: 0.35
   jumpTime: 0.14
-  DashDistance: 53
-  ClampGravityMin: 1
-  ClampGravityMax: 2
   jumpTimeCounter: 0
   checkPosSize: {x: 0, y: 0}
   isGrounded: 1
-  coyoteJump: 0
-  coyoteTimeCounter: 0
   isJumped: 0
-  buffering: 0
-  IsCanDash: 0
-  isDashing: 0
-  JumpCutTimeCounter: 0
-  JumpCutTimer: 1.9
-  dashCount: 0
+  totalJump: 2
+  jumpCounter: 2
   checkPos: {fileID: 7461186936902632192}
   layerMask:
     serializedVersion: 2
     m_Bits: 8
-  totalJump: 2
-  jumpCounter: 2
+  CoyotoTime: 0.15
+  CoyoteAmount: 9
+  coyoteJump: 0
+  coyoteTimeCounter: 0
+  BufferTime: 0.25
+  BufferAmount: 9
+  buffering: 0
+  DashDistance: 53
+  IsCanDash: 0
+  isDashing: 0
+  JumpCutTimeCounter: 0
+  dashCount: 0
+  doubleJumpAmount: 9
   rb: {fileID: 8505177524007123630}
   boxC2D: {fileID: 7235418268055531539}
   Input: {fileID: 1174689607428651666}
