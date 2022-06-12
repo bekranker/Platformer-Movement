@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class MovementManager : Librariy
 {
-
+    [Space(10)]
     [Header("-----Physical Settings-----")]
-
     //R-G-B-A
-
     [BackgroundColor(1f, 0f, 0f, 1f)] [Range(-50f, 50f)] [SerializeField] float maxFallGravity;
-    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(-50f, 50f)] [SerializeField] float minFallGravity;
-    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(1f, 100f)] public float AxeMainSpeed;
-    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(1f, 50f)] public float AxeAcceleration;
-    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(1f, 50f)] public float AxeDecceleration;
-    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(0.005f, 1f)] public float AxeVelPower;
-    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(0.005f, 100f)] public float ClampGravityMin;
-    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(0.005f, 100f)] public float ClampGravityMax;
+    [Range(-50f, 50f)] [SerializeField] float minFallGravity;
+    [Range(1f, 100f)] public float AxeMainSpeed;
+    [Range(1f, 50f)] public float AxeAcceleration;
+    [Range(1f, 50f)] public float AxeDecceleration;
+    [Range(0.005f, 1f)] public float AxeVelPower;
+    [Range(0.005f, 100f)] public float ClampGravityMin;
+    [Range(0.005f, 100f)] public float ClampGravityMax;
 
+    [Space(10)]
     [Header("-----Move Options-----")]
+    [Space(30)]
     [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f,100f)] public float MainSpeed;
     [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 50f)] public float acceleration;
     [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 50f)] public float decceleration;
@@ -26,7 +26,9 @@ public class MovementManager : Librariy
     [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 10f)] public float fallingGravityScale;
     [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 10f)] public float gravityScale;
 
+    [Space(10)]
     [Header("-----Jump Settings-----")]
+    [Space(30)]
     [BackgroundColor(0f, 0f, 1f, 1f)] [Range(1f, 100f)] public float jumpAmount;
     [BackgroundColor(0f, 0f, 1f, 1f)] [Range(1f, 10f)] public float JumpCutTimer;
     [BackgroundColor(0f, 0f, 1f, 1f)] [Range(0.005f, 1f)] public float jumpCutMultiplier;
@@ -40,31 +42,40 @@ public class MovementManager : Librariy
     public Transform checkPos;
     public LayerMask layerMask;
 
-
+    [Space(10)]
     [Header("-----Coyote Time Settings-----")]
+    [Space(30)]
     [BackgroundColor(0f, 1f, 1f, 1f)]
     [Range(0.005f, 1f)] public float CoyotoTime;
     [Range(1f, 100f)] public float CoyoteAmount;
     [HideInInspector] public bool coyoteJump;
     [HideInInspector] public float coyoteTimeCounter;
 
+    [Space(10)]
     [Header("-----Buffering Settings-----")]
+    [Space(30)]
     [Range(0.005f, 1f)] public float BufferTime;
     [Range(0.005f, 100f)] public float BufferAmount;
     [HideInInspector] public bool buffering = false;
 
+    [Space(5)]
     [Header("-----Dash Settings-----")]
+    [Space(20)]
     [Range(0.005f, 100f)] public float DashDistance;
     [HideInInspector] public bool IsCanDash;
     [HideInInspector] public bool isDashing;
     [HideInInspector] public float JumpCutTimeCounter;
     public int dashCount;
 
+    [Space(5)]
     [Header("-----Double Jump Settings-----")]
+    [Space(20)]
     [Range(1f, 100f)] public float doubleJumpAmount;
 
+    [Space(5)]
     [BackgroundColor(1f, 0f, 1f, 1f)]
     [Header("----Componenets-----")]
+    [Space(20)]
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private BoxCollider2D boxC2D;
     [SerializeField] private MovementBehaviour Input;
