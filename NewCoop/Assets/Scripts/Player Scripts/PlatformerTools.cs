@@ -10,12 +10,15 @@ public class PlatformerTools : MonoBehaviour
     [SerializeField] Transform rayPointTopRight;
     [SerializeField] Transform rayPointLeft;
     [SerializeField] Transform rayPointRight;
+    [SerializeField] Transform rayPointTopLeftFeed;
+    [SerializeField] Transform rayPointTopRightFeed;
     [SerializeField] Transform rayPointLeftFeed;
     [SerializeField] Transform rayPointRightFeed;
     [SerializeField] Vector3 TopRayDistance;
     [SerializeField] Vector3 RayDistance;
     [SerializeField] Vector3 FeedRayDistance;
-    [Range(0f, 100f)][SerializeField] float DistanceOfRays;
+    [Range(0.005f, 10f)][SerializeField] float DistanceOfRays;
+    [Range(0.005f, 10f)][SerializeField] float FeedDistanceOfRays;
     [Range(0.005f, 100f)][SerializeField] float JumpSupportAmount;
     [Range(0.005f, 1f)][SerializeField] float JumpSupportMultiplyAmount;
 
@@ -41,6 +44,8 @@ public class PlatformerTools : MonoBehaviour
     private Vector3 TopLeftRay;
     private Vector3 RightRay;
     private Vector3 LeftRay;
+    private Vector3 TopLeftFeedRay;
+    private Vector3 TopRightFeedRay;
     private Vector3 LeftFeedRay;
     private Vector3 RightFeedRay;
 
@@ -61,6 +66,8 @@ public class PlatformerTools : MonoBehaviour
         LeftRay = rayPointLeft.position - RayDistance;
         LeftFeedRay = rayPointLeftFeed.position - FeedRayDistance;
         RightFeedRay = rayPointRightFeed.position + FeedRayDistance;
+        TopLeftFeedRay = rayPointTopLeftFeed.position - FeedRayDistance;
+        TopRightFeedRay = rayPointTopRightFeed.position + FeedRayDistance;
 
         JumpSupport();
 
@@ -218,17 +225,19 @@ public class PlatformerTools : MonoBehaviour
                     movementManager.buffering = false;
                 }
             }
-            //if (Inputs.Jump == 1)
-            //{
-            //    if (direction.x == 1)
-            //    {
-            //        transform.position += Vector3.up + Vector3.right * JumpSupportMultiplyAmount * JumpSupportAmount * Time.fixedDeltaTime;
-            //    }
-            //    if (direction.x == -1)
-            //    {
-            //        transform.position += Vector3.up + Vector3.left * JumpSupportMultiplyAmount * JumpSupportAmount * Time.fixedDeltaTime;
-            //    }
-            //}
+            if (Inputs.Jump == 1 || Inputs.JumpDown == 1)
+            {
+                if (direction.x == -1)
+                {
+                    Debug.Log("Sað köþe deðdi");
+                    transform.position += Vector3.up * 10 * Time.fixedDeltaTime;
+                }
+                if (direction.x == 1)
+                {
+                    Debug.Log("Sol köþe deðdi");
+                    transform.position += Vector3.up * 10 * Time.fixedDeltaTime;
+                }
+            }
         }
         #endregion
         #endregion
@@ -241,14 +250,32 @@ public class PlatformerTools : MonoBehaviour
         {
             OnJumpingSupportRay();
         }
+        //AfterJumpSupportSystem();
     }
 
 
     private void AfterJumpSupportSystem()
     {
         //Eðer Bu ikisinden biris deðiyorsa Support çalýþacak
-        RaycastHit2D LeftFeed = Physics2D.Raycast(LeftFeedRay, Vector2.left * DistanceOfRays);
-        RaycastHit2D RightFeed = Physics2D.Raycast(RightFeedRay, Vector2.right * DistanceOfRays);
+        RaycastHit2D LeftFeed = Physics2D.Raycast(LeftFeedRay, Vector2.left * FeedDistanceOfRays);
+        RaycastHit2D RightFeed = Physics2D.Raycast(RightFeedRay, Vector2.right * FeedDistanceOfRays);
+        RaycastHit2D TopLeftFeed = Physics2D.Raycast(TopLeftFeedRay, Vector2.left * FeedDistanceOfRays);
+        RaycastHit2D TopRightFeed = Physics2D.Raycast(TopRightFeedRay, Vector2.right * FeedDistanceOfRays);
+
+
+        if (movementManager.isGrounded) return;
+        else if (rb.velocity.y == 0) return;
+        else
+        {
+            if (LeftFeed.collider.tag == "Ground" && TopLeftFeed.collider.tag != "Ground" && (RightFeed.collider.tag != "Ground"))
+            {
+                Debug.Log("Left Corner Support");
+            }
+            else if (RightFeed.collider.tag == "Ground" && TopRightFeed.collider.tag != "Ground" && (LeftFeed.collider.tag != "Ground"))
+            {
+                Debug.Log("Right Corner Support");
+            }
+        }
     }
 
 
@@ -286,8 +313,10 @@ public class PlatformerTools : MonoBehaviour
         Debug.DrawRay(TopRightRay, Vector2.up * DistanceOfRays, Color.yellow);
         Debug.DrawRay(RightRay, Vector2.up * DistanceOfRays, Color.green);
         Debug.DrawRay(LeftRay, Vector2.up * DistanceOfRays, Color.green);
-        Debug.DrawRay(LeftFeedRay, Vector2.left * DistanceOfRays, Color.blue);
-        Debug.DrawRay(RightFeedRay, Vector2.right * DistanceOfRays, Color.blue);
+        //Debug.DrawRay(LeftFeedRay, Vector2.left * FeedDistanceOfRays, Color.cyan);
+        //Debug.DrawRay(RightFeedRay, Vector2.right * FeedDistanceOfRays, Color.cyan);
+        //Debug.DrawRay(TopLeftFeedRay, Vector2.left * FeedDistanceOfRays, Color.cyan);
+        //Debug.DrawRay(TopRightFeedRay, Vector2.right * FeedDistanceOfRays, Color.cyan);
     }
 }
 
