@@ -6,50 +6,65 @@ public class MovementManager : Librariy
 {
 
     [Header("-----Physical Settings-----")]
-    [Range(-50f, 50f)] [SerializeField] float maxFallGravity;
-    [Range(-50f, 50f)] [SerializeField] float minFallGravity;
-    [Range(1f, 100f)] public float AxeMainSpeed;
-    [Range(1f, 50f)] public float AxeAcceleration;
-    [Range(1f, 50f)] public float AxeDecceleration;
-    [Range(0.005f, 1f)] public float AxeVelPower;
+
+    //R-G-B-A
+
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(-50f, 50f)] [SerializeField] float maxFallGravity;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(-50f, 50f)] [SerializeField] float minFallGravity;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(1f, 100f)] public float AxeMainSpeed;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(1f, 50f)] public float AxeAcceleration;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(1f, 50f)] public float AxeDecceleration;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(0.005f, 1f)] public float AxeVelPower;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(0.005f, 100f)] public float ClampGravityMin;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(0.005f, 100f)] public float ClampGravityMax;
 
     [Header("-----Move Options-----")]
-    [Range(1f,100f)] public float MainSpeed;
-    [Range(1f, 50f)] public float acceleration;
-    [Range(1f, 50f)] public float decceleration;
-    [Range(0.005f, 1f)] public float velPower;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f,100f)] public float MainSpeed;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 50f)] public float acceleration;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 50f)] public float decceleration;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(0.005f, 1f)] public float velPower;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 10f)] public float fallingGravityScale;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 10f)] public float gravityScale;
 
-    [Header("-----Jump Options-----")]
-    [Range(1f, 10f)] public float fallingGravityScale;
-    [Range(1f, 10f)] public float gravityScale;
-    [Range(1f, 100f)] public float jumpAmount;
-    [Range(1f, 100f)] public float doubleJumpAmount;
+    [Header("-----Jump Settings-----")]
+    [BackgroundColor(0f, 0f, 1f, 1f)] [Range(1f, 100f)] public float jumpAmount;
+    [BackgroundColor(0f, 0f, 1f, 1f)] [Range(1f, 10f)] public float JumpCutTimer;
+    [BackgroundColor(0f, 0f, 1f, 1f)] [Range(0.005f, 1f)] public float jumpCutMultiplier;
+    [BackgroundColor(0f, 0f, 1f, 1f)] [Range(0.005f, 1f)] public float jumpTime;
+    [BackgroundColor(0f, 0f, 1f, 1f)] [HideInInspector] public float jumpTimeCounter;
+    [BackgroundColor(0f, 0f, 1f, 1f)] [HideInInspector] public Vector2 checkPosSize;
+    [BackgroundColor(0f, 0f, 1f, 1f)] [HideInInspector] public bool isGrounded = true;
+    [BackgroundColor(0f, 0f, 1f, 1f)] [HideInInspector] public bool isJumped;
+    public int totalJump;
+    public int jumpCounter;
+    public Transform checkPos;
+    public LayerMask layerMask;
+
+
+    [Header("-----Coyote Time Settings-----")]
+    [BackgroundColor(0f, 1f, 1f, 1f)]
     [Range(0.005f, 1f)] public float CoyotoTime;
-    [Range(0.005f, 1f)] public float BufferTime;
-    [Range(0.005f, 100f)] public float BufferAmount;
-    [Range(0.005f, 1f)] public float jumpCutMultiplier;
-    [Range(0.005f, 1f)] public float jumpTime;
-    [Range(0.005f, 100f)] public float DashDistance;
-    [Range(0.005f, 100f)] public float ClampGravityMin;
-    [Range(0.005f, 100f)] public float ClampGravityMax;
-
-    [HideInInspector] public float jumpTimeCounter;
-    [HideInInspector] public Vector2 checkPosSize;
-    [HideInInspector] public bool isGrounded = true;
+    [Range(1f, 100f)] public float CoyoteAmount;
     [HideInInspector] public bool coyoteJump;
     [HideInInspector] public float coyoteTimeCounter;
-    [HideInInspector] public bool isJumped;
+
+    [Header("-----Buffering Settings-----")]
+    [Range(0.005f, 1f)] public float BufferTime;
+    [Range(0.005f, 100f)] public float BufferAmount;
     [HideInInspector] public bool buffering = false;
+
+    [Header("-----Dash Settings-----")]
+    [Range(0.005f, 100f)] public float DashDistance;
     [HideInInspector] public bool IsCanDash;
     [HideInInspector] public bool isDashing;
     [HideInInspector] public float JumpCutTimeCounter;
-
-    [Range(1f, 10f)]  public float JumpCutTimer;
     public int dashCount;
-    public Transform checkPos;
-    public LayerMask layerMask;
-    public int totalJump;
-    public int jumpCounter;
+
+    [Header("-----Double Jump Settings-----")]
+    [Range(1f, 100f)] public float doubleJumpAmount;
+
+
+
 
     [Header("----Componenets-----")]
     [SerializeField] private Rigidbody2D rb;
@@ -59,36 +74,25 @@ public class MovementManager : Librariy
     private void Start()
     {
         JumpCutTimeCounter = JumpCutTimer;
-
     }
 
     private void Update()
     {
-        if (Input.JumpDown == 1)
-        {
-            CalculatingStatues();
-        }
+        if (Input.JumpDown == 1) CalculatingStatues();
     }
-
 
     void FixedUpdate()
     {
         #region Run
-        if (!isDashing)
-        {
-            Runing();
-        }
+        if (!isDashing) Runing();
         #endregion
 
         #region Physical Settings
-        if (!isDashing)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, minFallGravity, maxFallGravity));
-        }
-        
+        if (!isDashing) rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, minFallGravity, maxFallGravity));
         #endregion
     }
 
+    #region Run Settings
     private void Runing()
     {
         //Direction
@@ -106,7 +110,9 @@ public class MovementManager : Librariy
         //Moving with forces
         rb.AddForce(moveInput * Vector2.right);
     }
+    #endregion
 
+    #region Axe Settings
     private void CalculatingStatues()
     {
         float _MainSpeed = MainSpeed;
@@ -130,12 +136,29 @@ public class MovementManager : Librariy
             totalJump = 2;
         }
     }
+    #endregion
 
     #region Adding Normal Jump Force
     public void AddJumpForce()
     {
         rb.velocity = Vector2.zero;
         _AddVelocity(rb, jumpAmount);
+    }
+    #endregion
+
+    #region Adding Double Jump Force
+    public void AddDoubleJumpForce()
+    {
+        rb.velocity = Vector2.zero;
+        _AddVelocity(rb, doubleJumpAmount);
+    }
+    #endregion
+
+    #region Adding Coyote Jump Force
+    public void AddCoyoteTimeForce()
+    {
+        rb.velocity = Vector2.zero;
+        _AddVelocity(rb, CoyoteAmount);
     }
     #endregion
 

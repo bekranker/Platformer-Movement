@@ -182,7 +182,7 @@ public class PlatformerTools : MonoBehaviour
                     Debug.Log("Double Jump is working");
                     movementManager.coyoteJump = true;
                     movementManager.jumpCounter--;
-                    movementManager.AddJumpForce();
+                    movementManager.AddDoubleJumpForce();
                 }
                 if (!movementManager.isGrounded && !movementManager.buffering)
                 {
@@ -190,7 +190,7 @@ public class PlatformerTools : MonoBehaviour
                     {
                         Debug.Log("Coyoto is working");
                         movementManager.jumpCounter--;
-                        movementManager.AddJumpForce();
+                        movementManager.AddCoyoteTimeForce();
                     }
                 }
             }
