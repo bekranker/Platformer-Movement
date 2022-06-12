@@ -7,8 +7,8 @@ TagManager:
   - UIManager
   - InputSelection
   - KeybindingMaster
-  - Head
   - Ground
+  - head
   layers:
   - Default
   - TransparentFX
@@ -17,7 +17,7 @@ TagManager:
   - Water
   - UI
   - Player
-  - 
+  - Head
   - 
   - 
   - 

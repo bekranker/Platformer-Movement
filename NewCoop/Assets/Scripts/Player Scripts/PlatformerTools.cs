@@ -152,9 +152,9 @@ public class PlatformerTools : MonoBehaviour
         #endregion
 
         #region calculatings
-        movementManager.coyoteTimeCounter = (movementManager.coyoteJump) ? movementManager.coyoteTimeCounter - Time.deltaTime : movementManager.coyoteTimeCounter = 0.15f;
+        movementManager.coyoteTimeCounter = (!movementManager.coyoteJump) ? movementManager.coyoteTimeCounter - Time.deltaTime : movementManager.coyoteTimeCounter = 0.15f;
         movementManager.jumpTimeCounter = (movementManager.isGrounded) ? movementManager.jumpTime : movementManager.jumpTimeCounter;
-        if (!movementManager.isGrounded) this.Wait(movementManager.CoyotoTime, () => movementManager.coyoteJump = false);
+        //if (!movementManager.isGrounded) this.Wait(movementManager.CoyotoTime, () => movementManager.coyoteJump = false);
         #endregion
 
         #region Jumping
@@ -170,11 +170,28 @@ public class PlatformerTools : MonoBehaviour
             ///<summary>///
             if (movementManager.jumpCounter > 0)
             {
-                if (movementManager.coyoteTimeCounter > 0 && !movementManager.buffering)
+                if (!movementManager.buffering && movementManager.isGrounded)
                 {
+                    movementManager.coyoteJump = false;
                     Debug.Log("Normal Jump is working");
                     movementManager.jumpCounter--;
                     movementManager.AddJumpForce();
+                }
+                else if (!movementManager.isGrounded && movementManager.coyoteTimeCounter <= 0)
+                {
+                    Debug.Log("Double Jump is working");
+                    movementManager.coyoteJump = true;
+                    movementManager.jumpCounter--;
+                    movementManager.AddJumpForce();
+                }
+                if (!movementManager.isGrounded && !movementManager.buffering)
+                {
+                    if (movementManager.coyoteTimeCounter > 0)
+                    {
+                        Debug.Log("Coyoto is working");
+                        movementManager.jumpCounter--;
+                        movementManager.AddJumpForce();
+                    }
                 }
             }
             else
@@ -250,34 +267,7 @@ public class PlatformerTools : MonoBehaviour
         {
             OnJumpingSupportRay();
         }
-        //AfterJumpSupportSystem();
     }
-
-
-    private void AfterJumpSupportSystem()
-    {
-        //Eðer Bu ikisinden biris deðiyorsa Support çalýþacak
-        RaycastHit2D LeftFeed = Physics2D.Raycast(LeftFeedRay, Vector2.left * FeedDistanceOfRays);
-        RaycastHit2D RightFeed = Physics2D.Raycast(RightFeedRay, Vector2.right * FeedDistanceOfRays);
-        RaycastHit2D TopLeftFeed = Physics2D.Raycast(TopLeftFeedRay, Vector2.left * FeedDistanceOfRays);
-        RaycastHit2D TopRightFeed = Physics2D.Raycast(TopRightFeedRay, Vector2.right * FeedDistanceOfRays);
-
-
-        if (movementManager.isGrounded) return;
-        else if (rb.velocity.y == 0) return;
-        else
-        {
-            if (LeftFeed.collider.tag == "Ground" && TopLeftFeed.collider.tag != "Ground" && (RightFeed.collider.tag != "Ground"))
-            {
-                Debug.Log("Left Corner Support");
-            }
-            else if (RightFeed.collider.tag == "Ground" && TopRightFeed.collider.tag != "Ground" && (LeftFeed.collider.tag != "Ground"))
-            {
-                Debug.Log("Right Corner Support");
-            }
-        }
-    }
-
 
     private void OnJumpingSupportRay()
     {
@@ -304,6 +294,7 @@ public class PlatformerTools : MonoBehaviour
     }
     #endregion
 
+    #region Draws
     private void OnDrawGizmos()
     {
         UnityEditor.Handles.color = Color.yellow;
@@ -313,10 +304,7 @@ public class PlatformerTools : MonoBehaviour
         Debug.DrawRay(TopRightRay, Vector2.up * DistanceOfRays, Color.yellow);
         Debug.DrawRay(RightRay, Vector2.up * DistanceOfRays, Color.green);
         Debug.DrawRay(LeftRay, Vector2.up * DistanceOfRays, Color.green);
-        //Debug.DrawRay(LeftFeedRay, Vector2.left * FeedDistanceOfRays, Color.cyan);
-        //Debug.DrawRay(RightFeedRay, Vector2.right * FeedDistanceOfRays, Color.cyan);
-        //Debug.DrawRay(TopLeftFeedRay, Vector2.left * FeedDistanceOfRays, Color.cyan);
-        //Debug.DrawRay(TopRightFeedRay, Vector2.right * FeedDistanceOfRays, Color.cyan);
     }
+    #endregion
 }
 

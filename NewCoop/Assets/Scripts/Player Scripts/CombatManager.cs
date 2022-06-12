@@ -15,9 +15,13 @@ public class CombatManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Vector2 direction = collision.GetContact(0).normal;
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Üstten deðdi");
+            if (direction.y == -1)
+            {
+                Debug.Log($"{collision.gameObject.name} is dead !!");
+            }
         }
     }
 }
