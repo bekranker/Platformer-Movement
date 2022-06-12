@@ -217,18 +217,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   CoyotoTime: 0.15
-  CoyoteAmount: 9
+  CoyoteAmount: 12
   coyoteJump: 0
   coyoteTimeCounter: 0
-  BufferTime: 0.74
-  BufferAmount: 9
+  BufferTime: 0.29
+  BufferAmount: 30
   buffering: 0
   DashDistance: 53
   IsCanDash: 0
   isDashing: 0
   JumpCutTimeCounter: 0
   dashCount: 0
-  doubleJumpAmount: 9
+  doubleJumpAmount: 16
   rb: {fileID: 8505177524007123630}
   boxC2D: {fileID: 7235418268055531539}
   Input: {fileID: 1174689607428651666}

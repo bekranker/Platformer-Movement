@@ -195,8 +195,9 @@ public class PlatformerTools : MonoBehaviour
                     }
                 }
             }
-            else
+            else if(movementManager.jumpCounter <= 0)
             {
+                Debug.Log($"{movementManager.jumpCounter}");
                 movementManager.buffering = true;
                 movementManager.jumpCounter--;
                 this.Wait(movementManager.BufferTime, () => movementManager.buffering = false);
@@ -234,15 +235,22 @@ public class PlatformerTools : MonoBehaviour
             Vector2 direction = collision.GetContact(0).normal;
             if (direction.y == 1)
             {
+                movementManager.coyoteJump = false;
                 movementManager.dashCount = 0;
-                movementManager.jumpCounter = movementManager.totalJump;
-                if (!movementManager.coyoteJump && movementManager.buffering)
+                
+                if (movementManager.buffering)
                 {
-                    movementManager.jumpCounter--;
+                    movementManager.jumpCounter = 1;
                     Debug.Log("Buffering");
                     movementManager.AddBufferJumpForce();
                     movementManager.buffering = false;
                 }
+                else if(!movementManager.buffering)
+                {
+                    movementManager.jumpCounter = movementManager.totalJump;
+                }
+                
+
             }
             if (Inputs.Jump == 1 || Inputs.JumpDown == 1)
             {
