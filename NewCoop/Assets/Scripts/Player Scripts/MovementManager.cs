@@ -9,15 +9,12 @@ public class MovementManager : Librariy
     //R-G-B-A
     [BackgroundColor(1f, 0f, 0f, 1f)] [Range(-50f, 50f)] [SerializeField] float maxFallGravity;
     [Range(-50f, 50f)] [SerializeField] float minFallGravity;
-    [Range(1f, 100f)] public float AxeMainSpeed;
-    [Range(1f, 50f)] public float AxeAcceleration;
-    [Range(1f, 50f)] public float AxeDecceleration;
-    [Range(0.005f, 1f)] public float AxeVelPower;
     [Range(0.005f, 100f)] public float ClampGravityMin;
     [Range(0.005f, 100f)] public float ClampGravityMax;
+    public bool IsCanMove = true;
 
     [Space(10)]
-    [Header("-----Move Options-----")]
+    [Header("-----Move Options Without axe-----")]
     [Space(30)]
     [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f,100f)] public float MainSpeed;
     [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 50f)] public float acceleration;
@@ -27,7 +24,22 @@ public class MovementManager : Librariy
     [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 10f)] public float gravityScale;
 
     [Space(10)]
-    [Header("-----Jump Settings-----")]
+    [Header("-----Move Options With one axe-----")]
+    [Space(30)]
+    [Range(1f, 100f)] public float AxeMainSpeed_1;
+    [Range(1f, 50f)] public float AxeAcceleration_1;
+    [Range(1f, 50f)] public float AxeDecceleration_1;
+
+    [Space(10)]
+    [Header("-----Move Options With two axe-----")]
+    [Space(30)]
+    [Range(1f, 100f)] public float AxeMainSpeed_2;
+    [Range(1f, 50f)] public float AxeAcceleration_2;
+    [Range(1f, 50f)] public float AxeDecceleration_2;
+
+
+    [Space(10)]
+    [Header("-----Jump Settings Without axe-----")]
     [Space(30)]
     [BackgroundColor(0f, 0f, 1f, 1f)] [Range(1f, 100f)] public float jumpAmount;
     [BackgroundColor(0f, 0f, 1f, 1f)] [Range(1f, 10f)] public float JumpCutTimer;
@@ -41,6 +53,26 @@ public class MovementManager : Librariy
     public int jumpCounter;
     public Transform checkPos;
     public LayerMask layerMask;
+
+
+    [Space(10)]
+    [Header("-----Jump Settings With One Axe-----")]
+    [Space(30)]
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 100f)] public float AxejumpAmount_1;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 10f)] public float AxeJumpCutTimer_1;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 1f)] public float AxejumpCutMultiplier_1;
+
+    [Space(10)]
+    [Header("-----Jump Settings With Two Axe-----")]
+    [Space(30)]
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 100f)] public float AxejumpAmount_2;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 10f)] public float AxeJumpCutTimer_2;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 1f)] public float AxejumpCutMultiplier_2;
+
+
+
+    private float _jumpAmount, _JumpCutMultiplier, _JumpTimeCounter, _MainSpeed, _Accelerration, _Deacceleration;
+
 
     [Space(10)]
     [Header("-----Coyote Time Settings-----")]
@@ -87,13 +119,16 @@ public class MovementManager : Librariy
 
     private void Update()
     {
-        if (Input.JumpDown == 1) CalculatingStatues();
+        CalculatingStatues();
     }
 
     void FixedUpdate()
     {
         #region Run
-        if (!isDashing) Runing();
+        if (IsCanMove)
+        {
+            if (!isDashing) Runing();
+        }
         #endregion
 
         #region Physical Settings
@@ -107,15 +142,15 @@ public class MovementManager : Librariy
         //Direction
         float moveInput = Input.x;
         //Calculating direction we want to move in and our desired velocity
-        float targetSpeed = moveInput * MainSpeed;
+        float targetSpeed = moveInput * _MainSpeed;
         //Calculeting difference between current velocity and desired velocity
         float speedDif = targetSpeed - rb.velocity.x;
         //This part choosing is need acceleration or deccelaration
-        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? acceleration : decceleration;
+        float accelRate = (Mathf.Abs(targetSpeed) > 0.01f) ? _Accelerration : _Deacceleration;
         //Calculeting movement value
         float movement = Mathf.Pow(Mathf.Abs(speedDif) * accelRate, velPower) * Mathf.Sign(speedDif);
         //Moving
-        rb.velocity = new Vector2(moveInput * MainSpeed, rb.velocity.y);
+        rb.velocity = new Vector2(moveInput * _MainSpeed, rb.velocity.y);
         //Moving with forces
         rb.AddForce(moveInput * Vector2.right);
     }
@@ -124,24 +159,31 @@ public class MovementManager : Librariy
     #region Axe Settings
     private void CalculatingStatues()
     {
-        float _MainSpeed = MainSpeed;
-        float _acceleration = acceleration;
-        float _decceleration = decceleration;
-        float _velPower = velPower;
         if (combatManager.HasAxe)
-        { 
-            MainSpeed = AxeMainSpeed;
-            acceleration = AxeAcceleration;
-            decceleration = AxeDecceleration;
-            velPower = AxeVelPower;
-            totalJump = 1;
+        {
+            if (combatManager.AxeCount == 1)
+            {
+                _MainSpeed = AxeMainSpeed_1;
+                _Accelerration = AxeAcceleration_1;
+                _Deacceleration = AxeDecceleration_1;
+                _jumpAmount = AxejumpAmount_1;
+                totalJump = 1;
+            }
+            if (combatManager.AxeCount == 2)
+            {
+                _MainSpeed = AxeMainSpeed_2;
+                _Accelerration = AxeAcceleration_2;
+                _Deacceleration = AxeDecceleration_2;
+                _jumpAmount = AxejumpAmount_2;
+                totalJump = 1;
+            }
         }
         else if (!combatManager.HasAxe)
         {
-            MainSpeed = _MainSpeed;
-            acceleration = _acceleration;
-            decceleration = _decceleration;
-            velPower = _velPower;
+            _MainSpeed = MainSpeed;
+            _Accelerration = acceleration;
+            _Deacceleration = decceleration;
+            _jumpAmount = jumpAmount;
             totalJump = 2;
         }
     }
@@ -151,7 +193,7 @@ public class MovementManager : Librariy
     public void AddJumpForce()
     {
         rb.velocity = Vector2.zero;
-        _AddVelocity(rb, jumpAmount);
+        _AddVelocity(rb, _jumpAmount);
     }
     #endregion
 

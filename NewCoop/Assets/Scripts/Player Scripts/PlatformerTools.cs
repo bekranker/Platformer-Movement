@@ -49,7 +49,7 @@ public class PlatformerTools : MonoBehaviour
     private Vector3 LeftFeedRay;
     private Vector3 RightFeedRay;
 
-
+    private bool IsCanDoubleJump;
     private void Start()
     {
         DashTime = StartDashTime;
@@ -173,16 +173,22 @@ public class PlatformerTools : MonoBehaviour
                 if (!movementManager.buffering && movementManager.isGrounded)
                 {
                     movementManager.coyoteJump = false;
+                    
+                    
                     Debug.Log("Normal Jump is working");
                     movementManager.jumpCounter--;
                     movementManager.AddJumpForce();
                 }
                 else if (!movementManager.isGrounded && movementManager.coyoteTimeCounter <= 0)
                 {
-                    Debug.Log("Double Jump is working");
+                    IsCanDoubleJump = true;
+                    if (IsCanDoubleJump)
+                    {
+                        Debug.Log("Double Jump is working");
+                        movementManager.jumpCounter--;
+                        movementManager.AddDoubleJumpForce();
+                    }
                     movementManager.coyoteJump = true;
-                    movementManager.jumpCounter--;
-                    movementManager.AddDoubleJumpForce();
                 }
                 if (!movementManager.isGrounded && !movementManager.buffering)
                 {
@@ -197,6 +203,7 @@ public class PlatformerTools : MonoBehaviour
             }
             else if(movementManager.jumpCounter <= 0)
             {
+                IsCanDoubleJump = false;
                 Debug.Log($"{movementManager.jumpCounter}");
                 movementManager.buffering = true;
                 movementManager.jumpCounter--;
@@ -233,7 +240,7 @@ public class PlatformerTools : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             Vector2 direction = collision.GetContact(0).normal;
-            if (direction.y == 1)
+            if (direction.y > 0)
             {
                 movementManager.coyoteJump = false;
                 movementManager.dashCount = 0;
@@ -254,12 +261,12 @@ public class PlatformerTools : MonoBehaviour
             }
             if (Inputs.Jump == 1 || Inputs.JumpDown == 1)
             {
-                if (direction.x == -1)
+                if (direction.x < 0)
                 {
                     Debug.Log("Sað köþe deðdi");
                     transform.position += Vector3.up * 10 * Time.fixedDeltaTime;
                 }
-                if (direction.x == 1)
+                if (direction.x > 0)
                 {
                     Debug.Log("Sol köþe deðdi");
                     transform.position += Vector3.up * 10 * Time.fixedDeltaTime;

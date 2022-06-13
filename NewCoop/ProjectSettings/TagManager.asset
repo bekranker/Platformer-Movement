@@ -9,6 +9,7 @@ TagManager:
   - KeybindingMaster
   - Ground
   - head
+  - Axe
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - UI
   - Player
   - Head
-  - 
+  - Axe
   - 
   - 
   - 
