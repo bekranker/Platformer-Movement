@@ -12,11 +12,12 @@ public class CombatManager : MonoBehaviour
     [SerializeField] SpriteRenderer AxeSprite;
     [SerializeField] Transform AxeSpawner;
     [SerializeField] GameObject[] Arrows;
+    [SerializeField] LayerMask AxeMask;
 
     [Header("-----Statues-----")]
     public bool HasAxe = true;
     public int AxeCount;
-
+    private bool IsTouchingAxe;
 
     [Header("----Components-----")]
     [SerializeField] MovementBehaviour Inputs;
@@ -24,35 +25,47 @@ public class CombatManager : MonoBehaviour
 
     private bool IsPressing;
     Vector2 Axedirection = Vector2.zero;
+    private GameObject myAxe;
+    private bool IsAttackOn;
 
     private void Update()
     {
         #region Shooting
         if (HasAxe)
         {
-            if (Inputs.Attack == 0)
-            {
-                if (IsPressing)
-                {
-                    //Fýrlatma ayarlarý burasý
-                    AxeSprite.enabled = false;
-                    GameObject AxeObject = Instantiate(AxePrefab, transform.position, Quaternion.identity);
-                    Rigidbody2D AxeRb = AxeObject.GetComponent<Rigidbody2D>();
-                    AxeRb.velocity = (Axedirection * Time.fixedDeltaTime * AxeSpeed);
-                    Debug.Log("Fýrlattý");
-                    this.Wait(0.2f, () => movementManager.IsCanMove = true);
-                    HasAxe = false;
-                }
-            }
-            else if (Inputs.Attack == 1)
+            if (Inputs.Attack == 1)
             {
                 //eðim alma ayarlarý burasý
                 Debug.Log("Eðim alýnýyor");
-
                 IsPressing = true;
                 movementManager.IsCanMove = false;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 Axedirection = ShootingDirection();
+                IsAttackOn = true;
             }
+            if (IsAttackOn)
+            {
+                if (Inputs.Attack == 0)
+                {
+                    if (IsPressing)
+                    {
+                        //Fýrlatma ayarlarý burasý
+                        AxeSprite.enabled = false;
+                        myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
+                        Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
+                        AxeRb.velocity = (Axedirection * Time.fixedDeltaTime * AxeSpeed);
+                        Debug.Log("Fýrlattý");
+                        this.Wait(0.2f, () => movementManager.IsCanMove = true);
+                        for (int i = 0; i < Arrows.Length; i++)
+                        {
+                            Arrows[i].SetActive(false);
+                        }
+                        HasAxe = false;
+                        IsAttackOn = false;
+                    }
+                }
+            }
+            
         }
         #endregion
 
@@ -65,6 +78,27 @@ public class CombatManager : MonoBehaviour
             }
         }
         #endregion
+
+        #region Taking axe back
+        if (!HasAxe)
+        {
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                if (IsTouchingAxe)
+                {
+                    myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
+                    AxeSprite.enabled = true;
+                    Destroy(myAxe);
+                    this.Wait(0.2f, () => HasAxe = true);
+                }
+            }
+        }
+        #endregion
+    }
+
+    private void FixedUpdate()
+    {
+        IsTouchingAxe = Physics2D.OverlapBox(transform.position, Vector2.one, default, AxeMask);
     }
 
     #region Shooting direction settings
@@ -160,6 +194,7 @@ public class CombatManager : MonoBehaviour
     }
     #endregion
 
+    #region Arrow System
     private void ArrowSystem(int key)
     {
         if (key == 9)
@@ -203,6 +238,7 @@ public class CombatManager : MonoBehaviour
             }
             
         }
-        
+
     }
+    #endregion
 }

@@ -379,6 +379,9 @@ MonoBehaviour:
   - {fileID: 5867210069282889420}
   - {fileID: 271492135857328976}
   - {fileID: 2579571639961656815}
+  AxeMask:
+    serializedVersion: 2
+    m_Bits: 256
   HasAxe: 1
   AxeCount: 1
   Inputs: {fileID: 1174689607428651666}
