@@ -11,7 +11,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] GameObject AxePrefab;
     [SerializeField] SpriteRenderer AxeSprite;
     [SerializeField] Transform AxeSpawner;
-
+    [SerializeField] GameObject[] Arrows;
 
     [Header("-----Statues-----")]
     public bool HasAxe = true;
@@ -48,6 +48,7 @@ public class CombatManager : MonoBehaviour
             {
                 //eðim alma ayarlarý burasý
                 Debug.Log("Eðim alýnýyor");
+
                 IsPressing = true;
                 movementManager.IsCanMove = false;
                 Axedirection = ShootingDirection();
@@ -117,30 +118,39 @@ public class CombatManager : MonoBehaviour
         switch (ShootDirectionSettings())
         {
             case 1:
+                ArrowSystem(0);
                 a = Vector2.up;
                 break;
             case 2:
+                ArrowSystem(1);
                 a = Vector2.up + Vector2.left;
                 break;
             case 3:
+                ArrowSystem(2);
                 a = Vector2.left;
                 break;
             case 4:
+                ArrowSystem(3);
                 a = Vector2.down + Vector2.left;
                 break;
             case 5:
+                ArrowSystem(4);
                 a = Vector2.down;
                 break;
             case 6:
+                ArrowSystem(5);
                 a = Vector2.right + Vector2.down;
                 break;
             case 7:
+                ArrowSystem(6);
                 a = Vector2.right;
                 break;
             case 8:
+                ArrowSystem(7);
                 a = Vector2.right + Vector2.up;
                 break;
             case 0:
+                ArrowSystem(9);
                 Debug.Log("Lost Direction");
                 break;
             default:
@@ -149,4 +159,50 @@ public class CombatManager : MonoBehaviour
         return a;
     }
     #endregion
+
+    private void ArrowSystem(int key)
+    {
+        if (key == 9)
+        {
+            for (int i = 7; i >= 0; i--)
+            {
+                Arrows[i].SetActive(false);
+            }
+        }
+        else if (key == 8)
+        {
+            Arrows[7].SetActive(true);
+            int i = key - 1;
+            for (; i >= 0; i--)
+            {
+                Arrows[i].SetActive(false);
+            }
+        }
+        else
+        {
+            Arrows[key].SetActive(true);
+            int i = key + 1;
+            int a = key - 1;
+            if (key == 0)
+            {
+                for (; i < Arrows.Length; i++)
+                {
+                    Arrows[i].SetActive(false);
+                }
+            }
+            else
+            {
+                for (; i < Arrows.Length; i++)
+                {
+                    Arrows[i].SetActive(false);
+                }
+                for (; a >= 0; a--)
+                {
+                    Arrows[a].SetActive(false);
+                }
+            }
+            
+        }
+        
+    }
 }
