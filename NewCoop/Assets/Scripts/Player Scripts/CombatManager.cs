@@ -1,35 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CombatManager : MonoBehaviour
 {
+    [Space(10)]
     [Header("-----Axe Physics-----")]
+    [Space(25)]
+    [BackgroundColor(1, 0, 0, 1)]
     [SerializeField] float AxeSpeed;
 
+    [Space(10)]
     [Header("-----Object's Settings-----")]
+    [BackgroundColor(0, 1, 0, 1)]
+    [Space(25)]
     [SerializeField] GameObject AxePrefab;
     [SerializeField] SpriteRenderer AxeSprite;
     [SerializeField] Transform AxeSpawner;
     [SerializeField] GameObject[] Arrows;
     [SerializeField] LayerMask AxeMask;
-
+    
+    [Space(10)]
     [Header("-----Statues-----")]
+    [Space(25)]
+    [BackgroundColor(0,0,1,1)]
     public bool HasAxe = true;
     public int AxeCount;
-    private bool IsTouchingAxe;
+    private Collider2D IsTouchingAxe;
 
+    [Space(10)]
     [Header("----Components-----")]
+    [Space(25)]
+    [BackgroundColor(0, 1, 1, 1)]
     [SerializeField] MovementBehaviour Inputs;
     [SerializeField] MovementManager movementManager;
 
     private bool IsPressing;
-    Vector2 Axedirection = Vector2.zero;
+    private Vector2 Axedirection = Vector2.zero;
     private GameObject myAxe;
     private bool IsAttackOn;
 
     private void Update()
     {
+        Debug.Log("Axe count: " + AxeCount);
         #region Shooting
         if (HasAxe)
         {
@@ -41,6 +55,7 @@ public class CombatManager : MonoBehaviour
                 movementManager.IsCanMove = false;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 Axedirection = ShootingDirection();
+                
                 IsAttackOn = true;
             }
             if (IsAttackOn)
@@ -49,19 +64,25 @@ public class CombatManager : MonoBehaviour
                 {
                     if (IsPressing)
                     {
+                        movementManager.CalculatingStatues();
                         //Fýrlatma ayarlarý burasý
                         AxeSprite.enabled = false;
                         myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
                         Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
-                        AxeRb.velocity = (Axedirection * Time.fixedDeltaTime * AxeSpeed);
+                        AxeRb.velocity = (Axedirection * Time.fixedDeltaTime * 100 * AxeSpeed);
                         Debug.Log("Fýrlattý");
-                        this.Wait(0.2f, () => movementManager.IsCanMove = true);
                         for (int i = 0; i < Arrows.Length; i++)
                         {
                             Arrows[i].SetActive(false);
                         }
-                        HasAxe = false;
+                        AxeCount--;
+                        if (AxeCount == 0)
+                        {
+                            HasAxe = false;
+                           
+                        }
                         IsAttackOn = false;
+                        this.Wait(0.2f, () => movementManager.IsCanMove = true);
                     }
                 }
             }
@@ -80,7 +101,7 @@ public class CombatManager : MonoBehaviour
         #endregion
 
         #region Taking axe back
-        if (!HasAxe)
+        if (AxeCount <= 2)
         {
             if (Input.GetKeyDown(KeyCode.G))
             {
@@ -89,6 +110,7 @@ public class CombatManager : MonoBehaviour
                     myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
                     AxeSprite.enabled = true;
                     Destroy(myAxe);
+                    AxeCount++;
                     this.Wait(0.2f, () => HasAxe = true);
                 }
             }

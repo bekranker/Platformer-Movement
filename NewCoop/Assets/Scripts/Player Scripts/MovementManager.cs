@@ -59,19 +59,14 @@ public class MovementManager : Librariy
     [Header("-----Jump Settings With One Axe-----")]
     [Space(30)]
     [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 100f)] public float AxejumpAmount_1;
-    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 10f)] public float AxeJumpCutTimer_1;
-    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 1f)] public float AxejumpCutMultiplier_1;
 
     [Space(10)]
     [Header("-----Jump Settings With Two Axe-----")]
     [Space(30)]
     [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 100f)] public float AxejumpAmount_2;
-    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 10f)] public float AxeJumpCutTimer_2;
-    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 1f)] public float AxejumpCutMultiplier_2;
 
 
-
-    private float _jumpAmount, _JumpCutMultiplier, _JumpTimeCounter, _MainSpeed, _Accelerration, _Deacceleration;
+    private float _jumpAmount, _MainSpeed, _Accelerration, _Deacceleration;
 
 
     [Space(10)]
@@ -157,7 +152,7 @@ public class MovementManager : Librariy
     #endregion
 
     #region Axe Settings
-    private void CalculatingStatues()
+    public void CalculatingStatues()
     {
         if (combatManager.HasAxe)
         {
@@ -169,7 +164,7 @@ public class MovementManager : Librariy
                 _jumpAmount = AxejumpAmount_1;
                 totalJump = 1;
             }
-            if (combatManager.AxeCount == 2)
+            else if (combatManager.AxeCount == 2)
             {
                 _MainSpeed = AxeMainSpeed_2;
                 _Accelerration = AxeAcceleration_2;
@@ -242,7 +237,6 @@ public class MovementManager : Librariy
     #region Jump Cut
     public void JumpCut()
     {
-        //rb.velocity += Vector2.up * jumpCutAmount * Time.fixedDeltaTime;
         if (rb.velocity.y > 0)
         {
             rb.AddForce(Vector2.down * rb.velocity.y * (1 - JumpCutTimeCounter), ForceMode2D.Impulse);

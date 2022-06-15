@@ -173,8 +173,6 @@ public class PlatformerTools : MonoBehaviour
                 if (!movementManager.buffering && movementManager.isGrounded)
                 {
                     movementManager.coyoteJump = false;
-                    
-                    
                     Debug.Log("Normal Jump is working");
                     movementManager.jumpCounter--;
                     movementManager.AddJumpForce();
@@ -215,7 +213,7 @@ public class PlatformerTools : MonoBehaviour
         if (Inputs.Jump == 1)
         {
             movementManager.jumpTimeCounter -= Time.deltaTime;
-            if (movementManager.jumpCounter > 0)
+            if (movementManager.jumpCounter >= 0)
             {
                 if (movementManager.jumpTimeCounter > 0 && !movementManager.isGrounded)
                 {

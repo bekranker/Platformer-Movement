@@ -292,13 +292,13 @@ MonoBehaviour:
   velPower: 0.96
   fallingGravityScale: 1.95
   gravityScale: 1.5
-  AxeMainSpeed_1: 10
-  AxeAcceleration_1: 20
-  AxeDecceleration_1: 25
+  AxeMainSpeed_1: 12.2
+  AxeAcceleration_1: 14
+  AxeDecceleration_1: 28.1
   AxeMainSpeed_2: 0
   AxeAcceleration_2: 0
   AxeDecceleration_2: 0
-  jumpAmount: 8
+  jumpAmount: 9
   JumpCutTimer: 1.9
   jumpCutMultiplier: 0.35
   jumpTime: 0.14
@@ -312,12 +312,8 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
-  AxejumpAmount_1: 8
-  AxeJumpCutTimer_1: 1.9
-  AxejumpCutMultiplier_1: 0.15
-  AxejumpAmount_2: 5
-  AxeJumpCutTimer_2: 1.1
-  AxejumpCutMultiplier_2: 0.15
+  AxejumpAmount_1: 7
+  AxejumpAmount_2: 6
   CoyotoTime: 0.15
   CoyoteAmount: 12
   coyoteJump: 0
@@ -330,7 +326,7 @@ MonoBehaviour:
   isDashing: 0
   JumpCutTimeCounter: 0
   dashCount: 0
-  doubleJumpAmount: 16
+  doubleJumpAmount: 27.1
   rb: {fileID: 8505177524007123630}
   boxC2D: {fileID: 7235418268055531539}
   Input: {fileID: 1174689607428651666}
@@ -366,7 +362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8435d1fb24f7401488180df6a53a1466, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AxeSpeed: 750
+  AxeSpeed: 10
   AxePrefab: {fileID: 8573904975313080598, guid: d8308c04b6ef0054cb96639dfd58901b, type: 3}
   AxeSprite: {fileID: 5624293397599338341}
   AxeSpawner: {fileID: 8476904157457249664}
