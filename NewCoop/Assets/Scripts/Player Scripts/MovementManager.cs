@@ -180,6 +180,7 @@ public class MovementManager : Librariy
             _Deacceleration = decceleration;
             _jumpAmount = jumpAmount;
             totalJump = 2;
+            jumpCounter = 2;
         }
     }
     #endregion

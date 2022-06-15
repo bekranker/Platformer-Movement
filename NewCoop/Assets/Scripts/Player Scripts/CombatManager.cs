@@ -44,6 +44,7 @@ public class CombatManager : MonoBehaviour
     private void Update()
     {
         Debug.Log("Axe count: " + AxeCount);
+
         #region Shooting
         if (HasAxe)
         {
@@ -64,7 +65,7 @@ public class CombatManager : MonoBehaviour
                 {
                     if (IsPressing)
                     {
-                        movementManager.CalculatingStatues();
+                        
                         //Fýrlatma ayarlarý burasý
                         AxeSprite.enabled = false;
                         myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
@@ -79,7 +80,6 @@ public class CombatManager : MonoBehaviour
                         if (AxeCount == 0)
                         {
                             HasAxe = false;
-                           
                         }
                         IsAttackOn = false;
                         this.Wait(0.2f, () => movementManager.IsCanMove = true);
