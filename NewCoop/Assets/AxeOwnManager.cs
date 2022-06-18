@@ -65,9 +65,12 @@ public class AxeOwnManager : MonoBehaviour
             rbAxe.gravityScale = 0;
             rbAxe.velocity = Vector2.zero;
         }
-        if (_IsCanKill && collision.gameObject.tag == "head")
+        if (collision.gameObject.tag == "head")
         {
-            Debug.Log("Player is dead !!");
+            if (_IsCanKill)
+            {
+                Destroy(collision.gameObject);
+            }
         }
         if (collision.gameObject.tag == "Player")
         {

@@ -6,12 +6,6 @@ using DG.Tweening;
 public class CombatManager : MonoBehaviour
 {
     [Space(10)]
-    [Header("-----Axe Physics-----")]
-    [Space(25)]
-    [BackgroundColor(1, 0, 0, 1)]
-    [SerializeField] float AxeSpeed;
-
-    [Space(10)]
     [Header("-----Object's Settings-----")]
     [BackgroundColor(0, 1, 0, 1)]
     [Space(25)]
@@ -27,7 +21,7 @@ public class CombatManager : MonoBehaviour
     [BackgroundColor(0,0,1,1)]
     public bool HasAxe = true;
     public int AxeCount;
-    private Collider2D IsTouchingAxe;
+
 
     [Space(10)]
     [Header("----Components-----")]
@@ -65,7 +59,6 @@ public class CombatManager : MonoBehaviour
                 {
                     if (IsPressing)
                     {
-                        
                         //Fýrlatma ayarlarý burasý
                         AxeSprite.enabled = false;
                         myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
@@ -102,10 +95,6 @@ public class CombatManager : MonoBehaviour
         #endregion
     }
 
-    private void FixedUpdate()
-    {
-        IsTouchingAxe = Physics2D.OverlapBox(transform.position, Vector2.one, default, AxeMask);
-    }
 
     #region Shooting direction settings
     private int ShootDirectionSettings()

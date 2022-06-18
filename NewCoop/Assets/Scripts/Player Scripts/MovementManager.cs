@@ -26,33 +26,33 @@ public class MovementManager : Librariy
     [Space(10)]
     [Header("-----Move Options With one axe-----")]
     [Space(30)]
-    [Range(1f, 100f)] public float AxeMainSpeed_1;
-    [Range(1f, 50f)] public float AxeAcceleration_1;
-    [Range(1f, 50f)] public float AxeDecceleration_1;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 100f)] public float AxeMainSpeed_1;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 50f)] public float AxeAcceleration_1;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 50f)] public float AxeDecceleration_1;
 
     [Space(10)]
     [Header("-----Move Options With two axe-----")]
     [Space(30)]
-    [Range(1f, 100f)] public float AxeMainSpeed_2;
-    [Range(1f, 50f)] public float AxeAcceleration_2;
-    [Range(1f, 50f)] public float AxeDecceleration_2;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 100f)] public float AxeMainSpeed_2;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 50f)] public float AxeAcceleration_2;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 50f)] public float AxeDecceleration_2;
 
 
     [Space(10)]
     [Header("-----Jump Settings Without axe-----")]
     [Space(30)]
-    [BackgroundColor(0f, 0f, 1f, 1f)] [Range(1f, 100f)] public float jumpAmount;
-    [BackgroundColor(0f, 0f, 1f, 1f)] [Range(1f, 10f)] public float JumpCutTimer;
-    [BackgroundColor(0f, 0f, 1f, 1f)] [Range(0.005f, 1f)] public float jumpCutMultiplier;
-    [BackgroundColor(0f, 0f, 1f, 1f)] [Range(0.005f, 1f)] public float jumpTime;
-    [BackgroundColor(0f, 0f, 1f, 1f)] [HideInInspector] public float jumpTimeCounter;
-    [BackgroundColor(0f, 0f, 1f, 1f)] [HideInInspector] public Vector2 checkPosSize;
-    [BackgroundColor(0f, 0f, 1f, 1f)] [HideInInspector] public bool isGrounded = true;
-    [BackgroundColor(0f, 0f, 1f, 1f)] [HideInInspector] public bool isJumped;
-    public int totalJump;
-    public int jumpCounter;
-    public Transform checkPos;
-    public LayerMask layerMask;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 100f)] public float jumpAmount;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(1f, 10f)] public float JumpCutTimer;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(0.005f, 1f)] public float jumpCutMultiplier;
+    [BackgroundColor(0f, 1f, 0f, 1f)] [Range(0.005f, 1f)] public float jumpTime;
+    [HideInInspector] public float jumpTimeCounter;
+    [HideInInspector] public Vector2 checkPosSize;
+    [HideInInspector] public bool isGrounded = true;
+    [HideInInspector] public bool isJumped;
+    [BackgroundColor(0f, 1f, 0f, 1f)] public int totalJump;
+    [BackgroundColor(0f, 1f, 0f, 1f)] public int jumpCounter;
+    [BackgroundColor(0f, 1f, 0f, 1f)] public Transform checkPos;
+    [BackgroundColor(0f, 1f, 0f, 1f)] public LayerMask layerMask;
 
 
     [Space(10)]
