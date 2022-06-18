@@ -43,7 +43,7 @@ public class CombatManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Axe count: " + AxeCount);
+        //Debug.Log("Axe count: " + AxeCount);
 
         #region Shooting
         if (HasAxe)

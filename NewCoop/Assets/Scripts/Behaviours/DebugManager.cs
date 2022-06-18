@@ -7,12 +7,17 @@ public class DebugManager : MonoBehaviour
 {
     [SerializeField] MovementBehaviour Ipnuts;
 
+    PauseManager pauseManager;
+    private void Start()
+    {
+        pauseManager = GameObject.Find("PauseManager").GetComponent<PauseManager>();
+    }
 
     void Update()
     {
         if (Ipnuts.Start == 1)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            pauseManager.Pause();
         }
     }
 }
