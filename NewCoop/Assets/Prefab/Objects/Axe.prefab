@@ -234,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   directionForce: 150
   directionForceCuter: 40.5
-  AxeForce: 5
+  AxeForce: 23
   AxeForceCuter: 6
   AxeGravityCounter: 0.6
   _mask:

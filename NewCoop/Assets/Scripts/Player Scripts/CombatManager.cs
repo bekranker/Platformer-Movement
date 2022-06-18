@@ -71,7 +71,7 @@ public class CombatManager : MonoBehaviour
                         myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
                         myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
                         Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
-                        
+                        myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
                         Debug.Log("Fýrlattý");
                         for (int i = 0; i < Arrows.Length; i++)
                         {
@@ -100,19 +100,6 @@ public class CombatManager : MonoBehaviour
             }
         }
         #endregion
-
-        //#region Taking axe back
-        //if (AxeCount <= 2)
-        //{
-        //    if (IsTouchingAxe)
-        //    {
-        //        //myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
-        //        AxeSprite.enabled = true;
-        //        AxeCount++;
-        //        this.Wait(0.2f, () => HasAxe = true);
-        //    }
-        //}
-        //#endregion
     }
 
     private void FixedUpdate()
