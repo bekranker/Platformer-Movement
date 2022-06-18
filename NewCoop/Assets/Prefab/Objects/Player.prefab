@@ -123,11 +123,12 @@ GameObject:
   - component: {fileID: 1174689607428651678}
   - component: {fileID: 8505177524007123630}
   - component: {fileID: 7235418268055531539}
-  - component: {fileID: 1174689607428651666}
   - component: {fileID: 5696987263579804961}
   - component: {fileID: 5999124978200234611}
   - component: {fileID: 3185881680145486794}
   - component: {fileID: 8337270857119494216}
+  - component: {fileID: 293021737014898470}
+  - component: {fileID: -6241936138316043997}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -210,31 +211,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1174689607428651666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174689607428651667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db4979638c927e4fa6f6c8e941f34fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerName: 
-  control: 0
-  x: 0
-  y: 0
-  RR: 0
-  RL: 0
-  JumpDown: 0
-  Jump: 0
-  Attack: 0
-  AttackDown: 0
-  Settings: 0
-  Cancel: 0
-  CancelDown: 0
 --- !u!114 &5696987263579804961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -266,7 +242,7 @@ MonoBehaviour:
   DashMultipler: 45
   DashTime: 0.2
   StartDashTime: 0.14
-  Inputs: {fileID: 1174689607428651666}
+  Inputs: {fileID: 293021737014898470}
   movementManager: {fileID: 5999124978200234611}
   rb: {fileID: 8505177524007123630}
 --- !u!114 &5999124978200234611
@@ -329,7 +305,7 @@ MonoBehaviour:
   doubleJumpAmount: 27.1
   rb: {fileID: 8505177524007123630}
   boxC2D: {fileID: 7235418268055531539}
-  Input: {fileID: 1174689607428651666}
+  Input: {fileID: 293021737014898470}
   combatManager: {fileID: 8337270857119494216}
 --- !u!114 &3185881680145486794
 MonoBehaviour:
@@ -347,7 +323,7 @@ MonoBehaviour:
   _walkParticule: {fileID: 8789413196721812345}
   _doubleParticule: {fileID: 5317139398204422639, guid: 424d6a2d0a17c7d4092f43d055c3f442, type: 3}
   velocityAmount: 56
-  movementBehaviour: {fileID: 1174689607428651666}
+  movementBehaviour: {fileID: 293021737014898470}
   movementManager: {fileID: 5999124978200234611}
   groundCheckPos: {fileID: 7461186936902632192}
 --- !u!114 &8337270857119494216
@@ -380,8 +356,61 @@ MonoBehaviour:
     m_Bits: 256
   HasAxe: 1
   AxeCount: 1
-  Inputs: {fileID: 1174689607428651666}
+  Inputs: {fileID: 293021737014898470}
   movementManager: {fileID: 5999124978200234611}
+--- !u!114 &293021737014898470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 222c22ebbc08cd44fbed4166eef1809b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
+  r: 0
+  JumpDown: 0
+  Jump: 0
+  Attack: 0
+  MeleeDown: 0
+  AttackDown: 0
+  Start: 0
+  Cancel: 0
+  CancelDown: 0
+--- !u!114 &-6241936138316043997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 63322eff00d148b48a52d097b1634ee3, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Keyboard
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1190423593955371348
 GameObject:
   m_ObjectHideFlags: 0

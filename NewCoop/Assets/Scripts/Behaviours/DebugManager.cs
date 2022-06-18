@@ -7,9 +7,9 @@ public class DebugManager : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }        
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //}        
     }
 }

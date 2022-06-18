@@ -93,27 +93,27 @@ public class CombatManager : MonoBehaviour
         #region Melee Combot
         if (HasAxe)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("Meele Combat With AXE");
-            }
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    Debug.Log("Meele Combat With AXE");
+            //}
         }
         #endregion
 
         #region Taking axe back
         if (AxeCount <= 2)
         {
-            if (Input.GetKeyDown(KeyCode.G))
-            {
-                if (IsTouchingAxe)
-                {
-                    myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
-                    AxeSprite.enabled = true;
-                    Destroy(myAxe);
-                    AxeCount++;
-                    this.Wait(0.2f, () => HasAxe = true);
-                }
-            }
+            //if (Input.GetKeyDown(KeyCode.G))
+            //{
+            //    if (IsTouchingAxe)
+            //    {
+            //        myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
+            //        AxeSprite.enabled = true;
+            //        Destroy(myAxe);
+            //        AxeCount++;
+            //        this.Wait(0.2f, () => HasAxe = true);
+            //    }
+            //}
         }
         #endregion
     }

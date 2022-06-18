@@ -1202,11 +1202,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1302163703}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71641542f02ac5c4dbdb8869765682cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d4582bf43fb3aa40ac3505700b58b16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 1174689607428651667, guid: 2522dac2347394741aa8c9474e5e4517, type: 3}
-  spawner: {fileID: 1302163705}
 --- !u!4 &1302163705
 Transform:
   m_ObjectHideFlags: 0
