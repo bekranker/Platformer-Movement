@@ -69,6 +69,18 @@ public class AxeOwnManager : MonoBehaviour
         {
             Debug.Log("Player is dead !!");
         }
+        if (collision.gameObject.tag == "Player")
+        {
+
+            if (_IsTouchingToGround)
+            {
+                if (collision.gameObject.GetComponent<CombatManager>().AxeCount < 2)
+                {
+                    collision.gameObject.GetComponent<CombatManager>().AxeCount++;
+                    Destroy(gameObject);
+                }
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)

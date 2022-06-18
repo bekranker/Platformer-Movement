@@ -27,7 +27,7 @@ public class GetControllers : MonoBehaviour
         #region Controller Join
         foreach (InputDevice device in InputSystem.devices)
         {
-            Debug.Log(device);
+
             if (Gamepad.all.ToList().Contains(device))
             {                
                 AddGamepad(device);
@@ -70,7 +70,7 @@ public class GetControllers : MonoBehaviour
     {
         GameObject playerMenu = Instantiate<GameObject>(PlayerMenuPrefab);         
         PlayerInput Keyboard = playerMenu.GetComponent<PlayerInput>();
-        Debug.Log("Keyboard" + KeyboardIndex);
+
         Keyboard.GetComponent<PlayerMenuScript>().GetPlayPanel(PlayPanel);
         if(KeyboardIndex == "1")
         {

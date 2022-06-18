@@ -173,7 +173,7 @@ public class PlatformerTools : MonoBehaviour
                 if (!movementManager.buffering && movementManager.isGrounded)
                 {
                     movementManager.coyoteJump = false;
-                    Debug.Log("Normal Jump is working");
+
                     movementManager.jumpCounter--;
                     movementManager.AddJumpForce();
                 }
@@ -182,7 +182,7 @@ public class PlatformerTools : MonoBehaviour
                     IsCanDoubleJump = true;
                     if (IsCanDoubleJump)
                     {
-                        Debug.Log("Double Jump is working");
+
                         movementManager.jumpCounter--;
                         movementManager.AddDoubleJumpForce();
                     }
@@ -192,7 +192,7 @@ public class PlatformerTools : MonoBehaviour
                 {
                     if (movementManager.coyoteTimeCounter > 0)
                     {
-                        Debug.Log("Coyoto is working");
+
                         movementManager.jumpCounter--;
                         movementManager.AddCoyoteTimeForce();
                         movementManager.coyoteJump = false;
@@ -202,7 +202,7 @@ public class PlatformerTools : MonoBehaviour
             else if(movementManager.jumpCounter <= 0)
             {
                 IsCanDoubleJump = false;
-                Debug.Log($"{movementManager.jumpCounter}");
+
                 movementManager.buffering = true;
                 movementManager.jumpCounter--;
                 this.Wait(movementManager.BufferTime, () => movementManager.buffering = false);
