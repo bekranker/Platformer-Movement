@@ -93,7 +93,6 @@ GameObject:
   - component: {fileID: 8573904975313080597}
   - component: {fileID: 6361770084160195023}
   - component: {fileID: 6366568690366443917}
-  - component: {fileID: -1761923123325692227}
   - component: {fileID: 8488413007730552338}
   m_Layer: 8
   m_Name: Axe
@@ -159,32 +158,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   rbAxe: {fileID: 6361770084160195023}
-  Inputs: {fileID: -1761923123325692227}
---- !u!114 &-1761923123325692227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8573904975313080598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db4979638c927e4fa6f6c8e941f34fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerName: 
-  control: 0
-  x: 0
-  y: 0
-  RR: 0
-  RL: 0
-  JumpDown: 0
-  Jump: 0
-  Attack: 0
-  AttackDown: 0
-  Settings: 0
-  Cancel: 0
-  CancelDown: 0
+  Inputs: {fileID: 0}
 --- !u!61 &8488413007730552338
 BoxCollider2D:
   m_ObjectHideFlags: 0

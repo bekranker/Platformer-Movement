@@ -69,6 +69,7 @@ public class CombatManager : MonoBehaviour
                         //Fýrlatma ayarlarý burasý
                         AxeSprite.enabled = false;
                         myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
+                        myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
                         Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
                         AxeRb.velocity = (Axedirection * Time.fixedDeltaTime * 100 * AxeSpeed);
                         Debug.Log("Fýrlattý");

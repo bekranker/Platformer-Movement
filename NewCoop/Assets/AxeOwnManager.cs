@@ -30,7 +30,7 @@ public class AxeOwnManager : MonoBehaviour
     [Header("-----Components-----")]
     [Space(20)]
     [BackgroundColor(0,0,1,1)]
-    [SerializeField] MovementBehaviour Inputs;
+    public MovementBehaviour Inputs;
 
     private void Start()
     {
