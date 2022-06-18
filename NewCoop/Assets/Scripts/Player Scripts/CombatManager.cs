@@ -37,7 +37,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] MovementManager movementManager;
 
     private bool IsPressing;
-    private Vector2 Axedirection = Vector2.zero;
+    private float Axedirection = 0;
     private GameObject myAxe;
     private bool IsAttackOn;
 
@@ -71,7 +71,7 @@ public class CombatManager : MonoBehaviour
                         myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
                         myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
                         Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
-                        AxeRb.velocity = (Axedirection * Time.fixedDeltaTime * 100 * AxeSpeed);
+                        
                         Debug.Log("Fýrlattý");
                         for (int i = 0; i < Arrows.Length; i++)
                         {
@@ -163,44 +163,44 @@ public class CombatManager : MonoBehaviour
     #endregion
 
     #region Shooting Direction
-    private Vector2 ShootingDirection()
+    private float ShootingDirection()
     {
         Debug.ClearDeveloperConsole();
         Debug.Log($"Direction Index: {ShootDirectionSettings()}");
-        Vector2 a = Vector2.zero;
+        float a = 0;
         switch (ShootDirectionSettings())
         {
             case 1:
                 ArrowSystem(0);
-                a = Vector2.up;
+                a = 0;
                 break;
             case 2:
                 ArrowSystem(1);
-                a = Vector2.up + Vector2.left;
+                a = 45;
                 break;
             case 3:
                 ArrowSystem(2);
-                a = Vector2.left;
+                a = 90;
                 break;
             case 4:
                 ArrowSystem(3);
-                a = Vector2.down + Vector2.left;
+                a = 135;
                 break;
             case 5:
                 ArrowSystem(4);
-                a = Vector2.down;
+                a = 180;
                 break;
             case 6:
                 ArrowSystem(5);
-                a = Vector2.right + Vector2.down;
+                a = 225;
                 break;
             case 7:
                 ArrowSystem(6);
-                a = Vector2.right;
+                a = 270;
                 break;
             case 8:
                 ArrowSystem(7);
-                a = Vector2.right + Vector2.up;
+                a = 315;
                 break;
             case 0:
                 ArrowSystem(9);
