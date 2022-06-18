@@ -77,6 +77,7 @@ public class AxeOwnManager : MonoBehaviour
                 if (collision.gameObject.GetComponent<CombatManager>().AxeCount < 2)
                 {
                     collision.gameObject.GetComponent<CombatManager>().AxeCount++;
+                    collision.gameObject.GetComponent<CombatManager>().HasAxe = true;
                     Destroy(gameObject);
                 }
             }
