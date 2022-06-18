@@ -124,35 +124,35 @@ public class CombatManager : MonoBehaviour
     #region Shooting direction settings
     private int ShootDirectionSettings()
     {
-        if (Inputs.x == 0 && Inputs.y > 0)
+        if (Inputs.x >= -0.1f && Inputs.x <= 0.1f && Inputs.y > 0.1f)
         {
             return 1;
         }
-        if (Inputs.x < 0 && Inputs.y > 0)
+        if (Inputs.x < -0.1f && Inputs.y > 0.3f)
         {
             return 2;
         }
-        if (Inputs.x < 0 && Inputs.y == 0)
+        if (Inputs.x < -0.1f && Inputs.y >= -0.1f && Inputs.y <= 0.1f)
         {
             return 3;
         }
-        if (Inputs.x < 0 && Inputs.y < 0)
+        if (Inputs.x < -0.1f && Inputs.y < -0.1f)
         {
             return 4;
         }
-        if (Inputs.x == 0 && Inputs.y < 0)
+        if (Inputs.x >= -0.1f && Inputs.x <= 0.1f && Inputs.y < -0.1f)
         {
             return 5;
         }
-        if (Inputs.x > 0 && Inputs.y < 0)
+        if (Inputs.x > 0.3f && Inputs.y < -0.1f)
         {
             return 6;
         }
-        if (Inputs.x > 0 && Inputs.y == 0)
+        if (Inputs.x > 0.3f && Inputs.y >= -0.1f && Inputs.y <= 0.1f)
         {
             return 7;
         }
-        if (Inputs.x > 0 && Inputs.y > 0)
+        if (Inputs.x > 0.3f && Inputs.y > 0.3f)
         {
             return 8;
         }
