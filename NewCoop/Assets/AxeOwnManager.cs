@@ -69,12 +69,11 @@ public class AxeOwnManager : MonoBehaviour
         {
             if (_IsCanKill)
             {
-                Destroy(collision.gameObject);
+                Destroy(collision.transform.parent.transform.parent.gameObject);
             }
         }
         if (collision.gameObject.tag == "Player")
         {
-
             if (_IsTouchingToGround)
             {
                 if (collision.gameObject.GetComponent<CombatManager>().AxeCount < 2)
@@ -95,7 +94,10 @@ public class AxeOwnManager : MonoBehaviour
         }
         if (collision.gameObject.tag == "head")
         {
-            _IsCanKill = true;
+            if (!_IsTouchingToGround)
+            {
+                _IsCanKill = true;
+            }
         }
     }
     #endregion

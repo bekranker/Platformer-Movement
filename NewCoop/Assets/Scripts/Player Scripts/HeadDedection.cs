@@ -12,6 +12,7 @@ public class HeadDedection : MonoBehaviour
             if (direction.y == -1)
             {
                 Debug.Log($"{collision.gameObject.name} is dead !!");
+                Destroy(transform.parent.transform.parent.gameObject);
             }
         }
     }
