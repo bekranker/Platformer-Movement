@@ -29,6 +29,11 @@ public class MenuManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void GotoScene(string SceneName)
+    {
+        SceneManager.LoadScene(SceneName);
+    }
+
     public void ChangeMap(string ActionMapName)
     {
         foreach (var playerMenu in GameObject.FindGameObjectsWithTag("PlayerMenu"))
