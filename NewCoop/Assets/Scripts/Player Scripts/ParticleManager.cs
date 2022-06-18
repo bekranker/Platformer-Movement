@@ -7,7 +7,6 @@ public class ParticleManager : MonoBehaviour
 
     [Header("-----Particles------")]
     [SerializeField] GameObject jumpParticle;
-    [SerializeField] GameObject _walkParticule;
     [SerializeField] GameObject _doubleParticule;
 
     [Header("------Jump Particle Settings------")]
@@ -40,7 +39,7 @@ public class ParticleManager : MonoBehaviour
             }
         }
         JumpParticle();
-        walkParticle();
+
     }
 
     void JumpParticle()
@@ -84,20 +83,6 @@ public class ParticleManager : MonoBehaviour
         {
             forceOverLifetime.xMultiplier -= Time.deltaTime;
             forceOverLifetime.yMultiplier -= Time.deltaTime;
-        }
-    }
-
-    void walkParticle()
-    {
-        ParticleSystem ps = _walkParticule.GetComponent<ParticleSystem>();
-
-        if (movementManager.isGrounded)
-        {
-            _walkParticule.SetActive(true);
-        }
-        else
-        {
-            _walkParticule.SetActive(false);
         }
     }
 }

@@ -85,7 +85,7 @@ public class MovementManager : Librariy
     [Range(0.005f, 100f)] public float BufferAmount;
     [HideInInspector] public bool buffering = false;
 
-    [Space(5)]
+    [Space(10)]
     [Header("-----Dash Settings-----")]
     [Space(20)]
     [Range(0.005f, 100f)] public float DashDistance;
@@ -94,16 +94,16 @@ public class MovementManager : Librariy
     [HideInInspector] public float JumpCutTimeCounter;
     public int dashCount;
 
-    [Space(5)]
+    [Space(10)]
     [Header("-----Double Jump Settings-----")]
     [Space(20)]
     [Range(1f, 100f)] public float doubleJumpAmount;
 
-    [Space(5)]
+    [Space(10)]
     [BackgroundColor(1f, 0f, 1f, 1f)]
     [Header("----Componenets-----")]
     [Space(20)]
-    [SerializeField] private Rigidbody2D rb;
+    [SerializeField] public Rigidbody2D rb;
     [SerializeField] private BoxCollider2D boxC2D;
     [SerializeField] private MovementBehaviour Input;
     [SerializeField] private CombatManager combatManager;
@@ -180,7 +180,6 @@ public class MovementManager : Librariy
             _Deacceleration = decceleration;
             _jumpAmount = jumpAmount;
             totalJump = 2;
-            jumpCounter = 2;
         }
     }
     #endregion

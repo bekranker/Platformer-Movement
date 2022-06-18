@@ -10,6 +10,7 @@ public class CombatManager : MonoBehaviour
     [Space(25)]
     [BackgroundColor(1, 0, 0, 1)]
     [SerializeField] float AxeSpeed;
+    [SerializeField] Vector2 _startForce;
 
     [Space(10)]
     [Header("-----Object's Settings-----")]
@@ -17,6 +18,7 @@ public class CombatManager : MonoBehaviour
     [Space(25)]
     [SerializeField] GameObject AxePrefab;
     [SerializeField] SpriteRenderer AxeSprite;
+    [SerializeField] SpriteRenderer OtherAxeSprite;
     [SerializeField] Transform AxeSpawner;
     [SerializeField] GameObject[] Arrows;
     [SerializeField] LayerMask AxeMask;
@@ -37,27 +39,20 @@ public class CombatManager : MonoBehaviour
     [SerializeField] MovementManager movementManager;
 
     private bool IsPressing;
-    private Vector2 Axedirection = Vector2.zero;
-    private GameObject myAxe;
+    private float Axedirection = 0f;
+    [HideInInspector] public GameObject myAxe;
+    [HideInInspector] public Rigidbody2D rb;
     private bool IsAttackOn;
 
     private void Update()
     {
-        Debug.Log("Axe count: " + AxeCount);
-
         #region Shooting
         if (HasAxe)
         {
             if (Inputs.Attack == 1)
             {
                 //eðim alma ayarlarý burasý
-                Debug.Log("Eðim alýnýyor");
-                IsPressing = true;
-                movementManager.IsCanMove = false;
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                Axedirection = ShootingDirection();
-                
-                IsAttackOn = true;
+                calculating();
             }
             if (IsAttackOn)
             {
@@ -65,28 +60,17 @@ public class CombatManager : MonoBehaviour
                 {
                     if (IsPressing)
                     {
-                        
-                        //Fýrlatma ayarlarý burasý
                         AxeSprite.enabled = false;
-                        myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
-                        Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
-                        AxeRb.velocity = (Axedirection * Time.fixedDeltaTime * 100 * AxeSpeed);
-                        Debug.Log("Fýrlattý");
-                        for (int i = 0; i < Arrows.Length; i++)
-                        {
-                            Arrows[i].SetActive(false);
-                        }
+                        creatingComponents();
+                        FalseAllArrows();
+                        myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
                         AxeCount--;
-                        if (AxeCount == 0)
-                        {
-                            HasAxe = false;
-                        }
+                        if (AxeCount == 0) HasAxe = false;
                         IsAttackOn = false;
                         this.Wait(0.2f, () => movementManager.IsCanMove = true);
                     }
                 }
             }
-            
         }
         #endregion
 
@@ -108,7 +92,16 @@ public class CombatManager : MonoBehaviour
                 if (IsTouchingAxe)
                 {
                     myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
-                    AxeSprite.enabled = true;
+                    if (AxeCount == 1)
+                    {
+                        AxeSprite.enabled = true;
+                        OtherAxeSprite.enabled = false;
+                    }
+                    if (AxeCount == 2)
+                    {
+                        AxeSprite.enabled = false;
+                        OtherAxeSprite.enabled = true;
+                    }
                     Destroy(myAxe);
                     AxeCount++;
                     this.Wait(0.2f, () => HasAxe = true);
@@ -118,10 +111,24 @@ public class CombatManager : MonoBehaviour
         #endregion
     }
 
-    private void FixedUpdate()
+    #region calculate
+    private void calculating()
     {
-        IsTouchingAxe = Physics2D.OverlapBox(transform.position, Vector2.one, default, AxeMask);
+        IsPressing = true;
+        movementManager.IsCanMove = false;
+        GetComponent<Rigidbody2D>().velocity = new Vector2(Mathf.Clamp(GetComponent<Rigidbody2D>().velocity.x, 0,0), GetComponent<Rigidbody2D>().velocity.y);
+        Axedirection = ShootingDirection();
+        IsAttackOn = true;
     }
+    #endregion
+
+    #region Create and give components
+    private void creatingComponents()
+    {
+        myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
+        rb = myAxe.GetComponent<Rigidbody2D>();
+    }
+    #endregion
 
     #region Shooting direction settings
     private int ShootDirectionSettings()
@@ -166,44 +173,43 @@ public class CombatManager : MonoBehaviour
     #endregion
 
     #region Shooting Direction
-    private Vector2 ShootingDirection()
+    private float ShootingDirection()
     {
         Debug.ClearDeveloperConsole();
-        Debug.Log($"Direction Index: {ShootDirectionSettings()}");
-        Vector2 a = Vector2.zero;
+        float a = 0;
         switch (ShootDirectionSettings())
         {
             case 1:
                 ArrowSystem(0);
-                a = Vector2.up;
+                a = 0f;
                 break;
             case 2:
                 ArrowSystem(1);
-                a = Vector2.up + Vector2.left;
+                a = -315f;
                 break;
             case 3:
                 ArrowSystem(2);
-                a = Vector2.left;
+                a = -270;
                 break;
             case 4:
                 ArrowSystem(3);
-                a = Vector2.down + Vector2.left;
+                a = -225;
                 break;
             case 5:
                 ArrowSystem(4);
-                a = Vector2.down;
+                a = 180;
                 break;
             case 6:
                 ArrowSystem(5);
-                a = Vector2.right + Vector2.down;
+                a = -135;
                 break;
             case 7:
                 ArrowSystem(6);
-                a = Vector2.right;
+                a = -90;
                 break;
             case 8:
                 ArrowSystem(7);
-                a = Vector2.right + Vector2.up;
+                a = -45;
                 break;
             case 0:
                 ArrowSystem(9);
@@ -217,6 +223,16 @@ public class CombatManager : MonoBehaviour
     #endregion
 
     #region Arrow System
+    
+    private void FalseAllArrows()
+    {
+        for (int i = 0; i < Arrows.Length; i++)
+        {
+            Arrows[i].SetActive(false);
+        }
+    }
+    
+    
     private void ArrowSystem(int key)
     {
         if (key == 9)
