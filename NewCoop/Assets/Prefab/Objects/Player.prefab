@@ -320,7 +320,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpParticle: {fileID: 8227339459606187491, guid: bb4b5864cc101dc47864f04603d8f641, type: 3}
-  _walkParticule: {fileID: 8789413196721812345}
   _doubleParticule: {fileID: 5317139398204422639, guid: 424d6a2d0a17c7d4092f43d055c3f442, type: 3}
   velocityAmount: 56
   movementBehaviour: {fileID: 293021737014898470}
@@ -353,7 +352,7 @@ MonoBehaviour:
   - {fileID: 2579571639961656815}
   AxeMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 64
   HasAxe: 1
   AxeCount: 1
   Inputs: {fileID: 293021737014898470}

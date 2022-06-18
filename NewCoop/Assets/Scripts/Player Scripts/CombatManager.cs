@@ -101,19 +101,18 @@ public class CombatManager : MonoBehaviour
         }
         #endregion
 
-        #region Taking axe back
-        if (AxeCount <= 2)
-        {
-            if (IsTouchingAxe)
-            {
-                //myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
-                AxeSprite.enabled = true;
-                Destroy(myAxe);
-                AxeCount++;
-                this.Wait(0.2f, () => HasAxe = true);
-            }
-        }
-        #endregion
+        //#region Taking axe back
+        //if (AxeCount <= 2)
+        //{
+        //    if (IsTouchingAxe)
+        //    {
+        //        //myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
+        //        AxeSprite.enabled = true;
+        //        AxeCount++;
+        //        this.Wait(0.2f, () => HasAxe = true);
+        //    }
+        //}
+        //#endregion
     }
 
     private void FixedUpdate()
