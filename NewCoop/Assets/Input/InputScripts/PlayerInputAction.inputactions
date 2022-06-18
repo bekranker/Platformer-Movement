@@ -549,7 +549,7 @@
                     "path": "<Keyboard>/numpad5",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Controller1",
+                    "groups": "Keyboard2",
                     "action": "Melee",
                     "isComposite": false,
                     "isPartOfComposite": false
