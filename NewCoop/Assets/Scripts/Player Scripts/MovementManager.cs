@@ -12,6 +12,7 @@ public class MovementManager : Librariy
     [Range(0.005f, 100f)] public float ClampGravityMin;
     [Range(0.005f, 100f)] public float ClampGravityMax;
     public bool IsCanMove = true;
+    [SerializeField] Transform _graph;
 
     [Space(10)]
     [Header("-----Move Options Without axe-----")]
@@ -128,8 +129,24 @@ public class MovementManager : Librariy
 
         #region Physical Settings
         if (!isDashing) rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, minFallGravity, maxFallGravity));
+        
         #endregion
     }
+
+    #region Direction Of Player
+    private void DirectionOfPlayer()
+    {
+        if (rb.velocity.x > 0.01f)
+        {
+            _graph.localScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+        else if (rb.velocity.x < -0.01f)
+        {
+            _graph.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        }
+
+    }
+    #endregion
 
     #region Run Settings
     private void Runing()
@@ -148,6 +165,7 @@ public class MovementManager : Librariy
         rb.velocity = new Vector2(moveInput * _MainSpeed, rb.velocity.y);
         //Moving with forces
         rb.AddForce(moveInput * Vector2.right);
+        DirectionOfPlayer();
     }
     #endregion
 
