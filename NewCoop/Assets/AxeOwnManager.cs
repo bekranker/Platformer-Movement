@@ -42,14 +42,14 @@ public class AxeOwnManager : MonoBehaviour
         if (_IsTouchingToGround) return;
         else
         {
-            if (Inputs.RL == 1)
+            if (Inputs.r > 0)
             {
-                transform.Rotate(new Vector3(0, 0, 1 * directionForce * Time.deltaTime));
+                transform.Rotate(new Vector3(0, 0, Inputs.r * directionForce * Time.deltaTime));
                 Debug.Log("RL yönünde force var");
             }
-            if (Inputs.RR == 1)
+            if (Inputs.r < 0)
             {
-                transform.Rotate(new Vector3(0, 0, -1 * directionForce * Time.deltaTime));
+                transform.Rotate(new Vector3(0, 0, Inputs.r * directionForce * Time.deltaTime));
                 Debug.Log("RR yönünde force var");
             }
         }
