@@ -62,6 +62,7 @@ public class AxeOwnManager : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             _IsTouchingToGround = true;
+            _IsCanKill = false;
             rbAxe.gravityScale = 0;
             rbAxe.velocity = Vector2.zero;
         }
@@ -74,7 +75,7 @@ public class AxeOwnManager : MonoBehaviour
         }
         if (collision.gameObject.tag == "Player")
         {
-            if (_IsTouchingToGround)
+            if (_IsTouchingToGround && !_IsCanKill)
             {
                 if (collision.gameObject.GetComponent<CombatManager>().AxeCount < 2)
                 {
