@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class DebugManager : MonoBehaviour
 {
+    [SerializeField] MovementBehaviour Ipnuts;
+
+
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        //}        
+        if (Ipnuts.Start == 1)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }

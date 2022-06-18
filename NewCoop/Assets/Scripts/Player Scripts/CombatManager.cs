@@ -94,27 +94,24 @@ public class CombatManager : MonoBehaviour
         #region Melee Combot
         if (HasAxe)
         {
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    Debug.Log("Meele Combat With AXE");
-            //}
+            if (Inputs.MeleeDown == 1)
+            {
+                Debug.Log("Meele Combat With AXE");
+            }
         }
         #endregion
 
         #region Taking axe back
         if (AxeCount <= 2)
         {
-            //if (Input.GetKeyDown(KeyCode.G))
-            //{
-            //    if (IsTouchingAxe)
-            //    {
-            //        myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
-            //        AxeSprite.enabled = true;
-            //        Destroy(myAxe);
-            //        AxeCount++;
-            //        this.Wait(0.2f, () => HasAxe = true);
-            //    }
-            //}
+            if (IsTouchingAxe)
+            {
+                //myAxe.transform.position = Vector2.Lerp(myAxe.transform.position, transform.position, 1f);
+                AxeSprite.enabled = true;
+                Destroy(myAxe);
+                AxeCount++;
+                this.Wait(0.2f, () => HasAxe = true);
+            }
         }
         #endregion
     }
@@ -127,35 +124,35 @@ public class CombatManager : MonoBehaviour
     #region Shooting direction settings
     private int ShootDirectionSettings()
     {
-        if (Inputs.x == 0 && Inputs.y == 1)
+        if (Inputs.x == 0 && Inputs.y > 0)
         {
             return 1;
         }
-        if (Inputs.x == -1 && Inputs.y == 1)
+        if (Inputs.x < 0 && Inputs.y > 0)
         {
             return 2;
         }
-        if (Inputs.x == -1 && Inputs.y == 0)
+        if (Inputs.x < 0 && Inputs.y == 0)
         {
             return 3;
         }
-        if (Inputs.x == -1 && Inputs.y == -1)
+        if (Inputs.x < 0 && Inputs.y < 0)
         {
             return 4;
         }
-        if (Inputs.x == 0 && Inputs.y == -1)
+        if (Inputs.x == 0 && Inputs.y < 0)
         {
             return 5;
         }
-        if (Inputs.x == 1 && Inputs.y == -1)
+        if (Inputs.x > 0 && Inputs.y < 0)
         {
             return 6;
         }
-        if (Inputs.x == 1 && Inputs.y == 0)
+        if (Inputs.x > 0 && Inputs.y == 0)
         {
             return 7;
         }
-        if (Inputs.x == 1 && Inputs.y == 1)
+        if (Inputs.x > 0 && Inputs.y > 0)
         {
             return 8;
         }

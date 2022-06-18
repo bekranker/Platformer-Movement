@@ -1539,6 +1539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3853188a0cddec4dab307b4136fa958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Ipnuts: {fileID: 293021737014898470, guid: 2522dac2347394741aa8c9474e5e4517, type: 3}
 --- !u!4 &1698054544
 Transform:
   m_ObjectHideFlags: 0
