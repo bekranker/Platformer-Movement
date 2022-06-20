@@ -24,7 +24,7 @@ public class AxeOwnManager : MonoBehaviour
     private bool _IsTouchingToHead;
     private bool _IsCanKill;
     private float AxeForceCounter;
-
+    private bool IsCanTake, IsCanIsCanTake;
 
     [Space(10)]
     [Header("-----Components-----")]
@@ -65,11 +65,13 @@ public class AxeOwnManager : MonoBehaviour
             _IsCanKill = false;
             rbAxe.gravityScale = 0;
             rbAxe.velocity = Vector2.zero;
+            IsCanTake = (IsCanIsCanTake) ? true : false ;
         }
         if (collision.gameObject.tag == "head")
         {
             if (_IsCanKill)
             {
+                Debug.Log("balta ile öldü");
                 Destroy(collision.transform.parent.transform.parent.gameObject);
             }
         }
@@ -77,11 +79,14 @@ public class AxeOwnManager : MonoBehaviour
         {
             if (_IsTouchingToGround && !_IsCanKill)
             {
-                if (collision.gameObject.GetComponent<CombatManager>().AxeCount < 2)
+                if (IsCanTake)
                 {
-                    collision.gameObject.GetComponent<CombatManager>().AxeCount++;
-                    collision.gameObject.GetComponent<CombatManager>().HasAxe = true;
-                    Destroy(gameObject);
+                    if (collision.gameObject.GetComponent<CombatManager>().AxeCount < 2)
+                    {
+                        collision.gameObject.GetComponent<CombatManager>().AxeCount++;
+                        collision.gameObject.GetComponent<CombatManager>().HasAxe = true;
+                        Destroy(gameObject);
+                    }
                 }
             }
         }
@@ -93,8 +98,9 @@ public class AxeOwnManager : MonoBehaviour
         {
             _IsTouchingToGround = false;
         }
-        if (collision.gameObject.tag == "head")
+        if (collision.gameObject.tag == "head" && collision.gameObject.tag == "Player")
         {
+            IsCanIsCanTake = true;
             if (!_IsTouchingToGround)
             {
                 _IsCanKill = true;

@@ -14,7 +14,9 @@ public class CombatManager : MonoBehaviour
     [SerializeField] Transform AxeSpawner;
     [SerializeField] GameObject[] Arrows;
     [SerializeField] LayerMask AxeMask;
-    
+    [SerializeField] Transform MeleeCombatArea;
+    [SerializeField] LayerMask MeeleCombatLayerMask;
+
     [Space(10)]
     [Header("-----Statues-----")]
     [Space(25)]
@@ -34,6 +36,7 @@ public class CombatManager : MonoBehaviour
     private float Axedirection = 0;
     private GameObject myAxe;
     private bool IsAttackOn;
+    private bool IsMeeleCombat;
 
     private void Update()
     {
@@ -87,14 +90,31 @@ public class CombatManager : MonoBehaviour
         #region Melee Combot
         if (HasAxe)
         {
-            if (Inputs.MeleeDown == 1)
+            if (Inputs.MeleeDown > 0)
             {
-                Debug.Log("Meele Combat With AXE");
+                IsMeeleCombat = true;
+            }
+            else
+            {
+                IsMeeleCombat = false;
             }
         }
         #endregion
     }
 
+    private void FixedUpdate()
+    {
+        if (IsMeeleCombat)
+        {
+            Collider2D IsTouchToPlayer = Physics2D.OverlapBox(MeleeCombatArea.position, MeleeCombatArea.localScale, default, MeeleCombatLayerMask);
+
+            if (IsTouchToPlayer != null && IsTouchToPlayer)
+            {
+                Debug.Log("Meele Combat ile öldü");
+                Destroy(IsTouchToPlayer.gameObject);
+            }
+        }
+    }
 
     #region Shooting direction settings
     private int ShootDirectionSettings()
