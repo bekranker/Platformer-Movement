@@ -24,7 +24,7 @@ public class AxeOwnManager : MonoBehaviour
     private bool _IsTouchingToHead;
     private bool _IsCanKill;
     private float AxeForceCounter;
-    private bool IsCanTake, IsCanIsCanTake;
+    private bool IsCanTake;
 
     [Space(10)]
     [Header("-----Components-----")]
@@ -56,6 +56,19 @@ public class AxeOwnManager : MonoBehaviour
     }
     #endregion
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Ground")
+        {
+            _IsTouchingToGround = true;
+            _IsCanKill = false;
+            IsCanTake = true;
+            rbAxe.gravityScale = 0;
+            rbAxe.velocity = Vector2.zero;
+        }
+    }
+
+
     #region Collision Settings
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -63,20 +76,20 @@ public class AxeOwnManager : MonoBehaviour
         {
             _IsTouchingToGround = true;
             _IsCanKill = false;
+            IsCanTake = true;
             rbAxe.gravityScale = 0;
             rbAxe.velocity = Vector2.zero;
-            IsCanTake = (IsCanIsCanTake) ? true : false ;
         }
         if (collision.gameObject.tag == "head")
         {
-            if (_IsCanKill)
+            if (_IsCanKill && !_IsTouchingToGround)
             {
-                Debug.Log("balta ile öldü");
                 Destroy(collision.transform.parent.transform.parent.gameObject);
             }
         }
         if (collision.gameObject.tag == "Player")
         {
+
             if (_IsTouchingToGround && !_IsCanKill)
             {
                 if (IsCanTake)
@@ -98,13 +111,9 @@ public class AxeOwnManager : MonoBehaviour
         {
             _IsTouchingToGround = false;
         }
-        if (collision.gameObject.tag == "head" && collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "head")
         {
-            IsCanIsCanTake = true;
-            if (!_IsTouchingToGround)
-            {
-                _IsCanKill = true;
-            }
+            _IsCanKill = true;
         }
     }
     #endregion

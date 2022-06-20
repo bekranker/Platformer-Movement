@@ -48,7 +48,6 @@ public class CombatManager : MonoBehaviour
             if (Inputs.Attack == 1)
             {
                 //eðim alma ayarlarý burasý
-                Debug.Log("Eðim alýnýyor");
                 IsPressing = true;
                 movementManager.IsCanMove = false;
                 GetComponent<Rigidbody2D>().velocity = Vector2.zero;
@@ -68,7 +67,6 @@ public class CombatManager : MonoBehaviour
                         myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
                         Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
                         myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
-                        Debug.Log("Fýrlattý");
                         for (int i = 0; i < Arrows.Length; i++)
                         {
                             Arrows[i].SetActive(false);
@@ -110,7 +108,6 @@ public class CombatManager : MonoBehaviour
 
             if (IsTouchToPlayer != null && IsTouchToPlayer)
             {
-                Debug.Log("Meele Combat ile öldü");
                 Destroy(IsTouchToPlayer.gameObject);
             }
         }
@@ -162,7 +159,6 @@ public class CombatManager : MonoBehaviour
     private float ShootingDirection()
     {
         Debug.ClearDeveloperConsole();
-        Debug.Log($"Direction Index: {ShootDirectionSettings()}");
         float a = 0;
         switch (ShootDirectionSettings())
         {
@@ -200,7 +196,6 @@ public class CombatManager : MonoBehaviour
                 break;
             case 0:
                 ArrowSystem(9);
-                Debug.Log("Lost Direction");
                 break;
             default:
                 break;
