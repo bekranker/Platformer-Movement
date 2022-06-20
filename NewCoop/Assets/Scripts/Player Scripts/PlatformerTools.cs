@@ -312,7 +312,7 @@ public class PlatformerTools : MonoBehaviour
     #region Draws
     private void OnDrawGizmos()
     {
-        UnityEditor.Handles.color = Color.yellow;
+
         Gizmos.DrawWireSphere(movementManager.checkPos.position, 0.3f);
 
         Debug.DrawRay(TopLeftRay, Vector2.up * DistanceOfRays, Color.yellow);

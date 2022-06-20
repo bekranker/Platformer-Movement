@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(BackgroundColorAttribute))]
 public class BackgroundColorDecorator : DecoratorDrawer
 {
@@ -12,3 +13,4 @@ public class BackgroundColorDecorator : DecoratorDrawer
         GUI.backgroundColor = attr.color;
     }
 }
+#endif
