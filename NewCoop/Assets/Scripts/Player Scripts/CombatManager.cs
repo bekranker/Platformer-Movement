@@ -90,7 +90,12 @@ public class CombatManager : MonoBehaviour
         {
             if (Inputs.MeleeDown > 0)
             {
-                IsMeeleCombat = true;
+                Collider2D IsTouchToPlayer = Physics2D.OverlapBox(MeleeCombatArea.position, MeleeCombatArea.localScale, default, MeeleCombatLayerMask);
+
+                if (IsTouchToPlayer != null && IsTouchToPlayer)
+                {
+                    Destroy(IsTouchToPlayer.gameObject);
+                }
             }
             else
             {
@@ -102,15 +107,7 @@ public class CombatManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (IsMeeleCombat)
-        {
-            Collider2D IsTouchToPlayer = Physics2D.OverlapBox(MeleeCombatArea.position, MeleeCombatArea.localScale, default, MeeleCombatLayerMask);
 
-            if (IsTouchToPlayer != null && IsTouchToPlayer)
-            {
-                Destroy(IsTouchToPlayer.gameObject);
-            }
-        }
     }
 
     #region Shooting direction settings
