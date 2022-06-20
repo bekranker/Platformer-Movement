@@ -383,9 +383,9 @@ MonoBehaviour:
   AxeMainSpeed_1: 12.2
   AxeAcceleration_1: 14
   AxeDecceleration_1: 28.1
-  AxeMainSpeed_2: 0
-  AxeAcceleration_2: 0
-  AxeDecceleration_2: 0
+  AxeMainSpeed_2: 10
+  AxeAcceleration_2: 5
+  AxeDecceleration_2: 45
   jumpAmount: 9
   JumpCutTimer: 1.9
   jumpCutMultiplier: 0.35
@@ -575,7 +575,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -12
-  m_Time: 0.2
+  m_Time: 0.15
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -584,21 +584,21 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.79784966
-        inSlope: -0.89261585
-        outSlope: -0.89261585
+        value: 0.5978489
+        inSlope: -0.37884104
+        outSlope: -0.37884104
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.13033447
+        outWeight: 0.3337028
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -0.9631261
-        outSlope: -0.9631261
+        inSlope: -0.46687344
+        outSlope: -0.46687344
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.15743947
+        inWeight: 0.30598688
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
