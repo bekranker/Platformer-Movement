@@ -7,30 +7,37 @@ public class AxeOwnManager : MonoBehaviour
     [Space(10)]
     [Header("-----Axe Direction Settings-----")]
     [Space(20)]
-    [BackgroundColor(1,0,0,1)]
-    [Range(1, 300)] [SerializeField] float directionForce;
-    [Range(1, 100)] [SerializeField] float directionForceCuter;
-    [Range(1, 300)] [SerializeField] float AxeForce;
-    [Range(1, 100)] [SerializeField] float AxeForceCuter;
-    [Range(0.005f, 10)] [SerializeField] float AxeGravityCounter;
+    [BackgroundColor(1, 0, 0, 1)] [Range(1, 300)] [SerializeField] float directionForce;
+    [BackgroundColor(1, 0, 0, 1)] [Range(1, 100)] [SerializeField] float directionForceCuter;
+    [BackgroundColor(1, 0, 0, 1)] [Range(1, 300)] [SerializeField] float AxeForce;
+    [BackgroundColor(1, 0, 0, 1)] [Range(1, 100)] [SerializeField] float AxeForceCuter;
+    [BackgroundColor(1, 0, 0, 1)] [Range(0.005f, 10)] [SerializeField] float AxeGravityCounter;
 
     [Space(10)]
     [Header("-----Axe Settings-----")]
     [Space(20)]
-    [BackgroundColor(0, 1, 0, 1)]
-    [SerializeField] LayerMask _mask;
-    [SerializeField] Rigidbody2D rbAxe;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] LayerMask _maskForGround;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] LayerMask _maskForHead;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] LayerMask _maskForPlayer;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] Rigidbody2D rbAxe;
+    [BackgroundColor(0, 1, 0, 1)] [Range(0.001f, 10)] [SerializeField] float axeHeadRange;
+    [BackgroundColor(0, 1, 0, 1)] [Range(0.001f, 10)] [SerializeField] float axeBoolHeadRange;
+    [BackgroundColor(0, 1, 0, 1)] [Range(0.001f, 10)] [SerializeField] float axeGroundRange;
+    [BackgroundColor(0, 1, 0, 1)] [Range(0.001f, 10)] [SerializeField] float axePlayerRange;
     private bool _IsTouchingToGround;
-    private bool _IsTouchingToHead;
-    private bool _IsCanKill;
+    private bool _IsTouchToHead;
+    private bool _IsTouchToPlayer;
     private float AxeForceCounter;
-    private bool IsCanTake;
+    
+
 
     [Space(10)]
     [Header("-----Components-----")]
     [Space(20)]
-    [BackgroundColor(0,0,1,1)]
-    public MovementBehaviour Inputs;
+    [HideInInspector] public MovementBehaviour Inputs;
+    [HideInInspector] public Collider2D _WhichHead;
+    private Collider2D _ThisHead;
+    private Collider2D _ThisPlayer;
 
     private void Start()
     {
@@ -56,91 +63,124 @@ public class AxeOwnManager : MonoBehaviour
     }
     #endregion
 
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Ground")
-        {
-            _IsTouchingToGround = true;
-            _IsCanKill = false;
-            IsCanTake = true;
-            rbAxe.gravityScale = 0;
-            rbAxe.velocity = Vector2.zero;
-        }
-    }
-
-
-    #region Collision Settings
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            _IsTouchingToGround = true;
-            _IsCanKill = false;
-            IsCanTake = true;
-            rbAxe.gravityScale = 0;
-            rbAxe.velocity = Vector2.zero;
-        }
-        if (collision.gameObject.tag == "head")
-        {
-            if (_IsCanKill && !_IsTouchingToGround)
-            {
-                Destroy(collision.transform.parent.transform.parent.gameObject);
-            }
-        }
-        if (collision.gameObject.tag == "Player")
-        {
-
-            if (_IsTouchingToGround && !_IsCanKill)
-            {
-                if (IsCanTake)
-                {
-                    if (collision.gameObject.GetComponent<CombatManager>().AxeCount < 2)
-                    {
-                        collision.gameObject.GetComponent<CombatManager>().AxeCount++;
-                        collision.gameObject.GetComponent<CombatManager>().HasAxe = true;
-                        Destroy(gameObject);
-                    }
-                }
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Ground")
-        {
-            _IsTouchingToGround = false;
-        }
-        if (collision.gameObject.tag == "head")
-        {
-            _IsCanKill = true;
-        }
-    }
-    #endregion
 
     #region Draw Gizmos
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(transform.position, transform.localScale.x / 2);
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, axePlayerRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, axeBoolHeadRange);
+        Gizmos.color = Color.green;
+        Gizmos.DrawSphere(transform.position, axeHeadRange);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(transform.position, axeGroundRange);
+
     }
     #endregion
 
     void Update()
     {
+        AxePhysics();
+        AddForceToAxe();
+    }
+
+    
+    private void FixedUpdate()
+    {
+        GroundDedection();
+        HeadDedection();
+        PlayerDedection();
+    }
+
+    #region Head Dedection
+    private void HeadDedection()
+    {
+        Collider2D ThisHead = Physics2D.OverlapCircle(transform.position, axeBoolHeadRange, _maskForHead);
+        if (ThisHead != _WhichHead)
+        {
+            _IsTouchToHead = Physics2D.OverlapCircle(transform.position, axeHeadRange, _maskForHead);
+            _ThisHead = ThisHead;
+        }
+    }
+    #endregion
+
+    #region Player Dedection
+    private void PlayerDedection()
+    {
+        if (_IsTouchingToGround)
+        {
+            _IsTouchToPlayer = Physics2D.OverlapCircle(transform.position, axePlayerRange, _maskForPlayer);
+            if (_IsTouchToPlayer)
+            {
+                Collider2D _WhichPlayer = Physics2D.OverlapCircle(transform.position, axePlayerRange, _maskForPlayer);
+                _ThisPlayer = _WhichPlayer;
+            }
+        }
+    }
+    #endregion
+
+    #region Ground Dedection
+    private void GroundDedection()
+    {
+        _IsTouchingToGround = Physics2D.OverlapCircle(transform.position, axeGroundRange, _maskForGround);
+    }
+    #endregion
+
+    #region Get Take Axe
+    private void GetTakeBackTheAxe()
+    {
+        if (!_IsTouchingToGround) return;
+        if (_ThisPlayer == null) return;
+        else
+        {
+            CombatManager playerComponent = _ThisPlayer.GetComponent<CombatManager>();
+            if (playerComponent.AxeCount < 2)
+            {
+                playerComponent.HasAxe = true;
+                playerComponent.AxeCount++;
+                Destroy(gameObject);
+            }
+        }
+
+    }
+    #endregion
+
+    #region Axe Physics
+    private void AxePhysics()
+    {
         if (!_IsTouchingToGround)
         {
-            rbAxe.velocity = new  Vector2(Mathf.Clamp(rbAxe.velocity.x, -20, 20), Mathf.Clamp(rbAxe.velocity.y, -20, 20));
-            rbAxe.velocity += new Vector2(transform.up.x, transform.up.y) * Time.fixedDeltaTime * AxeForce;
-            AxeForce -= Time.deltaTime * AxeForceCuter;
-            if (AxeForce > AxeForceCounter) AxeForce -= Time.deltaTime * AxeForceCuter;
-            this.Wait(AxeGravityCounter, () => rbAxe.gravityScale = 0.7f);
-            directionForce -= Time.deltaTime * directionForceCuter;
+            AxeOnFlying();
         }
         else
         {
-            rbAxe.velocity = Vector2.zero;
-            rbAxe.gravityScale = 0;
+            AxeOnGround();
         }
-        AddForceToAxe();
     }
+    #endregion
+
+    #region Axe On Fly
+    private void AxeOnFlying()
+    {
+        rbAxe.velocity = new Vector2(Mathf.Clamp(rbAxe.velocity.x, -20, 20), Mathf.Clamp(rbAxe.velocity.y, -20, 20));
+        rbAxe.velocity += new Vector2(transform.up.x, transform.up.y) * Time.fixedDeltaTime * AxeForce;
+        AxeForce -= Time.deltaTime * AxeForceCuter;
+        if (AxeForce > AxeForceCounter) AxeForce -= Time.deltaTime * AxeForceCuter;
+        this.Wait(AxeGravityCounter, () => rbAxe.gravityScale = 0.7f);
+        directionForce -= Time.deltaTime * directionForceCuter;
+        if (_IsTouchToHead)
+        {
+            Destroy(_ThisHead.gameObject.transform.parent.gameObject.transform.parent.gameObject);
+        }
+    }
+    #endregion
+
+    #region Axe On Ground
+    private void AxeOnGround()
+    {
+        rbAxe.velocity = Vector2.zero;
+        rbAxe.gravityScale = 0;
+    }
+    #endregion
 }

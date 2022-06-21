@@ -16,6 +16,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] LayerMask AxeMask;
     [SerializeField] Transform MeleeCombatArea;
     [SerializeField] LayerMask MeeleCombatLayerMask;
+    [SerializeField] Collider2D HeadCollider;
 
     [Space(10)]
     [Header("-----Statues-----")]
@@ -65,6 +66,7 @@ public class CombatManager : MonoBehaviour
                         AxeSprite.enabled = false;
                         myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
                         myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
+                        myAxe.GetComponent<AxeOwnManager>()._WhichHead = HeadCollider;
                         Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
                         myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
                         for (int i = 0; i < Arrows.Length; i++)
@@ -105,10 +107,6 @@ public class CombatManager : MonoBehaviour
         #endregion
     }
 
-    private void FixedUpdate()
-    {
-
-    }
 
     #region Shooting direction settings
     private int ShootDirectionSettings()
