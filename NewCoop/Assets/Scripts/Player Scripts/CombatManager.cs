@@ -7,31 +7,28 @@ public class CombatManager : MonoBehaviour
 {
     [Space(10)]
     [Header("-----Object's Settings-----")]
-    [BackgroundColor(0, 1, 0, 1)]
+
     [Space(25)]
-    [SerializeField] GameObject AxePrefab;
-    [SerializeField] SpriteRenderer AxeSprite;
-    [SerializeField] Transform AxeSpawner;
-    [SerializeField] GameObject[] Arrows;
-    [SerializeField] LayerMask AxeMask;
-    [SerializeField] Transform MeleeCombatArea;
-    [SerializeField] LayerMask MeeleCombatLayerMask;
-    [SerializeField] Collider2D HeadCollider;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] GameObject AxePrefab;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] SpriteRenderer AxeSprite;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] Transform AxeSpawner;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] GameObject[] Arrows;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] LayerMask AxeMask;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] Transform MeleeCombatArea;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] LayerMask MeeleCombatLayerMask;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] Collider2D HeadCollider;
 
     [Space(10)]
     [Header("-----Statues-----")]
     [Space(25)]
-    [BackgroundColor(0,0,1,1)]
-    public bool HasAxe = true;
-    public int AxeCount;
-
+    [BackgroundColor(0, 0, 1, 1)] public bool HasAxe = true;
+    [BackgroundColor(0, 0, 1, 1)] public int AxeCount;
 
     [Space(10)]
     [Header("----Components-----")]
     [Space(25)]
-    [BackgroundColor(0, 1, 1, 1)]
-    [SerializeField] MovementBehaviour Inputs;
-    [SerializeField] MovementManager movementManager;
+    [BackgroundColor(0, 1, 1, 1)] [SerializeField] MovementBehaviour Inputs;
+    [BackgroundColor(0, 1, 1, 1)] [SerializeField] MovementManager movementManager;
 
     private bool IsPressing;
     private float Axedirection = 0;
