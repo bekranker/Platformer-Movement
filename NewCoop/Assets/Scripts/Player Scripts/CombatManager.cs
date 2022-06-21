@@ -72,24 +72,7 @@ public class CombatManager : MonoBehaviour
 
     #endregion
 
-    #region Axe Calculating
-    private void IfHasAxe()
-    {
-        if (Inputs.Attack == 1)
-        {
-            //eðim alma ayarlarý burasý
-            InputMouseButtonDown();
-        }
-        if (IsAttackOn)
-        {
-            if (Inputs.Attack == 0)
-            {
-                InputMouseButtonUp();
-            }
-        }
-        
-    }
-    #endregion
+    #region Mouse Calculate
 
     #region Mouse Down For Aim
     private void InputMouseButtonDown()
@@ -116,6 +99,29 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #endregion
+
+    #region Axe Calculate
+
+    #region Axe Calculating
+    private void IfHasAxe()
+    {
+        if (Inputs.Attack == 1)
+        {
+            //eðim alma ayarlarý burasý
+            InputMouseButtonDown();
+        }
+        if (IsAttackOn)
+        {
+            if (Inputs.Attack == 0)
+            {
+                InputMouseButtonUp();
+            }
+        }
+
+    }
     #endregion
 
     #region Throw Axe Settings
@@ -146,6 +152,8 @@ public class CombatManager : MonoBehaviour
         IsAttackOn = false;
         this.Wait(0.2f, () => movementManager.IsCanMove = true);
     }
+
+    #endregion
 
     #endregion
 
