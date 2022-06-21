@@ -7,31 +7,28 @@ public class CombatManager : MonoBehaviour
 {
     [Space(10)]
     [Header("-----Object's Settings-----")]
-    [BackgroundColor(0, 1, 0, 1)]
+
     [Space(25)]
-    [SerializeField] GameObject AxePrefab;
-    [SerializeField] SpriteRenderer AxeSprite;
-    [SerializeField] Transform AxeSpawner;
-    [SerializeField] GameObject[] Arrows;
-    [SerializeField] LayerMask AxeMask;
-    [SerializeField] Transform MeleeCombatArea;
-    [SerializeField] LayerMask MeeleCombatLayerMask;
-    [SerializeField] Collider2D HeadCollider;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] GameObject AxePrefab;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] SpriteRenderer AxeSprite;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] Transform AxeSpawner;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] GameObject[] Arrows;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] LayerMask AxeMask;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] Transform MeleeCombatArea;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] LayerMask MeeleCombatLayerMask;
+    [BackgroundColor(0, 1, 0, 1)] [SerializeField] Collider2D HeadCollider;
 
     [Space(10)]
     [Header("-----Statues-----")]
     [Space(25)]
-    [BackgroundColor(0,0,1,1)]
-    public bool HasAxe = true;
-    public int AxeCount;
-
+    [BackgroundColor(0, 0, 1, 1)] public bool HasAxe = true;
+    [BackgroundColor(0, 0, 1, 1)] public int AxeCount;
 
     [Space(10)]
     [Header("----Components-----")]
     [Space(25)]
-    [BackgroundColor(0, 1, 1, 1)]
-    [SerializeField] MovementBehaviour Inputs;
-    [SerializeField] MovementManager movementManager;
+    [BackgroundColor(0, 1, 1, 1)] [SerializeField] MovementBehaviour Inputs;
+    [BackgroundColor(0, 1, 1, 1)] [SerializeField] MovementManager movementManager;
 
     private bool IsPressing;
     private float Axedirection = 0;
@@ -41,72 +38,124 @@ public class CombatManager : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("Axe count: " + AxeCount);
-
-        #region Shooting
-        if (HasAxe)
-        {
-            if (Inputs.Attack == 1)
-            {
-                //eðim alma ayarlarý burasý
-                IsPressing = true;
-                movementManager.IsCanMove = false;
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                Axedirection = ShootingDirection();
-                
-                IsAttackOn = true;
-            }
-            if (IsAttackOn)
-            {
-                if (Inputs.Attack == 0)
-                {
-                    if (IsPressing)
-                    {
-                        //Fýrlatma ayarlarý burasý
-                        AxeSprite.enabled = false;
-                        myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
-                        myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
-                        myAxe.GetComponent<AxeOwnManager>()._WhichHead = HeadCollider;
-                        Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
-                        myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
-                        for (int i = 0; i < Arrows.Length; i++)
-                        {
-                            Arrows[i].SetActive(false);
-                        }
-                        AxeCount--;
-                        if (AxeCount == 0)
-                        {
-                            HasAxe = false;
-                        }
-                        IsAttackOn = false;
-                        this.Wait(0.2f, () => movementManager.IsCanMove = true);
-                    }
-                }
-            }
-            
-        }
-        #endregion
-
-        #region Melee Combot
-        if (HasAxe)
-        {
-            if (Inputs.MeleeDown > 0)
-            {
-                Collider2D IsTouchToPlayer = Physics2D.OverlapBox(MeleeCombatArea.position, MeleeCombatArea.localScale, default, MeeleCombatLayerMask);
-
-                if (IsTouchToPlayer != null && IsTouchToPlayer)
-                {
-                    Destroy(IsTouchToPlayer.gameObject);
-                }
-            }
-            else
-            {
-                IsMeeleCombat = false;
-            }
-        }
-        #endregion
+        Shooting();
     }
 
+    #region Shooting
+    private void Shooting()
+    {
+        if (HasAxe)
+        {
+            IfHasAxe();
+            MeeleCombat();
+        }
+    }
+    #endregion
+
+    #region Meele Combat Settings
+    private void MeeleCombat()
+    {
+        if (Inputs.MeleeDown > 0)
+        {
+            Collider2D IsTouchToPlayer = Physics2D.OverlapBox(MeleeCombatArea.position, MeleeCombatArea.localScale, default, MeeleCombatLayerMask);
+
+            if (IsTouchToPlayer != null && IsTouchToPlayer)
+            {
+                Destroy(IsTouchToPlayer.gameObject);
+            }
+        }
+        else
+        {
+            IsMeeleCombat = false;
+        }
+    }
+
+    #endregion
+
+    #region Mouse Calculate
+
+    #region Mouse Down For Aim
+    private void InputMouseButtonDown()
+    {
+        IsPressing = true;
+        movementManager.IsCanMove = false;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Axedirection = ShootingDirection();
+        IsAttackOn = true;
+    }
+    #endregion
+
+    #region Mouse Up For Aim
+    private void InputMouseButtonUp()
+    {
+        if (IsPressing)
+        {
+            //Fýrlatma ayarlarý burasý
+            AxeSprite.enabled = false;
+
+            CreateAe();
+            SupportArrows();
+            calculating();
+        }
+    }
+
+    #endregion
+
+    #endregion
+
+    #region Axe Calculate
+
+    #region Axe Calculating
+    private void IfHasAxe()
+    {
+        if (Inputs.Attack == 1)
+        {
+            //eðim alma ayarlarý burasý
+            InputMouseButtonDown();
+        }
+        if (IsAttackOn)
+        {
+            if (Inputs.Attack == 0)
+            {
+                InputMouseButtonUp();
+            }
+        }
+
+    }
+    #endregion
+
+    #region Throw Axe Settings
+    private void CreateAe()
+    {
+        myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
+        myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
+        myAxe.GetComponent<AxeOwnManager>()._WhichHead = HeadCollider;
+        Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
+        myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
+    }
+
+    private void SupportArrows()
+    {
+        for (int i = 0; i < Arrows.Length; i++)
+        {
+            Arrows[i].SetActive(false);
+        }
+    }
+
+    private void calculating()
+    {
+        AxeCount--;
+        if (AxeCount == 0)
+        {
+            HasAxe = false;
+        }
+        IsAttackOn = false;
+        this.Wait(0.2f, () => movementManager.IsCanMove = true);
+    }
+
+    #endregion
+
+    #endregion
 
     #region Shooting direction settings
     private int ShootDirectionSettings()

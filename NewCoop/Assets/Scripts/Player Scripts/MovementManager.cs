@@ -8,9 +8,9 @@ public class MovementManager : Librariy
     [Header("-----Physical Settings-----")]
     //R-G-B-A
     [BackgroundColor(1f, 0f, 0f, 1f)] [Range(-50f, 50f)] [SerializeField] float maxFallGravity;
-    [Range(-50f, 50f)] [SerializeField] float minFallGravity;
-    [Range(0.005f, 100f)] public float ClampGravityMin;
-    [Range(0.005f, 100f)] public float ClampGravityMax;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(-50f, 50f)] [SerializeField] float minFallGravity;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(0.005f, 100f)] public float ClampGravityMin;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [Range(0.005f, 100f)] public float ClampGravityMax;
     public bool IsCanMove = true;
     [SerializeField] Transform _graph;
 
@@ -73,23 +73,23 @@ public class MovementManager : Librariy
     [Space(10)]
     [Header("-----Coyote Time Settings-----")]
     [Space(30)]
-    [BackgroundColor(0f, 1f, 1f, 1f)]
-    [Range(0.005f, 1f)] public float CoyotoTime;
-    [Range(1f, 100f)] public float CoyoteAmount;
+
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 1f)] public float CoyotoTime;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 100f)] public float CoyoteAmount;
     [HideInInspector] public bool coyoteJump;
     [HideInInspector] public float coyoteTimeCounter;
 
     [Space(10)]
     [Header("-----Buffering Settings-----")]
     [Space(30)]
-    [Range(0.005f, 1f)] public float BufferTime;
-    [Range(0.005f, 100f)] public float BufferAmount;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 1f)] public float BufferTime;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 100f)] public float BufferAmount;
     [HideInInspector] public bool buffering = false;
 
     [Space(10)]
     [Header("-----Dash Settings-----")]
     [Space(20)]
-    [Range(0.005f, 100f)] public float DashDistance;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 100f)] public float DashDistance;
     [HideInInspector] public bool IsCanDash;
     [HideInInspector] public bool isDashing;
     [HideInInspector] public float JumpCutTimeCounter;
@@ -98,13 +98,12 @@ public class MovementManager : Librariy
     [Space(10)]
     [Header("-----Double Jump Settings-----")]
     [Space(20)]
-    [Range(1f, 100f)] public float doubleJumpAmount;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1f, 100f)] public float doubleJumpAmount;
 
     [Space(10)]
-    [BackgroundColor(1f, 0f, 1f, 1f)]
     [Header("----Componenets-----")]
     [Space(20)]
-    [SerializeField] public Rigidbody2D rb;
+    [BackgroundColor(1f, 0f, 1f, 1f)] [SerializeField] public Rigidbody2D rb;
     [SerializeField] private BoxCollider2D boxC2D;
     [SerializeField] private MovementBehaviour Input;
     [SerializeField] private CombatManager combatManager;

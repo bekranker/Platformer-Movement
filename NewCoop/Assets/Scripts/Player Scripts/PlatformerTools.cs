@@ -5,37 +5,45 @@ using UnityEngine;
 public class PlatformerTools : MonoBehaviour
 {
 
+    [Space(25)]
     [Header("-----Jump Support to Corner-----")]
-    [SerializeField] Transform rayPointTopLeft;
-    [SerializeField] Transform rayPointTopRight;
-    [SerializeField] Transform rayPointLeft;
-    [SerializeField] Transform rayPointRight;
-    [SerializeField] Transform rayPointTopLeftFeed;
-    [SerializeField] Transform rayPointTopRightFeed;
-    [SerializeField] Transform rayPointLeftFeed;
-    [SerializeField] Transform rayPointRightFeed;
-    [SerializeField] Vector3 TopRayDistance;
-    [SerializeField] Vector3 RayDistance;
-    [SerializeField] Vector3 FeedRayDistance;
-    [Range(0.005f, 10f)][SerializeField] float DistanceOfRays;
-    [Range(0.005f, 10f)][SerializeField] float FeedDistanceOfRays;
-    [Range(0.005f, 100f)][SerializeField] float JumpSupportAmount;
-    [Range(0.005f, 1f)][SerializeField] float JumpSupportMultiplyAmount;
+    [Space(15)]
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Transform rayPointTopLeft;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Transform rayPointTopRight;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Transform rayPointLeft;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Transform rayPointRight;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Transform rayPointTopLeftFeed;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Transform rayPointTopRightFeed;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Transform rayPointLeftFeed;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Transform rayPointRightFeed;
+    [Space(15)]
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Vector3 TopRayDistance;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Vector3 RayDistance;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] Vector3 FeedRayDistance;
+    [Space(15)]
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 10f)][SerializeField] float DistanceOfRays;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 10f)][SerializeField] float FeedDistanceOfRays;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 100f)][SerializeField] float JumpSupportAmount;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(0.005f, 1f)][SerializeField] float JumpSupportMultiplyAmount;
 
-
+    [Space(25)]
     [Header("-----Dash-----")]
-    [Range(1f,100f)][SerializeField] float DashSpeed;
-    [Range(1f, 500f)] [SerializeField] float DashMultipler;
-    [Range(0.005f, 1f)] [SerializeField] float DashTime;
-    [Range(0.005f, 1f)] [SerializeField] float StartDashTime;
-    
+    [Space(15)]
+    [BackgroundColor(1f, 1f, 0f, 1f)] [Range(1f,100f)][SerializeField] float DashSpeed;
+    [BackgroundColor(1f, 1f, 0f, 1f)] [Range(1f, 500f)] [SerializeField] float DashMultipler;
+    [BackgroundColor(1f, 1f, 0f, 1f)] [Range(0.005f, 1f)] [SerializeField] float DashTime;
+    [BackgroundColor(1f, 1f, 0f, 1f)] [Range(0.005f, 1f)] [SerializeField] float StartDashTime;
 
+    [Space(25)]
     [Header("-----Managers-----")]
-    [SerializeField] MovementBehaviour Inputs;
-    [SerializeField] MovementManager movementManager;
+    [Space(15)]
+    [BackgroundColor(1f, 0f, 0f, 1f)] [SerializeField] MovementBehaviour Inputs;
+    [BackgroundColor(1f, 0f, 0f, 1f)] [SerializeField] MovementManager movementManager;
 
+    [Space(25)]
     [Header("-----Others-----")]
-    [SerializeField] Rigidbody2D rb;
+    [Space(15)]
+    [BackgroundColor(0f, 1f, 0f, 1f)] [SerializeField] Rigidbody2D rb;
 
     private int direction;
     private float _gravity;

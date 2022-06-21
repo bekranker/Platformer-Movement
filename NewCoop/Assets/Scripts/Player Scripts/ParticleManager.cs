@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class ParticleManager : MonoBehaviour
 {
-
+    [Space(25)]
     [Header("-----Particles------")]
-    [SerializeField] GameObject jumpParticle;
-    [SerializeField] GameObject _doubleParticule;
+    [Space(15)]
+    [BackgroundColor(1f, 1f, 0f, 1f)] [SerializeField] GameObject jumpParticle;
+    [BackgroundColor(1f, 1f, 0f, 1f)] [SerializeField] GameObject _doubleParticule;
 
+    [Space(25)]
     [Header("------Jump Particle Settings------")]
-    [Range(1, 100)] [SerializeField] float velocityAmount;
+    [Space(15)]
+    [BackgroundColor(0f, 1f, 1f, 1f)] [Range(1, 100)] [SerializeField] float velocityAmount;
 
+    [Space(25)]
     [Header("-----Managers-----")]
-    [SerializeField] MovementBehaviour movementBehaviour;
-    [SerializeField] MovementManager movementManager;
+    [Space(15)]
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] MovementBehaviour movementBehaviour;
+    [BackgroundColor(0f, 1f, 1f, 1f)] [SerializeField] MovementManager movementManager;
 
+    [Space(25)]
     [Header("-----Other------")]
-    [SerializeField] Transform groundCheckPos;
+    [Space(15)]
+    [BackgroundColor(1f, 1f, 0f, 1f)] [SerializeField] Transform groundCheckPos;
 
     Transform player;
     GameObject a;
