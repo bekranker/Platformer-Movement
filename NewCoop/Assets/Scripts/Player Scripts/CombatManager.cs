@@ -41,72 +41,97 @@ public class CombatManager : MonoBehaviour
 
     private void Update()
     {
-        //Debug.Log("Axe count: " + AxeCount);
-
-        #region Shooting
-        if (HasAxe)
-        {
-            if (Inputs.Attack == 1)
-            {
-                //eðim alma ayarlarý burasý
-                IsPressing = true;
-                movementManager.IsCanMove = false;
-                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-                Axedirection = ShootingDirection();
-                
-                IsAttackOn = true;
-            }
-            if (IsAttackOn)
-            {
-                if (Inputs.Attack == 0)
-                {
-                    if (IsPressing)
-                    {
-                        //Fýrlatma ayarlarý burasý
-                        AxeSprite.enabled = false;
-                        myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
-                        myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
-                        myAxe.GetComponent<AxeOwnManager>()._WhichHead = HeadCollider;
-                        Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
-                        myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
-                        for (int i = 0; i < Arrows.Length; i++)
-                        {
-                            Arrows[i].SetActive(false);
-                        }
-                        AxeCount--;
-                        if (AxeCount == 0)
-                        {
-                            HasAxe = false;
-                        }
-                        IsAttackOn = false;
-                        this.Wait(0.2f, () => movementManager.IsCanMove = true);
-                    }
-                }
-            }
-            
-        }
-        #endregion
-
-        #region Melee Combot
-        if (HasAxe)
-        {
-            if (Inputs.MeleeDown > 0)
-            {
-                Collider2D IsTouchToPlayer = Physics2D.OverlapBox(MeleeCombatArea.position, MeleeCombatArea.localScale, default, MeeleCombatLayerMask);
-
-                if (IsTouchToPlayer != null && IsTouchToPlayer)
-                {
-                    Destroy(IsTouchToPlayer.gameObject);
-                }
-            }
-            else
-            {
-                IsMeeleCombat = false;
-            }
-        }
-        #endregion
+        Shooting();
     }
 
+    #region Shooting
+    private void Shooting()
+    {
+        if (HasAxe)
+        {
+            IfHasAxe();
+            MeeleCombat();
+        }
+    }
+    #endregion
+
+    #region Meele Combat Settings
+    private void MeeleCombat()
+    {
+        if (Inputs.MeleeDown > 0)
+        {
+            Collider2D IsTouchToPlayer = Physics2D.OverlapBox(MeleeCombatArea.position, MeleeCombatArea.localScale, default, MeeleCombatLayerMask);
+
+            if (IsTouchToPlayer != null && IsTouchToPlayer)
+            {
+                Destroy(IsTouchToPlayer.gameObject);
+            }
+        }
+        else
+        {
+            IsMeeleCombat = false;
+        }
+    }
+
+    #endregion
+
+    #region Axe Calculating
+    private void IfHasAxe()
+    {
+        if (Inputs.Attack == 1)
+        {
+            //eðim alma ayarlarý burasý
+            InputMouseButtonDown();
+        }
+        if (IsAttackOn)
+        {
+            if (Inputs.Attack == 0)
+            {
+                InputMouseButtonUp();
+            }
+        }
+        
+    }
+    #endregion
+
+    #region Mouse Down For Aim
+    private void InputMouseButtonDown()
+    {
+        IsPressing = true;
+        movementManager.IsCanMove = false;
+        GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        Axedirection = ShootingDirection();
+        IsAttackOn = true;
+    }
+    #endregion
+
+    #region Mouse Up For Aim
+    private void InputMouseButtonUp()
+    {
+        if (IsPressing)
+        {
+            //Fýrlatma ayarlarý burasý
+            AxeSprite.enabled = false;
+            myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
+            myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
+            myAxe.GetComponent<AxeOwnManager>()._WhichHead = HeadCollider;
+            Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
+            myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
+            for (int i = 0; i < Arrows.Length; i++)
+            {
+                Arrows[i].SetActive(false);
+            }
+            AxeCount--;
+            if (AxeCount == 0)
+            {
+                HasAxe = false;
+            }
+            IsAttackOn = false;
+            this.Wait(0.2f, () => movementManager.IsCanMove = true);
+        }
+    }
+
+    #endregion
 
     #region Shooting direction settings
     private int ShootDirectionSettings()
