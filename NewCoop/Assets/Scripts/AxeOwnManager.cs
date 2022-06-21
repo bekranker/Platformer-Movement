@@ -43,20 +43,21 @@ public class AxeOwnManager : MonoBehaviour
     {
         AxeForceCounter = AxeForce - 50;
     }
+
     #region Add Force To Angle and Rotate
     private void AddForceToAxe()
     {
         if (_IsTouchingToGround) return;
         else
         {
-            if (Inputs.r > 0)
-            {
-                transform.Rotate(new Vector3(0, 0, Inputs.r * directionForce * Time.deltaTime));
-                Debug.Log("RL yönünde force var");
-            }
             if (Inputs.r < 0)
             {
-                transform.Rotate(new Vector3(0, 0, Inputs.r * directionForce * Time.deltaTime));
+                transform.Rotate(new Vector3(0, 0, -Inputs.r * directionForce * Time.fixedDeltaTime));
+                Debug.Log("RL yönünde force var");
+            }
+            if (Inputs.r > 0)
+            {
+                transform.Rotate(new Vector3(0, 0, -Inputs.r * directionForce * Time.fixedDeltaTime));
                 Debug.Log("RR yönünde force var");
             }
         }
@@ -83,6 +84,7 @@ public class AxeOwnManager : MonoBehaviour
     {
         AxePhysics();
         AddForceToAxe();
+        GetTakeBackTheAxe();
     }
 
     
@@ -165,14 +167,10 @@ public class AxeOwnManager : MonoBehaviour
     {
         rbAxe.velocity = new Vector2(Mathf.Clamp(rbAxe.velocity.x, -20, 20), Mathf.Clamp(rbAxe.velocity.y, -20, 20));
         rbAxe.velocity += new Vector2(transform.up.x, transform.up.y) * Time.fixedDeltaTime * AxeForce;
-        AxeForce -= Time.deltaTime * AxeForceCuter;
-        if (AxeForce > AxeForceCounter) AxeForce -= Time.deltaTime * AxeForceCuter;
+        if (AxeForce >= 0) AxeForce -= Time.deltaTime * AxeForceCuter;
         this.Wait(AxeGravityCounter, () => rbAxe.gravityScale = 0.7f);
-        directionForce -= Time.deltaTime * directionForceCuter;
-        if (_IsTouchToHead)
-        {
-            Destroy(_ThisHead.gameObject.transform.parent.gameObject.transform.parent.gameObject);
-        }
+        if (directionForce >= 0) directionForce -= Time.deltaTime * directionForceCuter;
+        if (_IsTouchToHead) Destroy(_ThisHead.gameObject.transform.parent.gameObject.transform.parent.gameObject);
     }
     #endregion
 
