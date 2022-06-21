@@ -29,12 +29,18 @@ public class CombatManager : MonoBehaviour
     [Space(25)]
     [BackgroundColor(0, 1, 1, 1)] [SerializeField] MovementBehaviour Inputs;
     [BackgroundColor(0, 1, 1, 1)] [SerializeField] MovementManager movementManager;
+    GameManager gameManager;
 
     private bool IsPressing;
     private float Axedirection = 0;
     private GameObject myAxe;
     private bool IsAttackOn;
     private bool IsMeeleCombat;
+
+    private void Start()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
 
     private void Update()
     {
@@ -61,7 +67,7 @@ public class CombatManager : MonoBehaviour
 
             if (IsTouchToPlayer != null && IsTouchToPlayer)
             {
-                Destroy(IsTouchToPlayer.gameObject);
+                Kill(IsTouchToPlayer.gameObject);
             }
         }
         else
@@ -295,4 +301,17 @@ public class CombatManager : MonoBehaviour
 
     }
     #endregion
+
+    public void Kill(GameObject Player)
+    {
+        Player.SetActive(false);
+        Debug.Log(int.Parse(gameObject.name[1].ToString()));
+        gameManager.ChangeScore(int.Parse(gameObject.name[1].ToString()), 1);
+    }
+
+    public void ResetPlayer()
+    {
+        HasAxe = true;
+        AxeCount = 1;
+    }
 }

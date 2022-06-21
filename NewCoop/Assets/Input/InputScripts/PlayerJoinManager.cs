@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
 public class PlayerJoinManager : MonoBehaviour
 {
     [SerializeField] GameObject PlayerPrefab;
-    [SerializeField] List<GameObject> Players;
+    public List<GameObject> Players;
     [SerializeField] List<GameObject> PlayerSpawnOrder;
     [SerializeField] GameObject MapSpawnPointsParent;
     [SerializeField] List<GameObject> MapSpawnPoints;
+
+    public List<Color> PlayerColors;
     private void Awake()
     {
         foreach (var item in MapSpawnPointsParent.GetComponentsInChildren<Transform>())
@@ -28,6 +29,7 @@ public class PlayerJoinManager : MonoBehaviour
             if (Control != "")
             {
                 GameObject Player = Instantiate<GameObject>(PlayerPrefab,Vector3.zero,Quaternion.identity);
+                Player.transform.GetChild(0).GetComponent<SpriteRenderer>().color = PlayerColors[i-1];
                 Players.Add(Player);
                 if (Control.Contains("Keyboard"))
                 {
@@ -44,6 +46,16 @@ public class PlayerJoinManager : MonoBehaviour
             }
         }
 
+        SpawnPlayers();
+    }
+
+    public void SpawnPlayers()
+    {
+        foreach (var item in GameObject.FindGameObjectsWithTag("Axe"))
+        {
+            Destroy(item);
+        }
+
         PlayerSpawnOrder = new List<GameObject>(Players);
 
         for (int i = 0; i < PlayerSpawnOrder.Count; i++)
@@ -57,6 +69,8 @@ public class PlayerJoinManager : MonoBehaviour
         for (int i = 0; i < PlayerSpawnOrder.Count; i++)
         {
             PlayerSpawnOrder[i].transform.position = MapSpawnPoints[i].transform.position;
+            PlayerSpawnOrder[i].GetComponent<CombatManager>().ResetPlayer();
+            PlayerSpawnOrder[i].SetActive(true);
         }
     }
 }

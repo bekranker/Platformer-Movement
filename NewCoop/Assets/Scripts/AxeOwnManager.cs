@@ -170,7 +170,7 @@ public class AxeOwnManager : MonoBehaviour
         if (AxeForce >= 0) AxeForce -= Time.deltaTime * AxeForceCuter;
         this.Wait(AxeGravityCounter, () => rbAxe.gravityScale = 0.7f);
         if (directionForce >= 0) directionForce -= Time.deltaTime * directionForceCuter;
-        if (_IsTouchToHead) Destroy(_ThisHead.gameObject.transform.parent.gameObject.transform.parent.gameObject);
+        if (_IsTouchToHead) Inputs.gameObject.GetComponent<CombatManager>().Kill(_ThisHead.gameObject.transform.parent.gameObject.transform.parent.gameObject);
     }
     #endregion
 
