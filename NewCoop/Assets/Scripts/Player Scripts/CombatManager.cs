@@ -109,23 +109,42 @@ public class CombatManager : MonoBehaviour
         {
             //Fýrlatma ayarlarý burasý
             AxeSprite.enabled = false;
-            myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
-            myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
-            myAxe.GetComponent<AxeOwnManager>()._WhichHead = HeadCollider;
-            Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
-            myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
-            for (int i = 0; i < Arrows.Length; i++)
-            {
-                Arrows[i].SetActive(false);
-            }
-            AxeCount--;
-            if (AxeCount == 0)
-            {
-                HasAxe = false;
-            }
-            IsAttackOn = false;
-            this.Wait(0.2f, () => movementManager.IsCanMove = true);
+
+            CreateAe();
+            SupportArrows();
+            calculating();
         }
+    }
+
+    #endregion
+
+    #region Throw Axe Settings
+    private void CreateAe()
+    {
+        myAxe = Instantiate(AxePrefab, transform.position, Quaternion.identity);
+        myAxe.GetComponent<AxeOwnManager>().Inputs = Inputs;
+        myAxe.GetComponent<AxeOwnManager>()._WhichHead = HeadCollider;
+        Rigidbody2D AxeRb = myAxe.GetComponent<Rigidbody2D>();
+        myAxe.GetComponent<Transform>().Rotate(0, 0, Axedirection);
+    }
+
+    private void SupportArrows()
+    {
+        for (int i = 0; i < Arrows.Length; i++)
+        {
+            Arrows[i].SetActive(false);
+        }
+    }
+
+    private void calculating()
+    {
+        AxeCount--;
+        if (AxeCount == 0)
+        {
+            HasAxe = false;
+        }
+        IsAttackOn = false;
+        this.Wait(0.2f, () => movementManager.IsCanMove = true);
     }
 
     #endregion
