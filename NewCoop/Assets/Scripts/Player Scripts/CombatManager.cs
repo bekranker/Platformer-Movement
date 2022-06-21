@@ -305,8 +305,15 @@ public class CombatManager : MonoBehaviour
     public void Kill(GameObject Player)
     {
         Player.SetActive(false);
-        Debug.Log(int.Parse(gameObject.name[1].ToString()));
-        gameManager.ChangeScore(int.Parse(gameObject.name[1].ToString()), 1);
+        
+        if(Player != gameObject)
+        {
+            gameManager.ChangeScore(int.Parse(gameObject.name[1].ToString()), 1);
+        }
+        else
+        {
+            gameManager.ChangeScore(int.Parse(gameObject.name[1].ToString()), -1);
+        }
     }
 
     public void ResetPlayer()
