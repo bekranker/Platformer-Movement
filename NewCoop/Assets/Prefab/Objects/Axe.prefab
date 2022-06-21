@@ -236,7 +236,7 @@ MonoBehaviour:
   directionForceCuter: 50
   AxeForce: 15
   AxeForceCuter: 5
-  AxeGravityCounter: 0.6
+  AxeGravityCounter: 0.4
   _maskForGround:
     serializedVersion: 2
     m_Bits: 8
