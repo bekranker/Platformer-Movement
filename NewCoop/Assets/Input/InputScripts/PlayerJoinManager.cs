@@ -34,12 +34,16 @@ public class PlayerJoinManager : MonoBehaviour
                 if (Control.Contains("Keyboard"))
                 {
                     Player.GetComponent<PlayerInput>().SwitchCurrentControlScheme(Control, InputSystem.devices[0]);
+                    Player.GetComponent<CombatManager>().ControlShame = Control;
+                    Player.GetComponent<CombatManager>().ControlDevice = InputSystem.devices[0];
                     Player.GetComponent<MovementBehaviour>().GetData("P" + i, null);                   
                 }
                 else
                 {
                     Debug.Log(Control);
                     Player.GetComponent<PlayerInput>().SwitchCurrentControlScheme(Control, InputSystem.GetDevice<Gamepad>(new InternedString("P"+i)));
+                    Player.GetComponent<CombatManager>().ControlShame = Control;
+                    Player.GetComponent<CombatManager>().ControlDevice = InputSystem.GetDevice<Gamepad>(new InternedString("P" + i));
                     Player.GetComponent<MovementBehaviour>().GetData("P" + i, InputSystem.GetDevice<Gamepad>(new InternedString("P" + i)));
                 }
                 Player.name = "P" + i;

@@ -232,7 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eca62324c5415c4a9efa5f19c669cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionForce: 24
+  directionForce: 35
   directionForceCuter: 50
   AxeForce: 15
   AxeForceCuter: 5

@@ -13997,6 +13997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e5ea5144f6aa4547ba000da692cebd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GamepadsId: 00000000000000000000000000000000
   GamepadCount: 0
   PlayPanel: {fileID: 266292443}
   PlayerMenuPrefab: {fileID: 8860286035849003639, guid: b287ff024d2365742adb72d98f9cc797, type: 3}

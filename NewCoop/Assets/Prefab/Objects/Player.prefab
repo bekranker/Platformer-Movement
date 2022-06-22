@@ -355,10 +355,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1174689607428651678}
-  - component: {fileID: 8505177524007123630}
-  - component: {fileID: 7235418268055531539}
   - component: {fileID: 5696987263579804961}
   - component: {fileID: 5999124978200234611}
+  - component: {fileID: 8505177524007123630}
+  - component: {fileID: 7235418268055531539}
   - component: {fileID: 3185881680145486794}
   - component: {fileID: 8337270857119494216}
   - component: {fileID: 293021737014898470}
@@ -397,53 +397,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &8505177524007123630
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174689607428651667}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!61 &7235418268055531539
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1174689607428651667}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: f7835f488b0b8ce4195f7996a40d63ff, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.0022858381, y: 0.047921732}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.6388347, y: 0.7013023}
-  m_EdgeRadius: 0
 --- !u!114 &5696987263579804961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,17 +455,17 @@ MonoBehaviour:
   velPower: 0.96
   fallingGravityScale: 1.95
   gravityScale: 1.5
-  AxeMainSpeed_1: 12.2
-  AxeAcceleration_1: 14
-  AxeDecceleration_1: 28.1
-  AxeMainSpeed_2: 10
-  AxeAcceleration_2: 5
-  AxeDecceleration_2: 45
+  AxeMainSpeed_1: 10
+  AxeAcceleration_1: 8
+  AxeDecceleration_1: 15
+  AxeMainSpeed_2: 8
+  AxeAcceleration_2: 1
+  AxeDecceleration_2: 30
   jumpAmount: 9
   JumpCutTimer: 1.9
   jumpCutMultiplier: 0.35
   jumpTime: 0.14
-  jumpTimeCounter: 0
+  jumpTimeCounter: 0.14
   checkPosSize: {x: 0, y: 0}
   isGrounded: 1
   isJumped: 0
@@ -527,20 +480,67 @@ MonoBehaviour:
   CoyotoTime: 0.15
   CoyoteAmount: 12
   coyoteJump: 0
-  coyoteTimeCounter: 0
+  coyoteTimeCounter: -8.641664
   BufferTime: 0.29
   BufferAmount: 30
   buffering: 0
   DashDistance: 53
   IsCanDash: 0
   isDashing: 0
-  JumpCutTimeCounter: 0
+  JumpCutTimeCounter: 1.9
   dashCount: 0
   doubleJumpAmount: 27.1
   rb: {fileID: 8505177524007123630}
   boxC2D: {fileID: 7235418268055531539}
   Input: {fileID: 293021737014898470}
   combatManager: {fileID: 8337270857119494216}
+--- !u!50 &8505177524007123630
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!61 &7235418268055531539
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174689607428651667}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: f7835f488b0b8ce4195f7996a40d63ff, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.0022858381, y: 0.047921732}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6388347, y: 0.7013023}
+  m_EdgeRadius: 0
 --- !u!114 &3185881680145486794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +595,7 @@ MonoBehaviour:
   AxeCount: 1
   Inputs: {fileID: 293021737014898470}
   movementManager: {fileID: 5999124978200234611}
+  ControlShame: 
 --- !u!114 &293021737014898470
 MonoBehaviour:
   m_ObjectHideFlags: 0

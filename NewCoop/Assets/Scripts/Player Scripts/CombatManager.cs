@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using DG.Tweening;
 
 public class CombatManager : MonoBehaviour
@@ -36,6 +37,9 @@ public class CombatManager : MonoBehaviour
     private GameObject myAxe;
     private bool IsAttackOn;
     private bool IsMeeleCombat;
+
+    public string ControlShame;
+    public InputDevice ControlDevice;
 
     private void Start()
     {
@@ -319,6 +323,7 @@ public class CombatManager : MonoBehaviour
     public void ResetPlayer()
     {
         HasAxe = true;
+        GetComponent<PlayerInput>().SwitchCurrentControlScheme(ControlShame, InputSystem.devices[0]);
         AxeCount = 1;
     }
 }

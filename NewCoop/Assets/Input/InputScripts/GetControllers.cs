@@ -6,7 +6,8 @@ using System.Linq;
 
 public class GetControllers : MonoBehaviour
 {
-    [SerializeField] List<InputDevice> Gamepads = new List<InputDevice>(4);
+    //[SerializeField] List<InputDevice> Gamepads = new List<InputDevice>(4);
+    [SerializeField] List<int> GamepadsId = new List<int>(4);
     [SerializeField] int GamepadCount;
     [SerializeField] GameObject PlayPanel;
 
@@ -85,19 +86,21 @@ public class GetControllers : MonoBehaviour
 
     void AddGamepad(InputDevice device)
     {
-        if (Gamepad.all.ToList().Contains(device) && !Gamepads.Contains(device))
+        if (Gamepad.all.ToList().Contains(device) && !GamepadsId.Contains(device.deviceId))
         {
             GamepadCount++;
             Debug.Log("Index :" + (1 + GamepadCount));
             PlayerInput Gamepad = Instantiate<GameObject>(PlayerMenuPrefab).GetComponent<PlayerInput>();
 
             Gamepad.GetComponent<PlayerMenuScript>().GetPlayPanel(PlayPanel);
-            for (int i = 0; i < Gamepads.Count; i++)
+            Debug.Log(device.deviceId);
+            for (int i = 0; i < GamepadsId.Count; i++)
             {
-                if (Gamepads[i] == null)
+                if (GamepadsId[i] == 0)
                 {
+                    Debug.Log(i+ " " + GamepadsId.Count + " " + GamepadsId[i]);
                     Gamepad.SwitchCurrentControlScheme("Controller" + (i + 1), device);
-                    Gamepads[i] = device;
+                    GamepadsId[i] = device.deviceId;
                     break;
                 }
             }
@@ -111,11 +114,11 @@ public class GetControllers : MonoBehaviour
         {
             Debug.Log(":D" + device.name + gameObject.name);
 
-            for (int i = 0; i < Gamepads.Count; i++)
+            for (int i = 0; i < GamepadsId.Count; i++)
             {
-                if (Gamepads[i] == device)
+                if (GamepadsId[i] == device.deviceId)
                 {
-                    Gamepads[i] = null;
+                    GamepadsId[i] = 0;
                     break;
                 }
             }
